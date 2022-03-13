@@ -1,4 +1,4 @@
-Advanced 2 Course
-Ido Aharon
-Yoav Otmazgin
-Shahar
+# Advanced 2 Course
+**Ido Aharon** 
+**Yoav Otmazgin**
+**Shahar**
