@@ -1,4 +1,4 @@
-# Advanced 2 Course  &#x1F34E;
-**Ido Aharon**  
-**Yoav Otmazgin**  
+# Advanced 2 Course  &#x1F34E;  
+**Yoav Otmazgin**
+**Ido Aharon**
 **Shahar**  
