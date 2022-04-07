@@ -2,8 +2,10 @@ import './App.css';
 import Registration from './registration/registration';
 
 function App() {
-    return ( 
+    return (
+        <div class="">
         <Registration/>
+        </div>
     );
 }
 
