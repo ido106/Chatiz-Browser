@@ -1,11 +1,365 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>registration</title>
+    <link href="registration.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function IsValid() {
+            var Firstname = (document.getElementById('Fname'));
+            Firstname.style.backgroundColor = "white";
+
+            var Lastname = (document.getElementById('Lname'));
+            Lastname.style.backgroundColor = "white";
+
+            var Uname = (document.getElementById('Uname'));
+            Uname.style.backgroundColor = "white";
+
+            var password = (document.getElementById('password'));
+            password.style.backgroundColor = "white";
+
+            var Cpassword = (document.getElementById('Cpassword'));
+            Cpassword.style.backgroundColor = "white";
+
+            var Email = (document.getElementById('Email'));
+            Email.style.backgroundColor = "white";
+
+            var Pnumber = (document.getElementById('Pnumber'));
+            Pnumber.style.backgroundColor = "white";
+
+            var male = document.getElementById('male');
+            var female = document.getElementById('female');
+            var other = document.getElementById('other');
+
+            var day = document.getElementById('day').value;
+            var month = document.getElementById('month').value;
+            var year = document.getElementById('year').value
+
+            var tof = document.getElementById('terms of');
+
+            var Msg = "";
+            if (Firstname.value == '') {
+                Msg = "נא למלא שם פרטי <br>";
+                Firstname.focus();
+                Firstname.style.backgroundColor = "red";
+            }
+            else {
+                if ((Firstname.value.length < 2) || (Firstname.value.length > 8)) {
+                    Msg += "הזן שם פרטי בין 2 ל8 תווים<br>";
+                    Firstname.focus();
+                    Firstname.style.backgroundColor = "red";
+                }
+                var FNhebrewCount = 0;
+                for (i = 0; i < Firstname.value.length; i++) {
+                    if ((Firstname.value.charAt(i) >= 'א') && (Firstname.value.charAt(i) <= 'ת')) {
+                        FNhebrewCount++;
+                    }
+                }
+                if (Firstname.value.length != FNhebrewCount) {
+                    Msg += "השם הפרטי חייב להיות בעברית<br>";
+                    Firstname.focus();
+                    Firstname.style.backgroundColor = "red";
+                }
+            }
+            if (Lastname.value == '') {
+                Msg += "נא למלא שם משפחה <br>";
+                Lastname.focus();
+                Lastname.style.backgroundColor = "red";
+            }
+            else {
+                if ((Lastname.value.length < 2) || (Lastname.value.length > 8)) {
+                    Msg += "הזן שם משפחה בין 2 ל8 תווים<br>";
+                    Lastname.focus();
+                    Lastname.style.backgroundColor = "red";
+                }
+                var FNhebrewCount = 0;
+                for (i = 0; i < Lastname.value.length; i++) {
+                    if ((Lastname.value.charAt(i) >= 'א') && (Lastname.value.charAt(i) <= 'ת')) {
+                        FNhebrewCount++;
+                    }
+                }
+                if (Lastname.value.length != FNhebrewCount) {
+                    Msg += "שם המשפחה חייב להיות בעברית<br>";
+                    Lastname.focus();
+                    Lastname.style.backgroundColor = "red";
+                }
+            }
+            if (Uname.value == '') {
+                Msg += "נא למלא שם משתמש  <br>";
+                Uname.focus();
+                Uname.style.backgroundColor = "red";
+            }
+            else {
+                if ((Uname.value.length < 4) || (Uname.value.length > 8)) {
+                    Msg += "הזן שם משתמש בין 4 ל8 תווים<br>";
+                    Uname.focus();
+                    Uname.style.backgroundColor = "red";
+                }
+            }
+            if (password.value == '') {
+                Msg += "נא למלא סיסמא  <br>";
+                password.focus();
+                password.style.backgroundColor = "red";
+            }
+            else {
+                var CharCount = 0;
+                var NumCount = 0;
+
+                for (i = 0; i < password.value.length; i++) {
+                    if (isNaN(password.value.charAt(i)) == true) {
+                        CharCount++;
+                    }
+                    else {
+                        NumCount++;
+                    }
+                }
+                if ((CharCount == 0) || (NumCount == 0)) {
+                    Msg += "סיסמא חייבת להכיל גם ספרות וגם אותיות<br>";
+                    password.focus();
+                    password.style.backgroundColor = "red";
+                }
+                if ((password.value.length < 4) || (password.value.length > 8)) {
+                    Msg += "הזן סיסמא בין 4 ל8 תווים<br>";
+                    password.focus();
+                    password.style.backgroundColor = "red";
+                }
+            }
+            if (Cpassword.value == '') {
+                Msg += "נא למלא סיסמא אימות  <br>";
+                Cpassword.focus();
+                Cpassword.style.backgroundColor = "red";
+            }
+            else {
+                if (password.value != Cpassword.value) {
+                    Msg += "אימות סיסמא נכשל<br>"
+                    Cpassword.focus();
+                    Cpassword.style.backgroundColor = "red";
+                    password.focus();
+                    password.style.backgroundColor = "red";
+                }
+            }
+            if (Pnumber.value == '') {
+                Msg += "נא למלא מספר טלפון  <br>";
+                Pnumber.focus();
+                Pnumber.style.backgroundColor = "red";
+            }
+            else {
+
+                if ((Pnumber.value.length != 7) || (isNaN(Pnumber.value) == true)) {
+                    Msg += "מספר הטלפון חייב להכיל 7 מספרים בדיוק<br>";
+                    Pnumber.focus();
+                    Pnumber.style.backgroundColor = "red";
+                }
+            }
+            if (Email.value == '') {
+                Msg = Msg + "נא למלא כתובת אימייל  <br>";
+                Email.focus();
+                Email.style.backgroundColor = "red";
+            }
+            else {
+                if (Email.value.indexOf('@') < 1) {
+                    Msg = Msg + "אימייל חייב להכיל @ מהתו השני ומעלה<br>";
+                    Email.focus();
+                    Email.style.backgroundColor = "red";
+                }
+                if (isNaN(Email.value.charAt(0)) == false) {
+                    Msg = Msg + "אימייל לא יכול להתחיל מספרה<br>";
+                    Email.focus();
+                    Email.style.backgroundColor = "red";
+                }
+                if (Email.value.lastIndexOf('@') != Email.value.indexOf('@')) {
+                    Msg = Msg + "אימייל חייב להכיל @ אחד בלבד<br>";
+                    Email.focus();
+                    Email.style.backgroundColor = "red";
+                }
+                if (Email.value.lastIndexOf('@') > Email.value.lastIndexOf('.')) {
+                    Msg = Msg + "אימייל חייב להכיל . אחרי שטרודל<br>";
+                    Email.focus();
+                    Email.style.backgroundColor = "red";
+                }
+            }
+
+            if ((male.checked == false) && (female.checked == false) && (other.checked == false)) {
+                Msg += "בחר מגדר : זכר או נקבה או אחר<br>";
+            }
+            switch (month) {
+                case '4':
+                case '6':
+                case '9':
+                case '11':
+                    if (day == 31)
+                        Msg = Msg + "בחודש זה יש 30 ימים<br/>";
+                    break;
+                case '2':
+                    if ((year % 4 == 0) && (day > 29))
+                        Msg = Msg + "בחודש זה יש 29 ימים<br/>";
+                    else if ((year % 4 != 0) && (day > 28))
+                        Msg = Msg + "בחודש זה יש 28 ימים<br/>";
+                    break;
+            }
+            if (tof.checked == false) {
+                Msg += "חייב להסכים לתנאיי השימוש<br>";
+            }
+            document.getElementById('ErrorSummary').innerHTML = Msg + "<br/>";
+            if (Msg == '') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+
+    </script>
 </head>
 <body>
+    <h1>sign up</h1>
+    <div>
+        <form action="NewUser.js" method="post" id="frmReg" onsubmit="return IsValid()">
+            <div class="row mb-4">
+                <div class="col">
+                    <p1>First name:</p1><br>
+                    <input type="text" id="Fname" name="Fname" value=""><br /><br />
+                    <p1>Last name:</p1><br>
+                    <input type="text" id="Lname" name="Lname" value=""><br /><br />
+                    <p1>username:</p1><br>
+                    <input type="text" id="Uname" name="Uname" value=""><br /><br />
+                    <p1>password:</p1><br>
+                    <input type="password" id="password" name="password" value=""><br /><br />
+                    <p1>Cpassword:</p1><br>
+                    <input type="password" id="Cpassword" name="Cpassword" value=""><br /><br />
+                    <p1>Email:</p1><br>
+                    <input type="text" id="Email" name="Email" value=""><br /><br />
 
+
+                    <p1>Phone Number:</p1><br>
+                    <select id="ph" name="ph">
+                        <option label="050" value="050"></option>
+                        <option label="052" value="052"></option>
+                        <option label="053" value="053"></option>
+                        <option label="054" value="054"></option>
+                        <option label="055" value="055"></option>
+                        <option label="056" value="056"></option>
+                    </select>
+                    <input type="text" name="Pnumber" id="Pnumber" value="" /><br><br>
+
+                    <p1>gender:</p1><br /><br />
+                    <input type="radio" name="gender" id="male" value="male">Male<br>
+                    <input type="radio" name="gender" id="female" value="female">Female<br>
+                    <input type="radio" name="gender" id="other" value="other">Other<br /><br />
+
+                    <p1>Birthday Date:</p1>
+                    <select id="day" name="day">
+                        <option label="1" value="1"></option>
+                        <option label="2" value="2"></option>
+                        <option label="3" value="3"></option>
+                        <option label="4" value="4"></option>
+                        <option label="5" value="5"></option>
+                        <option label="6" value="6"></option>
+                        <option label="7" value="7"></option>
+                        <option label="8" value="8"></option>
+                        <option label="9" value="9"></option>
+                        <option label="10" value="10"></option>
+                        <option label="11" value="11"></option>
+                        <option label="12" value="12"></option>
+                        <option label="13" value="13"></option>
+                        <option label="14" value="14"></option>
+                        <option label="15" value="15"></option>
+                        <option label="16" value="16"></option>
+                        <option label="17" value="17"></option>
+                        <option label="18" value="18"></option>
+                        <option label="19" value="19"></option>
+                        <option label="20" value="20"></option>
+                        <option label="21" value="21"></option>
+                        <option label="22" value="22"></option>
+                        <option label="23" value="23"></option>
+                        <option label="24" value="24"></option>
+                        <option label="25" value="25"></option>
+                        <option label="26" value="26"></option>
+                        <option label="27" value="27"></option>
+                        <option label="28" value="28"></option>
+                        <option label="29" value="29"></option>
+                        <option label="30" value="30"></option>
+                        <option label="31" value="31"></option>
+                    </select>
+                    <select id="month" name="month">
+                        <option label="1" value="1"></option>
+                        <option label="2" value="2"></option>
+                        <option label="3" value="3"></option>
+                        <option label="4" value="4"></option>
+                        <option label="5" value="5"></option>
+                        <option label="6" value="6"></option>
+                        <option label="7" value="7"></option>
+                        <option label="8" value="8"></option>
+                        <option label="9" value="9"></option>
+                        <option label="10" value="10"></option>
+                        <option label="11" value="11"></option>
+                        <option label="12" value="12"></option>
+                    </select>
+                    <select id="year" name="year">
+                        <option label="1970" value="1970"></option>
+                        <option label="1971" value="1971"></option>
+                        <option label="1972" value="1972"></option>
+                        <option label="1973" value="1973"></option>
+                        <option label="1974" value="1974"></option>
+                        <option label="1975" value="1975"></option>
+                        <option label="1976" value="1976"></option>
+                        <option label="1977" value="1977"></option>
+                        <option label="1978" value="1978"></option>
+                        <option label="1979" value="1979"></option>
+                        <option label="1980" value="1980"></option>
+                        <option label="1981" value="1981"></option>
+                        <option label="1982" value="1982"></option>
+                        <option label="1983" value="1983"></option>
+                        <option label="1984" value="1984"></option>
+                        <option label="1985" value="1985"></option>
+                        <option label="1986" value="1986"></option>
+                        <option label="1987" value="1987"></option>
+                        <option label="1988" value="1988"></option>
+                        <option label="1989" value="1989"></option>
+                        <option label="1990" value="1990"></option>
+                        <option label="1991" value="1991"></option>
+                        <option label="1992" value="1992"></option>
+                        <option label="1993" value="1993"></option>
+                        <option label="1994" value="1994"></option>
+                        <option label="1995" value="1995"></option>
+                        <option label="1996" value="1996"></option>
+                        <option label="1997" value="1997"></option>
+                        <option label="1998" value="1998"></option>
+                        <option label="1999" value="1999"></option>
+                        <option label="2000" value="2000"></option>
+                        <option label="2001" value="2001"></option>
+                        <option label="2002" value="2002"></option>
+                        <option label="2003" value="2003"></option>
+                        <option label="2004" value="2004"></option>
+                        <option label="2005" value="2005"></option>
+                        <option label="2006" value="2006"></option>
+                        <option label="2007" value="2007"></option>
+                        <option label="2008" value="2008"></option>
+                        <option label="2009" value="2009"></option>
+                        <option label="2010" value="2010"></option>
+                        <option label="2011" value="2011"></option>
+                        <option label="2012" value="2012"></option>
+                        <option label="2013" value="2013"></option>
+                        <option label="2014" value="2014"></option>
+                        <option label="2015" value="2015"></option>
+                        <option label="2016" value="2016"></option>
+                        <option label="2017" value="2017"></option>
+                        <option label="2018" value="2018"></option>
+                    </select>
+                    <br /><br />
+
+                    <input type="checkbox" id="terms of" name="terms of" value=""> <p1>אני מאשר את תנאי השימוש</p1>
+                    <br />
+                    <br />
+                    <p1>When you finish signing up.<a href="login.js">Click Login</a></p1><br />
+                    <input type="reset" value="reset">
+                    <input type="submit" value="submit"><br />
+
+                    <div id="ErrorSummary"></div>
+                </div>
+            </div>
+</form>
+    </div>
 </body>
 </html>
