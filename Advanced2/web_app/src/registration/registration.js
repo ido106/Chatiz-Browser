@@ -1,6 +1,6 @@
 function Registration() {
     return (
-<div>
+<div container>
     <div class="mb-3 row">
         <label for="Username" class="col-form-label">Username</label>
         <div class="col-sm-3">
