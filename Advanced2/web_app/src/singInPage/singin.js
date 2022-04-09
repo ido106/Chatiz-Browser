@@ -4,17 +4,17 @@ function submitsingin(data) {
 
 export default function Singin() {
     return (
-        <form onSubmit={submitsingin} className="boxingAndBackground">
+        <form onSubmit={submitsingin} className="boxForms">
         {/* <!-- Email input --> */}
         <div class="form-outline mb-4">
+            Username
           <input type="text" id="Username" class="form-control" />
-          <label class="form-label" for="Username">Israel israeli</label>
         </div>
       
         {/* <!-- Password input --> */}
         <div class="form-outline mb-4">
+            Password
           <input type="password" id="password" class="form-control" />
-          <label class="form-label" for="password">Password</label>
         </div>
       
         {/* <!-- 2 column grid layout for inline styling --> */}

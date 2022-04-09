@@ -1,4 +1,3 @@
-import './App.css';
 import Singin from './singInPage/singin';
 import Registration from './registration/registration';
 import {
@@ -9,9 +8,7 @@ import {
 
 function App() {
     return (
-        <BrowserRouter>
-            <Singin/>
-        </BrowserRouter>
+        <Singin/>
     );
 }
 
