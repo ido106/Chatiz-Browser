@@ -9,13 +9,13 @@ function Registration() {
             {/* <!-- Email input --> */}
             <div className="form-outline mb-4">
                 <input type="text" id="Username" className="form-control"></input>
-                <label className="form-label" for="Username">Username</label>
+                <label className="form-label" htmlFor="Username">Username</label>
             </div>
 
             {/* <!-- Password input --> */}
             <div className="form-outline mb-4">
                 <input type="password" id="Password" className="form-control"></input>
-                <label className="form-label" for="Password">Password</label>
+                <label className="form-label" htmlFor="Password">Password</label>
             </div>
 
             {/* <!-- 2 column grid layout for inline styling --> */}
@@ -24,7 +24,7 @@ function Registration() {
                     {/* <!-- Checkbox --> */}
                     <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="checkBoxRemember"></input>
-                        <label className="form-check-label" for="checkBoxRemember"> Remember me </label>
+                        <label className="form-check-label" htmlFor="checkBoxRemember"> Remember me </label>
                     </div>
                 </div>
 
