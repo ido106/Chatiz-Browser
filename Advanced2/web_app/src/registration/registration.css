@@ -134,7 +134,7 @@ input[type=button], input[type=submit], input[type=reset] {
     cursor: pointer;
 }
 
-div {
+.boxForms{
     background: #fff;
     width: 600px;
     max-width: 100%;
