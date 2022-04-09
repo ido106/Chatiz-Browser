@@ -3,7 +3,7 @@ import Registration from './registration/registration';
 
 function App() {
     return (
-        <div class="">
+        <div>
         <Registration/>
         </div>
     );

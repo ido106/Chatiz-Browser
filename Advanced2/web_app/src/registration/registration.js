@@ -1,36 +1,41 @@
+function handleSubmit(data) {
+    console.log(data) // trying to see what format data comes at
+    // check validity and save user details somewhere
+}
+
 function Registration() {
     return (
-        <form>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-                <input type="email" id="form1Example1" class="form-control" />
-                <label class="form-label" for="form1Example1">Email address</label>
+        <form onSubmit={handleSubmit}>
+            {/* <!-- Email input --> */}
+            <div className="form-outline mb-4">
+                <input type="text" id="Username" className="form-control"></input>
+                <label className="form-label" for="Username">Username</label>
             </div>
 
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-                <input type="password" id="form1Example2" class="form-control" />
-                <label class="form-label" for="form1Example2">Password</label>
+            {/* <!-- Password input --> */}
+            <div className="form-outline mb-4">
+                <input type="password" id="Password" className="form-control"></input>
+                <label className="form-label" for="Password">Password</label>
             </div>
 
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-                <div class="col d-flex justify-content-center">
-                    <!-- Checkbox -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                        <label class="form-check-label" for="form1Example3"> Remember me </label>
+            {/* <!-- 2 column grid layout for inline styling --> */}
+            <div className="row mb-4">
+                <div className="col d-flex justify-content-center">
+                    {/* <!-- Checkbox --> */}
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="" id="checkBoxRemember"></input>
+                        <label className="form-check-label" for="checkBoxRemember"> Remember me </label>
                     </div>
                 </div>
 
-                <div class="col">
-                    <!-- Simple link -->
+                <div className="col">
+                    {/* <!-- Simple link --> */}
                     <a href="#!">Forgot password?</a>
                 </div>
             </div>
 
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            {/* <!-- Submit button --> */}
+            <button type="submit" className="btn btn-primary btn-block">Sign in</button>
         </form>
     );
 }
