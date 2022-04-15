@@ -1,6 +1,7 @@
 import React from 'react';
 import validate from './validateInfo';
 import useForm from './useForm';
+import { BrowserRouter as Router , Routes, Route, Link } from 'react-router-dom';
 import './Form.css';
 
 const FormSignup = ({ submitForm }) => {
@@ -8,6 +9,7 @@ const FormSignup = ({ submitForm }) => {
     submitForm,
     validate
   );
+  
 
   return (
     <div className='form-content-right'>
@@ -68,7 +70,7 @@ const FormSignup = ({ submitForm }) => {
           Sign up
         </button>
         <span className='form-input-login'>
-          Already have an account? Login <a href='#'>here</a>
+          Already have an account? Login <Link to="/login">here</Link>
         </span>
       </form>
     </div>
