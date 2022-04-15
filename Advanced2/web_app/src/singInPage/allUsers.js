@@ -1,10 +1,9 @@
 
-const users = [
-    {userName: "otma", password: "homo"},
-    {userName: "ido", password: "king"},
-    {userName: "shahar", password: "chingbling"},
-    {userName: "messi", password: "goat"},
-    {userName: "xavi", password: "goat2"}
-  ]
+
+const users = [{userN: 'otma', Pass: 'homo'},
+    {userN: 'ido', Pass: 'king'},
+    {userN: 'shahar', Pass: 'chingbling'},
+    {userN: 'messi', Pass: 'goat'},
+    {userN: 'xavi', Pass: 'goat2'}];
 
   export default users;
