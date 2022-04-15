@@ -10,7 +10,6 @@ const Form = () => {
     setIsSubmitted(true);
   }
   return (
-    <>
       <div className='form-container'>
         <span className='close-btn'>×</span>
         <div className='form-content-left'>
@@ -22,7 +21,6 @@ const Form = () => {
           <FormSuccess />
         )}
       </div>
-    </>
   );
 };
 
