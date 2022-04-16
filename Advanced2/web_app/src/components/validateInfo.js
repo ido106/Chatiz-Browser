@@ -1,4 +1,5 @@
 
+import users from './allUsers'
 export default function validateInfo(values) {
   var check = true;
   let errors = {};
@@ -34,7 +35,7 @@ export default function validateInfo(values) {
     check = false;
   }
   if (check) {
-    
+    users.push({userN: values.username, Pass: values.password})
   }
   return errors;
 }

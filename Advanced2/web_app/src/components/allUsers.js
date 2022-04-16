@@ -1,5 +1,4 @@
 
-
 const users = [{userN: 'otma', Pass: 'homo'},
     {userN: 'ido', Pass: 'king'},
     {userN: 'shahar', Pass: 'chingbling'},

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router , Routes, Route, Link } from 'react-router-dom';
-import SignInValid from "./singInPage/signInValid";
-import Form from './signUpForm/Form';
+import SignInValid from "./components/signInValid";
+import Form from './components/Form';
 
 function App() {
   return (

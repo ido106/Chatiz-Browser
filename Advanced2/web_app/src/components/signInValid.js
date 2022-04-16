@@ -10,18 +10,14 @@ function SignInValid() {
         var check1=false, check2=false
 
         users.forEach(element => {
-            if(element.userN.includes(details.userName)
+            if(element.userN == (details.userName) && element.Pass == (details.password)
+            && details.password!=''
             && details.userName!='') {
             check1=true;
+            check2 = true;
             }
         });
 
-        users.forEach(element => {
-            if(element.Pass.includes(details.password)
-                && details.password!='') {
-                check2=true;
-            }
-        });
         if (check1&&check2) {
             console.log("login...");
             setUser({
