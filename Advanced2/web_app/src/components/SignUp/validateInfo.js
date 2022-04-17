@@ -1,5 +1,5 @@
 
-import users from './allUsers'
+import users from '../SignIn/allUsers'
 export default function validateInfo(values) {
   var check = true;
   let errors = {};
