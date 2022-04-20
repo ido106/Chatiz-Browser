@@ -65,12 +65,17 @@ const FormSignup = ({ submitForm }) => {
           />
           {errors.password2 && <p>{errors.password2}</p>}
         </div>
+        <label className="form-label">
+        <input type="checkbox"></input>
+         &nbsp;I agree to the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms of Service</a>
+        </label>
         <button className="form-input-btn" type="submit">
           Sign up
         </button>
         <span className="form-input-login">
           Already have an account? Login <Link to="/login">here</Link>
         </span>
+        
       </form>
     </div>
   );
