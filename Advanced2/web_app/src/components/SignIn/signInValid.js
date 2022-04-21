@@ -2,6 +2,7 @@ import Singin from "./singin";
 import React, { useState } from "react";
 import users from "./allUsers";
 import { render } from "react-dom";
+import Chats from "../Chat/chats";
 
 function SignInValid() {
   const [user, setUser] = useState({ userName: "", password: "" });
@@ -34,15 +35,17 @@ function SignInValid() {
     console.log("logout");
     setUser({ userName: "", password: "" });
   };
+  // alert(user.userName)
   return (
     <div>
       {user.userName != "" ? (
-        <div className="welcome">
-          <h2>
-            welcome, <span>{user.userName}</span>
-          </h2>
-          <button onClick={Logout}>Logout</button>
-        </div>
+        // <div className="welcome">
+        //   <h2>
+        //     welcome, <span>{user.userName}</span>
+        //   </h2>
+        //   <button onClick={Logout}>Logout</button>
+        // </div>
+        <Chats username={user.userName}/>
       ) : (
         <Singin Login={Login} error={error} />
       )}
