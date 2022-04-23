@@ -1,4 +1,4 @@
-import users from "../SignIn/allUsers";
+import users from "../sign_in/users";
 export default function validateInfo(values) {
   var check = true;
   let errors = {};
@@ -7,9 +7,6 @@ export default function validateInfo(values) {
     errors.username = "Username required";
     check = false;
   }
-  // else if (!/^[A-Za-z]+/.test(values.name.trim())) {
-  //   errors.name = 'Enter a valid name';
-  // }
 
   if (!values.email) {
     errors.email = "Email required";
