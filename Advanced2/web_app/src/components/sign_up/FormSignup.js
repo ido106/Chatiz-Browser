@@ -66,8 +66,11 @@ const FormSignup = ({ submitForm }) => {
           {errors.password2 && <p>{errors.password2}</p>}
         </div>
         <label className="form-label">
-        <input type="checkbox"></input>
-         &nbsp;I agree to the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Terms of Service</a>
+          <input type="checkbox"></input>
+          &nbsp;I agree to the&nbsp;
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            Terms of Service
+          </a>
         </label>
         <button className="form-input-btn" type="submit">
           Sign up
@@ -75,7 +78,7 @@ const FormSignup = ({ submitForm }) => {
         <span className="form-input-login">
           Already have an account? Login <Link to="/">here</Link>
         </span>
-        
+
       </form>
     </div>
   );

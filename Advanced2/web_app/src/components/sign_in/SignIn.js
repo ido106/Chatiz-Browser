@@ -115,10 +115,12 @@ class SignIn extends React.Component {
                         </div>
                         <div className="card-footer">
                             <div className="d-flex justify-content-center links">
-                                Don't have an account?<Link to="/SignUp" onClick={()=>{this.setState({valid_user : true})}}>Sign Up</Link>
+                                Don't have an account?<Link to="/SignUp" onClick={() => { this.setState({ valid_user: true }) }}>Sign Up</Link>
                             </div>
                             <div className="d-flex justify-content-center">
-                                <a href="#">Forgot your password?</a>
+                                <a href="https://www.youtube.com/watch?v=y83x7MgzWOA" target="_blank">
+                                    Forgot your password?
+                                </a>
                             </div>
                         </div>
                     </div>
