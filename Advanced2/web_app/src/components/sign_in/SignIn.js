@@ -24,6 +24,7 @@ class SignIn extends React.Component {
             valid_user: true,
             userName: '',
             passWord: ''
+
         }
 
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -33,6 +34,7 @@ class SignIn extends React.Component {
 
     handleChangeUsername(event) {
         this.setState({ userName: event.target.value });
+        this.props.updateUserData((prevState)=>({...prevState, myUser : this.state.userName}))
     }
     handleChangePassword(event) {
         this.setState({ passWord: event.target.value });
@@ -55,6 +57,7 @@ class SignIn extends React.Component {
             this.setState({
                 valid_user: true
             });
+            //console.log(this.props)
             // <ChatForm
             //     username={this.state.userName}
             //     password={this.state.passWord}

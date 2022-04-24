@@ -7,11 +7,17 @@ import SignIn from "./components/sign_in/SignIn";
 import Form from "./components/sign_up/Form";
 
 function App() {
+
+  const [UserData, setUserData] = React.useState({
+    myUser : 'OtmaBeast'
+  })
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignIn/>}></Route>
+        <Route path="/" element={<SignIn updateUserData={setUserData}/>}></Route>
         <Route path="/SignUp" element={<Form/>}></Route>
+        <Route path="/Chats" element={<Form UserData={UserData} />}></Route>
       </Routes>
     </Router>
   );
