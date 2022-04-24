@@ -3,15 +3,23 @@ body{
     margin-top:20px;
 }
 .card {
-    background: #fff;
+    background: #fff ;
     transition: .5s;
     border: 0;
     margin-bottom: 30px;
     border-radius: .55rem;
-    position: relative;
-    width: 100%;
+    position: fixed;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
+
+.search-buttun-chat {
+    height : 100%
+}
+.chat-card {
+    height: 95% !important;
+    width: 85% !important;
+    background-color: rgba(white,white,white, 1) !important;}
+
 .chat-app .people-list {
     width: 280px;
     position: absolute;
@@ -35,8 +43,7 @@ body{
 
 .people-list .chat-list li {
     padding: 10px 15px;
-    list-style: none;
-    border-radius: 3px
+    width: 100%;
 }
 
 .people-list .chat-list li:hover {

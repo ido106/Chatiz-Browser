@@ -1,27 +1,16 @@
 import React from "react"
-
+import { Navigate } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import ChatForm from "../chats/ChatForm";
-import { useNavigate } from "react-router-dom";
-
 
 import './sign_in.css';
 import users from "./users";
-
-// function Invoices() {
-//     let navigate = useNavigate();
-//     return (
-//       <div>
-//         navigate('/')
-//       </div>
-//     );
-//   }
 
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            valid_user: true,
+            valid_user: false,
+            isSubmitted : false,
             userName: '',
             passWord: ''
 
@@ -33,8 +22,10 @@ class SignIn extends React.Component {
     }
 
     handleChangeUsername(event) {
-        this.setState({ userName: event.target.value });
-        this.props.updateUserData((prevState)=>({...prevState, myUser : this.state.userName}))
+        this.setState({
+             userName: event.target.value
+             });
+        this.props.updateUserData((prevState) => ({ ...prevState, myUser: this.state.userName }))
     }
     handleChangePassword(event) {
         this.setState({ passWord: event.target.value });
@@ -42,6 +33,9 @@ class SignIn extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({
+            isSubmitted : true
+        })
         var check1 = false;
 
         users.forEach((element) => {
@@ -57,13 +51,6 @@ class SignIn extends React.Component {
             this.setState({
                 valid_user: true
             });
-            //console.log(this.props)
-            // <ChatForm
-            //     username={this.state.userName}
-            //     password={this.state.passWord}
-            // />
-
-            //<Invoices/>
         } else {
             this.setState({
                 valid_user: false
@@ -72,8 +59,11 @@ class SignIn extends React.Component {
     }
 
     render() {
+        if(this.state.valid_user) {
+            return <Navigate to="/Chats" />
+        }
         return (
-            <div className="container">
+            <div className="signin-container">
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
 
                 {/* Fontawesome CDN */}
@@ -83,7 +73,7 @@ class SignIn extends React.Component {
                 <link rel="stylesheet" type="text/css" href="styles.css" />
 
                 <div className="d-flex justify-content-center h-100">
-                    <div className="card">
+                    <div className="card signin-card">
                         <div className="card-header">
                             <h3>Sign In</h3>
                             <div className="d-flex justify-content-end social_icon">
@@ -93,7 +83,7 @@ class SignIn extends React.Component {
                             </div>
                         </div>
                         <div className="card-body">
-                            {!this.state.valid_user ? <p className="text-danger">Incorrect username or password</p> : null}
+                            {(!this.state.valid_user && this.state.isSubmitted) ? <p className="text-danger">Incorrect username or password</p> : null}
                             <form onSubmit={this.handleSubmit}>
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
@@ -112,7 +102,7 @@ class SignIn extends React.Component {
                                     <input type="checkbox" /> Remember Me
                                 </div>
                                 <div className="form-group">
-                                    <input type="submit" value="Login" className="btn float-right login_btn" />
+                                    <input type="submit" value="Login" className="btn float-right login_btn"/>
                                 </div>
                             </form>
                         </div>
