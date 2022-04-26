@@ -16,7 +16,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
       body:"",
     });
   };
-  if (!activeNote) return <div className="no-active-note">No Active Note</div>;
+  if (!activeNote) return <div className="no-active-note">No Active Chat</div>;
   return (
     <div className="app-main">
       <div className="app-main-note-edit">
