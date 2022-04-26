@@ -30,7 +30,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
         />
         <input
           id="body"
-          placeholder="Write your note here..."
+          placeholder="Write your massage here..."
           value={activeNote.body}
           onChange={(e) => onEditField("body", e.target.value)}
         />
