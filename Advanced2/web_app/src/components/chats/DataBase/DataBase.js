@@ -8,8 +8,10 @@ class DataBase {
     }
 
     addUser(param) {
-        this.setState({numberOfUsers : numberOfUsers+1});
-        Users.push(param)
+        this.setState({
+            numberOfUsers : numberOfUsers+1,
+            Users: Users.push(param.user)
+        });
     }
 
     getUserByName(userName) {

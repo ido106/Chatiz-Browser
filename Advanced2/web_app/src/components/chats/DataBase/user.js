@@ -7,7 +7,7 @@ class User {
         }
     }
 
-    addMessage(message) {
-        this.messages.push(message)
+    addMessage(param) {
+        this.messages.push(param.message)
     }
 }
