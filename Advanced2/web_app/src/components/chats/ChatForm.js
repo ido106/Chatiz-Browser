@@ -5,6 +5,20 @@ import './chats.css'
 import ChatInfo from "./ChatInfo"
 
 class ChatForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            talkingTo : null,
+            
+        }
+    }
+
+    send(params) {
+        console.log(document.getElementById("textMessage").value);
+         
+    }
+
     render() {
         return (
             <div className="container">
@@ -14,24 +28,20 @@ class ChatForm extends React.Component {
                             <div id="plist" className="people-list">
                                 <div className="input-group">
                                     <div className="input-group-prepend">
-                                        <span class="input-group-text search-buttun-chat"><i class="fa fa-search"></i></span>
+                                        <span className="input-group-text search-buttun-chat"><i className="fa fa-search"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Search..."></input>
+                                    <input type="text" className="form-control" placeholder="Search..."></input>
                                 </div>
                                 <ul className="list-unstyled chat-list me-2 mb-0">
                                     <ContactView
                                         img="https://bootdey.com/img/Content/avatar/avatar1.png"
                                         name="Vincent Porter"
                                         timeLeft="7 mins" />
-
-                                    <li class="clearfix active">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" />
-                                        <div class="about">
-                                            <div class="name">Aiden Chavez</div>
-                                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                        </div>
-                                    </li>
-
+                                    <ContactView
+                                        img="https://bootdey.com/img/Content/avatar/avatar2.png"
+                                        name="Aiden Chavez"
+                                        timeLeft="online" />
+                                  
                                     <ContactView
                                         img="https://bootdey.com/img/Content/avatar/avatar3.png"
                                         name="Mike Thomas"
@@ -41,7 +51,7 @@ class ChatForm extends React.Component {
                             <div className="chat">
                                 <div className="chat-header clearfix">
                                     <div className="row">
-                                        <div class="col-lg-6">
+                                        <div className="col-lg-6">
                                             <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" />
                                             </a>
@@ -50,38 +60,46 @@ class ChatForm extends React.Component {
                                                 onlineState="Last seen: 2 hours ago"
                                             />
                                         </div>
-                                        <div class="col-lg-6 hidden-sm text-right">
-                                            <a class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                                            <a class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                                            <a class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                                            <a class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+                                        <div className="col-lg-6 hidden-sm text-right">
+                                            <a className="btn btn-outline-secondary"><i className="fa fa-camera"></i></a>
+                                            <a className="btn btn-outline-primary"><i className="fa fa-image"></i></a>
+                                            <a className="btn btn-outline-info"><i className="fa fa-cogs"></i></a>
+                                            <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>
                                         </div>
                                     </div>
 
                                 </div>
-                                <div class="chat-history">
-                                    <ul class="m-b-0">
-                                        <li class="clearfix">
-                                            <div class="message-data text-right">
-                                                <span class="message-data-time">10:10 AM, Today</span>
+                                <div className="chat-history">
+                                    <ul className="m-b-0 logo">
+                                        <li className="clearfix">
+                                            <div className="message-data text-right">
+                                                <span className="message-data-time">10:10 AM, Today</span>
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar" />
                                             </div>
-                                            <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
+                                            <div className="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
                                         </li>
-                                        <li class="clearfix">
-                                            <div class="message-data">
-                                                <span class="message-data-time">10:12 AM, Today</span>
+                                        <li className="clearfix">
+                                            <div className="message-data">
+                                                <span className="message-data-time">10:12 AM, Today</span>
                                             </div>
-                                            <div class="message my-message">Are we meeting today?</div>
+                                            <div className="message my-message">Are we meeting today?</div>
                                         </li>
-                                        <li class="clearfix">
-                                            <div class="message-data">
-                                                <span class="message-data-time">10:15 AM, Today</span>
+                                        <li className="clearfix">
+                                            <div className="message-data">
+                                                <span className="message-data-time">10:15 AM, Today</span>
                                             </div>
-                                            <div class="message my-message">Project has been already finished and I have results to show you.</div>
+                                            <div className="message my-message">Project has been already finished and I have results to show you.</div>
                                         </li>
                                     </ul>
                                 </div>
+                                <div className="chat-message clearfix">
+                    <div className="input-group mb-0 stick-down">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text send-buttun-chat"><i className="fa fa-send" onClick={this.send}></i></span>
+                        </div>
+                        <input type="text" className="form-control" placeholder="Enter text here..." id="textMessage"/>                                    
+                    </div>
+                </div>
                             </div>
 
                         </div>

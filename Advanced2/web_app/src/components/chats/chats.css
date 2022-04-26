@@ -15,6 +15,14 @@ body{
 .search-buttun-chat {
     height : 100%
 }
+
+.send-buttun-chat {
+    height : 100%
+}
+
+.stick-down {
+
+}
 .chat-card {
     height: 95% !important;
     width: 85% !important;
@@ -260,4 +268,9 @@ body{
         height: calc(100vh - 350px);
         overflow-x: auto
     }
+}
+
+
+.logo {
+    /* add background img here */
 }
