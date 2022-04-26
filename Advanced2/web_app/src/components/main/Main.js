@@ -23,7 +23,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
         <input
           type="text"
           id="title"
-          placeholder="Note Title"
+          placeholder="contact user"
           value={activeNote.title}
           onChange={(e) => onEditField("title", e.target.value)}
           autoFocus
