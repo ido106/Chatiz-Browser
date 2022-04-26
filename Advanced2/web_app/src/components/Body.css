@@ -92,7 +92,7 @@ button:hover {
 }
 .app-main-note-edit,
 .app-main-note-preview {
-  height: 50vh;
+  height: 20vh;
 }
 
 .no-active-note {
@@ -106,40 +106,42 @@ button:hover {
 
 /* Editing */
 .app-main-note-edit {
-  padding: 25px;
+  padding: 15px;
 }
 
 .app-main-note-edit input,
 textarea {
+  size:1cm;
   display: block;
   border: 1px solid #ddd;
   margin-bottom: 20px;
   width: 100%;
-  height: calc(50vh - 130px);
-  padding: 10px;
+  height: 20;
+  padding: 1px;
   resize: none;
   font-size: inherit;
   font-family: inherit;
 }
 .app-main-note-edit input {
-  height: 50px;
-  font-size: 2rem;
+  height: 22px;
+  font-size: 1rem;
 }
 
 /* Preview */
 .app-main-note-preview {
   border-top: 1px solid #ddd;
   overflow-y: scroll;
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(8, 8, 8, 0.037);
+  height: 80vh;
 }
 
 .preview-title {
-  padding: 25px 25px 0 25px;
+  padding: 40px 40px 0 40px;
   margin: 0;
 }
 
 .markdown-preview {
-  padding: 0 25px 25px 25px;
+  padding: 0 5px 5px 5px;
   font-size: 1rem;
   line-height: 2rem;
 }

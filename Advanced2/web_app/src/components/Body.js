@@ -15,9 +15,9 @@ function Body() {
   }, [notes]);
 
   const onAddNote = () => {
-    const newNote = {
+    var newNote = {
       id: notes.length,
-      title: "no-name",
+      title: "",
       body: "",
       newMsg:"",
       msgChats: [],
