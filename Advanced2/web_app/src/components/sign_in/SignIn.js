@@ -75,7 +75,7 @@ class SignIn extends React.Component {
     render() {
         if (this.state.valid_user) {
             return (
-                <Body />
+                <Navigate to="/Chats" />
             );
         }
         return (
