@@ -16,6 +16,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
       lastModified: Date.now(),
     });
   };
+
   const onClickEditField = (field, value,value2) => {
     value2.push(value)
     onUpdateNote({
@@ -44,6 +45,33 @@ const Main = ({ activeNote, onUpdateNote }) => {
           value={activeNote.body}
           onChange={(e) => onEditField("body", e.target.value)}
         />
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
         <button onClick={() => onClickEditField("newMsg", activeNote.body,activeNote.msgChats)}>send!</button>
       </div>
       <div className="app-main-note-preview">
@@ -53,6 +81,7 @@ const Main = ({ activeNote, onUpdateNote }) => {
             {activeNote.msgChats.map((itm, index) => {
               return (
                 <ChatItem
+                  type={"text"}
                   animationDelay={index + 2}
                   key={chatItmExample.key}
                   user={chatItmExample.type ? chatItmExample.type : "me"}
