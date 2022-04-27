@@ -15,20 +15,28 @@ let stopRecording = () => {
 };
 
 let startRecording = () => {
+  console.log("1");
     navigator.mediaDevices.getUserMedia({audio : true})
     .then(stream => {
+      console.log("2");
         mediaRecorder = new MediaRecorder(stream);
+        console.log("!!");
         mediaRecorder.start();
 
         const audioChunks = [];
+        console.log("3");
         mediaRecorder.addEventListener("dataavailable", event => {
+          console.log("4");
             audioChunks.push(event.data);
+            console.log("5");
         });
 
         mediaRecorder.addEventListener("stop", () => {
+          console.log("6");
             const audioBlob = new Blob(audioChunks);
             audioMessage  = URL.createObjectURL(audioBlob);
             stream.getTracks().forEach(track => track.stop());
+            console.log("stopped recording") 
         });
     });
 };
