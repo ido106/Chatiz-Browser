@@ -13,7 +13,7 @@ function Sidebar({
         {sortedNotes.map(({ id, title, body, lastModified }, i) => (
           <div
             className={`app-sidebar-note ${id === activeNote && "active"}`}
-            onClick={() => setActiveNote(id)}
+            onClick={() => setActiveNote(id)} key={i}
           >
             <div className="sidebar-note-title">
               <strong>{title}</strong>
