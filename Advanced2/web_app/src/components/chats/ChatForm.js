@@ -24,7 +24,7 @@ class ChatForm extends React.Component {
             <div className="container">
                 <div className="row clearfix">
                     <div className="col-lg-12">
-                        <div className="chat-card card chat-app">
+                        <div className="chat-card card chat-app ">
                             <div id="plist" className="people-list">
                                 <div className="input-group">
                                     <div className="input-group-prepend">
