@@ -42,8 +42,9 @@ button:hover {
 
 .app-sidebar {
   background:linear-gradient(
-    rgba(0, 0, 0, 0.142), 
-    rgba(0, 0, 0, 0.7)
+    rgb(20, 7, 63), 
+    rgba(62, 9, 46, 0.7),
+    rgba(7, 49, 100, 0.7)
   );
   width: 30%;
   height: 100vh;
@@ -140,7 +141,7 @@ textarea {
 .app-main-note-preview {
   border-top: 1px solid #ddd;
   overflow-y: scroll;
-  background: rgba(8, 8, 8, 0.037);
+  background: rgba(29, 4, 64, 0.037);
   height: 80vh;
 }
 

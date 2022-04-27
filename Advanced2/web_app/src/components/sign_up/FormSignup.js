@@ -12,28 +12,28 @@ const FormSignup = ({ submitForm }) => {
 
   function togglePassword() {
     var passwordInput = document.getElementById("passwordInput");
-    //var eye = document.getElementById("passwordEye")
+    var eye = document.getElementById("passwordEye")
     if (passwordInput.value != '') {
       if (passwordInput.type === "password") {
         passwordInput.type = "text";
-        //eye.classList.toggle("fa fa-eye-slash")
+        eye.className = "fa fa-eye-slash"
       } else {
         passwordInput.type = "password";
-        //eye.classList.toggle('fa fa-eye')
+        eye.className = "fa fa-eye"
       }
     }
   }
 
   function toggleConfirmPassword() {
     var passwordInput = document.getElementById("ConfirmPasswordInput");
-    //var eye = document.getElementById("passwordEye")
+    var eye = document.getElementById("ConfirmPasswordEye")
     if (passwordInput.value != '') {
       if (passwordInput.type === "password") {
         passwordInput.type = "text";
-        //eye.classList.toggle("fa fa-eye-slash")
+        eye.className = "fa fa-eye-slash"
       } else {
         passwordInput.type = "password";
-        //eye.classList.toggle('fa fa-eye')
+        eye.className = "fa fa-eye"
       }
     }
   }
@@ -99,7 +99,7 @@ const FormSignup = ({ submitForm }) => {
             value={values.password2}
             onChange={handleChange}
           />
-          <span className="input-group-text"><i id="passwordEye" className="fa fa-eye" onClick={toggleConfirmPassword}></i></span>
+          <span className="input-group-text"><i id="ConfirmPasswordEye" className="fa fa-eye" onClick={toggleConfirmPassword}></i></span>
         </div>
         {errors.password2 && <p className="form-inputs text-danger">{errors.password2}</p>}
 

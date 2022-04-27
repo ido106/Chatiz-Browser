@@ -1,13 +1,15 @@
-class User {
+import {useState} from 'react';
+import Message from './message'
+
+export default class User {
     constructor(props) {
-        super(props);
-        this.state = {
-            name : props.name,
-            messages : []
-        }
+            this.userName = props.name;
+            this.messages = [];
     }
 
     addMessage(param) {
-        this.messages.push(param.message)
+        this.messages.push(
+        <Message {...param}/>
+        )
     }
 }

@@ -23,14 +23,14 @@ class SignIn extends React.Component {
 
     togglePassword() {
         var passwordInput = document.getElementById("passwordInput");
-        //var eye = document.getElementById("passwordEye")
+        var eye = document.getElementById("passwordEye")
         if (passwordInput.value != '') {
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
-                //eye.classList.toggle("fa fa-eye-slash")
+                eye.className = "fa fa-eye-slash"
             } else {
                 passwordInput.type = "password";
-                //eye.classList.toggle('fa fa-eye')
+                eye.className = "fa fa-eye"
             }
         }
     }
