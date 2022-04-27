@@ -10,6 +10,7 @@ const Form = () => {
   function submitForm() {
     setIsSubmitted(true);
   }
+
   return (
     <div className='form-container'>
       

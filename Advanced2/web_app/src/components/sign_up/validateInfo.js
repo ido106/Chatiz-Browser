@@ -40,7 +40,7 @@ export default function validateInfo(values) {
     check = false;
   }
   if (check) {
-    users.push({ userN: values.username, Pass: values.password });
+    users.push({ UserName: values.username, Password: values.password });
   }
   return errors;
 }
