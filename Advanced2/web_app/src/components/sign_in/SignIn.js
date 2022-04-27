@@ -11,7 +11,7 @@ class SignIn extends React.Component {
         super(props);
         this.state = {
             valid_user: false,
-            isSubmitted : false,
+            isSubmitted: false,
             userName: '',
             passWord: ''
 
@@ -22,10 +22,24 @@ class SignIn extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    togglePassword() {
+        var passwordInput = document.getElementById("passwordInput");
+        //var eye = document.getElementById("passwordEye")
+        if (passwordInput.value != '') {
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                //eye.classList.toggle("fa fa-eye-slash")
+            } else {
+                passwordInput.type = "password";
+                //eye.classList.toggle('fa fa-eye')
+            }
+        }
+    }
+
     handleChangeUsername(event) {
         this.setState({
-             userName: event.target.value
-             });
+            userName: event.target.value
+        });
         this.props.updateUserData((prevState) => ({ ...prevState, myUser: this.state.userName }))
     }
     handleChangePassword(event) {
@@ -35,7 +49,7 @@ class SignIn extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.setState({
-            isSubmitted : true
+            isSubmitted: true
         })
         var check1 = false;
 
@@ -60,10 +74,10 @@ class SignIn extends React.Component {
     }
 
     render() {
-        if(this.state.valid_user) {
+        if (this.state.valid_user) {
             return (
-                <Body/>
-    );
+                <Body />
+            );
         }
         return (
             <div className="signin-container">
@@ -99,19 +113,26 @@ class SignIn extends React.Component {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                    <input type="password" onChange={this.handleChangePassword} value={this.state.passWord} className="form-control" placeholder="password" />
+
+                                    <input type="password" onChange={this.handleChangePassword} value={this.state.passWord} className="form-control" placeholder="password"
+                                        id="passwordInput" />
+
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i id="passwordEye" className="fa fa-eye" onClick={this.togglePassword}></i></span>
+                                    </div>
+
                                 </div>
                                 <div className="row align-items-center remember">
                                     <input type="checkbox" /> Remember Me
                                 </div>
                                 <div className="form-group">
-                                    <input type="submit" value="Login" className="btn float-right login_btn"/>
+                                    <input type="submit" value="Login" className="btn float-right login_btn" />
                                 </div>
                             </form>
                         </div>
                         <div className="card-footer">
                             <div className="d-flex justify-content-center links">
-                                Don't have an account?<Link to="/SignUp" onClick={() => { this.setState({ valid_user: true }) }}>Sign Up</Link>
+                                Don't have an account?<Link to="/SignUp" onClick={() => { this.setState({ valid_user: false }) }}>Sign Up</Link>
                             </div>
                             <div className="d-flex justify-content-center">
                                 <a href="https://www.youtube.com/watch?v=y83x7MgzWOA" target="_blank">
