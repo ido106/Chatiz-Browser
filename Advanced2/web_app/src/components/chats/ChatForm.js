@@ -41,17 +41,14 @@ class ChatForm extends React.Component {
 
 
     //********************************************************************************************************** */
-    send(type, data) {
-        if(type == "audio") {
-            console.log("shahar moher");
-        }
-        if (this.state.activeChat == null || data == "") {
+    send(messageType, newData) {
+        if (this.state.activeChat == null || newData == "") {
             return;
         }
 
         var ma = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
-            type: type,
-            data: data,
+            type: messageType,
+            data: newData,
             timeSent: Date.now(),
             isMine: true
         });
@@ -67,10 +64,6 @@ class ChatForm extends React.Component {
 
 
     showMessages() {
-        if (this.state.activeChat == null) {
-            return <div className="no-active-note">No Active Chat</div>
-        }
-
         var msgs = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages
         if (msgs != null) {
             return msgs.map((element, k) => {
@@ -128,7 +121,7 @@ class ChatForm extends React.Component {
                 this.mediaRecorder.addEventListener("stop", () => {
                     let audioMessage = new Blob(audioChunks);
                     stream.getTracks().forEach(track => track.stop());
-                    this.send('audio', audioMessage);
+                    this.send('audio', URL.createObjectURL(audioMessage));
 
                 });
             });
@@ -212,7 +205,6 @@ class ChatForm extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

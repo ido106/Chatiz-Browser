@@ -160,7 +160,7 @@ body{
 }
 
 .chat .chat-history .my-message {
-    background: #efefef
+    background: rgb(175,225,175)
 }
 
 .chat .chat-history .my-message:after {
@@ -178,7 +178,7 @@ body{
 }
 
 .chat .chat-history .other-message {
-    background: #e8f1f3;
+    background: rgb(125, 249, 255);
     text-align: right
 }
 

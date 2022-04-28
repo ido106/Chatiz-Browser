@@ -30,8 +30,8 @@ function App() {
           {
             type: "text",
             data: "im idiot",
-            timeSent: "",
-            isMine: true
+            timeSent: "15:34",
+            isMine: false
           },
 
           ],
@@ -44,21 +44,21 @@ function App() {
           {
             type: "text",
             data: "aaaaaaa",
-            timeSent: "",
-            isMine: true
+            timeSent: "12:45",
+            isMine: false
           },
 
           {
             type: "text",
             data: "bbbbbbbbbbb",
-            timeSent: "",
+            timeSent: "11:11",
             isMine: true
           },
 
           {
             type: "text",
             data: "ccccccccc",
-            timeSent: "",
+            timeSent: "12:24",
             isMine: true
           }],
         img: "https://bootdey.com/img/Content/avatar/avatar1.png",

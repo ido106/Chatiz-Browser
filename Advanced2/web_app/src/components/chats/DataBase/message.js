@@ -4,24 +4,19 @@ import React from "react"
 export default class Message extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            type: props.type,
-            data: props.data,
-            timeSent: props.timeSent,
-            isMine: false
-        }
     }
 
     render() {
-        if (this.state.type == "text") {
-            if (this.state.isMine) {
-                console.log("my msg data is = " + this.state.data);
+    
+        console.log(this.props.isMine)
+        if (this.props.type == "text") {
+            if (this.props.isMine) {
                 return (
                     <li className="clearfix">
                         <div className="message my-message float-left fs-5 ido_dumb">
-                            {this.state.data}<br />
+                            {this.props.data}<br />
                             <div className="float-right small fs-6">
-                                {this.state.timeSent}
+                                {this.props.timeSent}
                             </div>
                         </div>
 
@@ -29,9 +24,10 @@ export default class Message extends React.Component {
                 )
             } else {
                 return (
+                    
                     <li className="clearfix">
                         <div className="message other-message float-right fs-5 ido_dumb">
-                            {this.state.data}<br />
+                            {this.props.data}<br />
                             <div className="float-left fs-6">
                                 12:54
                             </div>
@@ -41,16 +37,38 @@ export default class Message extends React.Component {
                 )
             }
         }
-        if (this.state.data == "audio") {
-            if (this.state.isMine) {
+        if (this.props.type == "audio") {
+            if (this.props.isMine) {
                 return (
-                    <div>
-                    <audio controls>
-                        <source src={URL.createObjectURL(this.state.data)} />
-                    </audio>
+                    <div className="float-left ido_dumb">
+                        <audio controls  autobuffer = "false">
+                            <source src={this.props.data} />
+                        </audio>
                     </div>
                 )
+            } else {
+                return (
+                    <div className=" float-left ido_dumb">
+                        <audio controls  autobuffer = "false">
+                        <source src={this.props.data} />
+                    </audio>
+                </div>
+                )
             }
+        }
+
+        if(this.props.type == 'video') {
+            if(this.props.isMine) {
+               
+            }
+
+        }
+
+        if(this.props.type == 'img') {
+            if(this.props.isMine) {
+
+            }
+            
         }
     }
 
