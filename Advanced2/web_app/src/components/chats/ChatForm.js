@@ -4,14 +4,13 @@ import ContactView from "./ContactView"
 import './chats.css'
 import ChatInfo from "./ChatInfo"
 import Message from './DataBase/message'
-import userMessage from "./DB"
 
 class ChatForm extends React.Component {
 
     constructor(props) {
         super(props);
         var chatInfo = null
-        userMessage.forEach(e => {
+        this.props.userMessage.forEach(e => {
             if (e.user == this.props.UserData.myUser) {
                 chatInfo = e.contacts;
             }
@@ -45,11 +44,11 @@ class ChatForm extends React.Component {
         if (this.state.activeChat == null || newData == "") {
             return;
         }
-
+        var date = new Date();
         var ma = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
             type: messageType,
             data: newData,
-            timeSent: Date.now(),
+            timeSent: date.getHours().toString() + ":" + date.getMinutes().toString(),
             isMine: true
         });
         this.setState ({
@@ -143,12 +142,6 @@ class ChatForm extends React.Component {
     }
 
     render() {
-
-
-
-
-
-
         
         return (
             <div className="container">
@@ -187,6 +180,7 @@ class ChatForm extends React.Component {
                                     </div>
 
                                 </div>
+
                                 <div className="chat-history">
                                     <ul className="m-b-0 logo">
                                         <li className="clearfix">
@@ -194,14 +188,16 @@ class ChatForm extends React.Component {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="chat-message clearfix">
-                                    <div className="input-group mb-0 stick-down">
+
+
+                                <div className="chat-message clearfix" id="toMarginSearch">
+                                    <div className="input-group position-relative fixed-bottom">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text send-buttun-chat"><i className="fa fa-send" onClick={() => {
                                                 this.send("text", document.getElementById('textMessage').value);
                                             }} ></i></span>
                                         </div>
-                                        <input type="text" className="form-control" placeholder="Enter text here..." id="textMessage" />
+                                        <input type="text" className="form-control mb-0" placeholder="Enter text here..." id="textMessage" />
                                     </div>
                                 </div>
                             </div>

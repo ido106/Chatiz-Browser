@@ -244,7 +244,6 @@ body{
     }
     .chat-app .chat-history {
         height: 300px;
-        overflow-x: auto
     }
 }
 
@@ -270,7 +269,7 @@ body{
     }
 }
 
-.ido_dumb {
+.message-flow {
     max-width: 69%;
     position: relative;
 }
