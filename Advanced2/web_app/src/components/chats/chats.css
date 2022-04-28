@@ -142,7 +142,7 @@ body{
     font-size: 16px;
     border-radius: 7px;
     display: inline-block;
-    position: relative
+    position: relative;
 }
 
 .chat .chat-history .message:after {
@@ -270,7 +270,7 @@ body{
     }
 }
 
-
-.logo {
-    /* add background img here */
+.ido_dumb {
+    max-width: 69%;
+    position: relative;
 }

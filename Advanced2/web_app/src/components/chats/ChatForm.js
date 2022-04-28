@@ -42,7 +42,10 @@ class ChatForm extends React.Component {
 
     //********************************************************************************************************** */
     send(type, data) {
-        if (this.state.activeChat == null) {
+        if(type == "audio") {
+            console.log("shahar moher");
+        }
+        if (this.state.activeChat == null || data == "") {
             return;
         }
 
@@ -202,7 +205,6 @@ class ChatForm extends React.Component {
                                     <div className="input-group mb-0 stick-down">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text send-buttun-chat"><i className="fa fa-send" onClick={() => {
-                                                console.log("sending data");
                                                 this.send("text", document.getElementById('textMessage').value);
                                             }} ></i></span>
                                         </div>
