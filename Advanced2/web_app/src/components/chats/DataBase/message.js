@@ -15,12 +15,13 @@ export default class Message extends React.Component {
     render() {
         if(this.state.type == "text") {
             if(this.state.isMine) {
+                console.log("my msg data is = " +this.state.data);
                 return(
                     <li className="clearfix">
                         <div className="message-data text-right">
                             <span className="message-data-time">{this.state.timeSent}</span>
                         </div>
-                        <div className="message my-message float-ledt">{this.state.data}</div>
+                        <div className="message my-message float-left">{this.state.data}</div>
                     </li>
             )} else{
                 return(
@@ -34,9 +35,13 @@ export default class Message extends React.Component {
             }
         }
         if(this.state.data == "audio") {
+            if(this.state.isMine) {
             return(
-                <div></div>
+                <audio controls> 
+                    <source src={this.state.data}/> 
+                </audio>
             )
+            }
         }
     }
 

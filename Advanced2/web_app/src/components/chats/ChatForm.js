@@ -20,7 +20,10 @@ class ChatForm extends React.Component {
         this.state = {
             user: this.props.UserData.myUser,
             chatInfos: chatInfo,
-            activeChat : null,
+            activeChat : {
+                name: "ido",
+                lastSeen: Date.now(),
+            },
         }
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
@@ -78,6 +81,8 @@ class ChatForm extends React.Component {
         });
         if(msgs !=null) {
         return msgs.map((element,k) => {
+            console.log("1");
+
             return <Message {...element} key={k}></Message>
         })
     }
@@ -96,7 +101,6 @@ class ChatForm extends React.Component {
         return this.state.chatInfos.map((element, k) => {
             return <ContactView name={element.name} img={element.img} lastSeen={element.lastSeen} key={k}
              onClick={ () => {
-                 console.log("sdvsfdf");
                 this.setActiveChat(element.name, element.lastSeen);
                 }} />
         });
@@ -106,6 +110,7 @@ class ChatForm extends React.Component {
     titleChat() {
         if(this.state.activeChat != null) {
             return <ChatInfo name={this.state.activeChat.name} lastSeen={this.state.activeChat.lastSeen}></ChatInfo>
+
         }
 
     }

@@ -18,6 +18,7 @@ const Form = () => {
         <img className='form-img' src='img/img-2.svg' alt='spaceship' />
       </div>
       {!isSubmitted ? (
+
         <FormSignup submitForm={submitForm} />
       ) : (
         <FormSuccess />

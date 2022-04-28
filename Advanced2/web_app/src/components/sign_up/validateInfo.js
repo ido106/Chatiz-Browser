@@ -16,21 +16,14 @@ export default function validateInfo(values) {
     check = false;
   }
 
-  errors.password = "";
   if (!values.password) {
     errors.password = "Password is required";
     check = false;
-  } else if (values.password.length < 6) {
-    if(/[w+]/.exec(values.password) == null) {
-      errors.password = "Password needs to be 6 characters or morePassword needs to include letters";
-      
-
-    } else{
+  }
+   else if (values.password.length < 6) {
     errors.password = "Password needs to be 6 characters or more";
     check = false;
     }
-  }
-
 
   if (!values.password2) {
     errors.password2 = "Password is required";
@@ -40,6 +33,7 @@ export default function validateInfo(values) {
     check = false;
   }
   if (check) {
+    
     users.push({ UserName: values.username, Password: values.password });
   }
   return errors;

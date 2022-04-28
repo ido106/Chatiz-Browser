@@ -221,7 +221,7 @@ body{
     font-size: 0;
     content: " ";
     clear: both;
-    height: 0
+    height: -5
 }
 
 @media only screen and (max-width: 767px) {
