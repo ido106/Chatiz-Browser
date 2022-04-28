@@ -25,7 +25,7 @@ class ChatForm extends React.Component {
                 name: "ido",
                 lastSeen: Date.now(),
             },
-            tryyy : this.props.userMessage
+            ignore : false
         }
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
@@ -53,10 +53,12 @@ class ChatForm extends React.Component {
             isMine: true
         });
         this.setState ({
-            tryyy : ma
+            ignore : !this.state.ignore
         }
         )
-        console.log(this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages);
+
+
+        document.getElementById('textMessage').value = "";
     }
 
 
@@ -66,12 +68,7 @@ class ChatForm extends React.Component {
             return <div className="no-active-note">No Active Chat</div>
         }
 
-        let msgs = null
-        this.state.chatInfos.forEach(element => {
-            if (element.name == this.state.activeChat.name) {
-                msgs = element.messages;
-            }
-        });
+        var msgs = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages
         if (msgs != null) {
             return msgs.map((element, k) => {
                 return <Message {...element} key={k}></Message>
