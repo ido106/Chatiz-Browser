@@ -84,17 +84,18 @@ class ChatForm extends React.Component {
 
     contacts() {
         return this.state.chatInfos.map((element, k) => {
-            return <ContactView name={element.name} img={element.img} lastSeen={element.lastSeen} key={k}
-                onClick={() => {
-                    this.setActiveChat(element.name, element.lastSeen);
-                }} />
+            return <ContactView name={element.name} img={element.img} lastSeen={element.lastSeen} key={k} />
         });
     }
 
 
     titleChat() {
         if (this.state.activeChat != null) {
-            return <ChatInfo name={this.state.activeChat.name} lastSeen={this.state.activeChat.lastSeen}></ChatInfo>
+            return <ChatInfo 
+            name={this.state.activeChat.name} 
+            lastSeen={this.state.activeChat.lastSeen}
+            setActiveChat={this.setActiveChat}
+            />
         }
     }
 
