@@ -65,6 +65,7 @@ class SignIn extends React.Component {
             this.setState({
                 valid_user: true
             });
+            this.props.updateUserData((prevState) => ({ ...prevState, myUser: this.state.userName }))
         } else {
             this.setState({
                 valid_user: false

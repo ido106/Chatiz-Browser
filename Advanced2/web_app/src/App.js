@@ -21,7 +21,8 @@ function App() {
       <Routes>
         <Route path="/" element={<SignIn updateUserData={setUserData}/>}></Route>
         <Route path="/SignUp" element={<Form/>}></Route>
-        <Route path="/Chats" element={<Body  UserData={UserData} />}></Route>
+        <Route path="/ChatsTemp" element={<Body  UserData={UserData} />}></Route>
+        <Route path="/Chats" element={<ChatForm UserData={UserData} />} ></Route>
       </Routes>
     </Router>
   );
