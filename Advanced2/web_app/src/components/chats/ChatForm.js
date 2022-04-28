@@ -16,11 +16,12 @@ class ChatForm extends React.Component {
                 chatInfo = e.contacts;
             }
         })
-
+        this.mediaRecorder = null;
         this.state = {
+            isRecording : false,
             user: this.props.UserData.myUser,
             chatInfos: chatInfo,
-            activeChat : {
+            activeChat: {
                 name: "ido",
                 lastSeen: Date.now(),
             },
@@ -30,93 +31,137 @@ class ChatForm extends React.Component {
         this.setActiveChat = this.setActiveChat.bind(this);
         this.showMessages = this.showMessages.bind(this);
         this.send = this.send.bind(this);
-
+        this.stopRecording = this.stopRecording.bind(this);
+        this.startRecording = this.startRecording.bind(this);
+        this.handleAudioButton = this.handleAudioButton.bind(this);
 
 
     }
 
 
-
-    send(data) {
-        console.log(data);
-        if(this.state.activeChat == null) {
+    //********************************************************************************************************** */
+    send(type, data) {
+        if (this.state.activeChat == null) {
             return;
         }
 
-        // this.setState({
-        // })
-        // let msgs = null
-        // this.state.chatInfos.forEach(element => {
-        //     if(element.name == this.state.activeChat.name) {
-        //         msgs = element.messages;
-        //     }
-        // });
-        // if(msgs ==null) {
-        //     return;
-        // }
-        // msgs.push({
-        //     type : "text",
-        //     data: data,
-        //     timeSent: Date.now(),
-        //     isMine : true
-        // })
+        let msgs = null
+        this.state.chatInfos.forEach(element => {
+            if (element.name == this.state.activeChat.name) {
+                msgs = element.messages;
+            }
+        });
+        if (msgs == null) {
+            return;
+        }
+        msgs.push({
+            type: type,
+            data: data,
+            timeSent: Date.now(),
+            isMine: true
+        })
+        // need to add the new message!!
+
     }
 
-    // messages() {
-    //     return this.state.talkingTo.messages.map((message, key) => {
-    //         return <Message {...message} key={key}> </Message>
-    //     }
-    //     )
-    // }
+
+
     showMessages() {
-        if(this.state.activeChat == null) {
+        if (this.state.activeChat == null) {
             return <div className="no-active-note">No Active Chat</div>
         }
 
         let msgs = null
         this.state.chatInfos.forEach(element => {
-            if(element.name == this.state.activeChat.name) {
+            if (element.name == this.state.activeChat.name) {
                 msgs = element.messages;
             }
         });
-        if(msgs !=null) {
-        return msgs.map((element,k) => {
-            console.log("1");
-
-            return <Message {...element} key={k}></Message>
-        })
-    }
+        if (msgs != null) {
+            return msgs.map((element, k) => {
+                return <Message {...element} key={k}></Message>
+            })
+        }
     }
 
     setActiveChat(userName, userNamelastSeen) {
         console.log(userName);
-        this.setState({activeChat : {
-        name: userName,
-        lastSeen : userNamelastSeen
-        }});
+        this.setState({
+            activeChat: {
+                name: userName,
+                lastSeen: userNamelastSeen
+            }
+        });
     }
 
 
     contacts() {
         return this.state.chatInfos.map((element, k) => {
             return <ContactView name={element.name} img={element.img} lastSeen={element.lastSeen} key={k}
-             onClick={ () => {
-                this.setActiveChat(element.name, element.lastSeen);
+                onClick={() => {
+                    this.setActiveChat(element.name, element.lastSeen);
                 }} />
         });
     }
 
 
     titleChat() {
-        if(this.state.activeChat != null) {
+        if (this.state.activeChat != null) {
             return <ChatInfo name={this.state.activeChat.name} lastSeen={this.state.activeChat.lastSeen}></ChatInfo>
+        }
+    }
 
+
+    stopRecording() {
+        if (this.mediaRecorder == null) {
+            return;
+        }
+        this.mediaRecorder.stop();
+    };
+
+    startRecording() {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                this.mediaRecorder = new MediaRecorder(stream);
+                this.mediaRecorder.start();
+
+                const audioChunks = [];
+                this.mediaRecorder.addEventListener("dataavailable", event => {
+                    audioChunks.push(event.data);
+                });
+
+                this.mediaRecorder.addEventListener("stop", () => {
+                    let audioMessage = new Blob(audioChunks);
+                    stream.getTracks().forEach(track => track.stop());
+                    this.send('audio', audioMessage);
+
+                });
+            });
+    };
+
+
+    handleAudioButton ()  {
+        var mic = document.getElementById("mic");
+        this.setState({isRecording : !this.state.isRecording});
+        if(this.state.isRecording) {
+            mic.className="fa fa-microphone-slash";
+            this.stopRecording();
+        }
+        else {
+            mic.className="fa fa-microphone";
+            this.startRecording();
         }
 
     }
 
     render() {
 
+
+
+
+
+
+        
         return (
             <div className="container">
                 <div className="row clearfix">
@@ -143,12 +188,12 @@ class ChatForm extends React.Component {
                                             <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" />
                                             </a>
-                                         {this.titleChat()}
+                                            {this.titleChat()}
                                         </div>
                                         <div className="col-lg-6 hidden-sm text-right">
                                             <a className="btn btn-outline-secondary"><i className="fa fa-camera"></i></a>
                                             <a className="btn btn-outline-primary"><i className="fa fa-image"></i></a>
-                                            <a className="btn btn-outline-info"><i className="fa fa-cogs"></i></a>
+                                            <a className="btn btn-outline-info"><i className="fa fa-microphone-slash" id="mic" onClick={this.handleAudioButton}></i></a>
                                             <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>
                                         </div>
                                     </div>
@@ -157,19 +202,19 @@ class ChatForm extends React.Component {
                                 <div className="chat-history">
                                     <ul className="m-b-0 logo">
                                         <li className="clearfix">
-                                        {this.showMessages()}
+                                            {this.showMessages()}
                                         </li>
                                     </ul>
                                 </div>
                                 <div className="chat-message clearfix">
                                     <div className="input-group mb-0 stick-down">
                                         <div className="input-group-prepend">
-                                            <span className="input-group-text send-buttun-chat"><i className="fa fa-send" onClick={()=>{
+                                            <span className="input-group-text send-buttun-chat"><i className="fa fa-send" onClick={() => {
                                                 console.log("sending data");
-                                                this.send(document.getElementById('textMessage').value);
-                                                }} ></i></span>
+                                                this.send("text", document.getElementById('textMessage').value);
+                                            }} ></i></span>
                                         </div>
-                                        <input type="text" className="form-control" placeholder="Enter text here..." id="textMessage"/>
+                                        <input type="text" className="form-control" placeholder="Enter text here..." id="textMessage" />
                                     </div>
                                 </div>
                             </div>
