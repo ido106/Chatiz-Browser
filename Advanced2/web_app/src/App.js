@@ -34,19 +34,7 @@ function App() {
             isMine: true
           },
 
-          {
-            type: "text",
-            data: "realy man",
-            timeSent: "",
-            isMine: true
-          },
-
-          {
-            type: "text",
-            data: "im dumb",
-            timeSent: "",
-            isMine: true
-          }],
+          ],
         img: "https://bootdey.com/img/Content/avatar/avatar1.png",
         lastSeen: "4 hours ago",
       },
@@ -55,21 +43,21 @@ function App() {
         messages: [
           {
             type: "text",
-            data: "im idiot",
+            data: "aaaaaaa",
             timeSent: "",
             isMine: true
           },
 
           {
             type: "text",
-            data: "realy man",
+            data: "bbbbbbbbbbb",
             timeSent: "",
             isMine: true
           },
 
           {
             type: "text",
-            data: "im dumb",
+            data: "ccccccccc",
             timeSent: "",
             isMine: true
           }],

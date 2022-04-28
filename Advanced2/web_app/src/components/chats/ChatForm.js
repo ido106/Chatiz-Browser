@@ -25,6 +25,7 @@ class ChatForm extends React.Component {
                 name: "ido",
                 lastSeen: Date.now(),
             },
+            tryyy : this.props.userMessage
         }
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
@@ -45,15 +46,17 @@ class ChatForm extends React.Component {
             return;
         }
 
-        this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
+        var ma = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
             type: type,
             data: data,
             timeSent: Date.now(),
             isMine: true
         });
-        
+        this.setState ({
+            tryyy : ma
+        }
+        )
         console.log(this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages);
-
     }
 
 
