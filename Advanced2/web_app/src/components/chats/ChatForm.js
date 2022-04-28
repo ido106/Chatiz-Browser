@@ -17,14 +17,14 @@ class ChatForm extends React.Component {
         })
         this.mediaRecorder = null;
         this.state = {
-            isRecording : false,
+            isRecording: false,
             user: this.props.UserData.myUser,
             chatInfos: chatInfo,
             activeChat: {
-                name: "ido",
+                name: null,
                 lastSeen: Date.now(),
             },
-            ignore : false
+            ignore: false
         }
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
@@ -52,8 +52,8 @@ class ChatForm extends React.Component {
             isMine: true
         });
 
-        this.setState ({
-            ignore : !this.state.ignore
+        this.setState({
+            ignore: !this.state.ignore
         }
         )
 
@@ -64,6 +64,9 @@ class ChatForm extends React.Component {
 
 
     showMessages() {
+        if(this.state.activeChat.name == null) {
+            return
+        }
         var msgs = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages
         if (msgs != null) {
             return msgs.map((element, k) => {
@@ -84,17 +87,22 @@ class ChatForm extends React.Component {
 
     contacts() {
         return this.state.chatInfos.map((element, k) => {
-            return <ContactView name={element.name} img={element.img} lastSeen={element.lastSeen} key={k} />
+            return <ContactView
+                name={element.name}
+                img={element.img}
+                lastSeen={element.lastSeen}
+                key={k}
+                setActiveChat={this.setActiveChat}
+            />
         });
     }
 
 
     titleChat() {
         if (this.state.activeChat != null) {
-            return <ChatInfo 
-            name={this.state.activeChat.name} 
-            lastSeen={this.state.activeChat.lastSeen}
-            setActiveChat={this.setActiveChat}
+            return <ChatInfo
+                name={this.state.activeChat.name}
+                lastSeen={this.state.activeChat.lastSeen}
             />
         }
     }
@@ -128,22 +136,22 @@ class ChatForm extends React.Component {
     };
 
 
-    handleAudioButton ()  {
+    handleAudioButton() {
         var mic = document.getElementById("mic");
-        this.setState({isRecording : !this.state.isRecording});
-        if(this.state.isRecording) {
-            mic.className="fa fa-microphone-slash";
+        this.setState({ isRecording: !this.state.isRecording });
+        if (this.state.isRecording) {
+            mic.className = "fa fa-microphone-slash";
             this.stopRecording();
         }
         else {
-            mic.className="fa fa-microphone";
+            mic.className = "fa fa-microphone";
             this.startRecording();
         }
 
     }
 
     render() {
-        
+
         return (
             <div className="container">
                 <div className="row clearfix">

@@ -15,14 +15,10 @@ export default function ContactView(props) {
         )
     }
 
-    const handleClick = () => {
-        props.setActiveChat(props.name, props.lastSeen)
-    }
-
     return (
 
         <li className="clearfix"
-        onClick={handleClick}
+        onClick={()=> props.setActiveChat(props.name, props.lastSeen)}
         >
             <img src={props.img}/>
             <div className="about">
