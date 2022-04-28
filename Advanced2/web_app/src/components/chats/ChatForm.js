@@ -45,12 +45,13 @@ class ChatForm extends React.Component {
             return;
         }
         var date = new Date();
-        var ma = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
+        this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
             type: messageType,
             data: newData,
             timeSent: date.getHours().toString() + ":" + date.getMinutes().toString(),
             isMine: true
         });
+
         this.setState ({
             ignore : !this.state.ignore
         }
@@ -72,7 +73,6 @@ class ChatForm extends React.Component {
     }
 
     setActiveChat(userName, userNamelastSeen) {
-        console.log(userName);
         this.setState({
             activeChat: {
                 name: userName,

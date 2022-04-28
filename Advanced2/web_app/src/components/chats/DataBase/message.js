@@ -13,7 +13,7 @@ export default class Message extends React.Component {
             if (this.props.isMine) {
                 return (
                     <li className="clearfix">
-                        <div className="message my-message float-left fs-5 message-flow">
+                        <div className="message my-message float-left fs-5 message-flow text-truncate">
                             {this.props.data}<br />
                             <div className="float-left small fs-6">
                                 {this.props.timeSent}

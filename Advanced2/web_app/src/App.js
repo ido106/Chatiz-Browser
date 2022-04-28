@@ -20,78 +20,119 @@ function App() {
 
 
   const [userMessage, setUserMessage] = React.useState(
-  [
-    {
-      user: "otma",
-      contacts: [
-        {
-        name: "ido",
-        messages: [
-          {
-            type: "text",
-            data: "im idiot",
-            timeSent: "15:34",
-            isMine: false
-          },
-
-          ],
-        img: "https://bootdey.com/img/Content/avatar/avatar1.png",
-        lastSeen: "4 hours ago",
-      },
+    [
       {
-        name: "Shahar",
-        messages: [
+        user: "otma",
+        contacts: [
           {
-            type: "text",
-            data: "aaaaaaa",
-            timeSent: "12:45",
-            isMine: false
+            name: "ido",
+            messages: [
+              {
+                type: "text",
+                data: "im idiot",
+                timeSent: "15:34",
+                isMine: false
+              },
+
+            ],
+            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            lastSeen: "4 hours",
           },
-
           {
-            type: "text",
-            data: "bbbbbbbbbbb",
-            timeSent: "11:11",
-            isMine: true
+            name: "Shahar",
+            messages: [
+              {
+                type: "text",
+                data: "aaaaaaa",
+                timeSent: "12:45",
+                isMine: false
+              },
+
+              {
+                type: "text",
+                data: "bbbbbbbbbbb",
+                timeSent: "11:11",
+                isMine: true
+              },
+
+              {
+                type: "text",
+                data: "ccccccccc",
+                timeSent: "12:24",
+                isMine: true
+              }],
+            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            lastSeen: "2 hours",
+          }
+        ]
+      },
+
+
+
+      {
+        user: "ido",
+        contacts: [
+          {
+            name: "otma",
+            messages: [
+              {
+                type: "text",
+                data: "im idiot",
+                timeSent: "15:34",
+                isMine: true
+              },
+
+            ],
+            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            lastSeen: "4 hours",
           },
+        ]
+      },
 
+
+
+
+      {
+        user: "Shahar",
+        contacts: [
           {
-            type: "text",
-            data: "ccccccccc",
-            timeSent: "12:24",
-            isMine: true
-          }],
-        img: "https://bootdey.com/img/Content/avatar/avatar1.png",
-        lastSeen: "2 hours ago",
-      }
-      ]
-    },
+            name: "otma",
+            messages: [
+              {
+                type: "text",
+                data: "aaaaaaa",
+                timeSent: "12:45",
+                isMine: true
+              },
 
-    {
-      user: 'shahar',
-      contacts: [],
-      lastSeen: "",
-      img: "https://bootdey.com/img/Content/avatar/avatar1.png"
+              {
+                type: "text",
+                data: "bbbbbbbbbbb",
+                timeSent: "11:11",
+                isMine: false
+              },
 
-    },
+              {
+                type: "text",
+                data: "ccccccccc",
+                timeSent: "12:24",
+                isMine: false
+              }
+            ],
+            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            lastSeen: "4 hours",
+          },
+        ]
+      },
+    ])
 
-    {
-      user: 'ido',
-      contacts: [],
-      img: "https://bootdey.com/img/Content/avatar/avatar1.png",
-      lastSeen: "",
-    },
-
-  ])
   return (
-      
-    
     <Router>
       <Routes>
         <Route path="/" element={<SignIn updateUserData={setUserData} />}></Route>
         <Route path="/SignUp" element={<Form />}></Route>
         <Route path="/ChatsTemp" element={<Body UserData={UserData} />}></Route>
-        <Route path="/Chats" element={<ChatForm UserData={UserData} userMessage={userMessage} setUserMessage={setUserMessage}/>} ></Route>
+        <Route path="/Chats" element={<ChatForm UserData={UserData} userMessage={userMessage} setUserMessage={setUserMessage} />} ></Route>
       </Routes>
     </Router>
   );
