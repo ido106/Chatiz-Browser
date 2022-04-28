@@ -6,7 +6,7 @@ import Sidebar from "./sidebar/Sidebar";
 function Body() {
   var i = 0;
   const [notes, setNotes] = useState(
-    localStorage.notes ? JSON.parse(localStorage.notes) : []
+     []
   );
   const [activeNote, setActiveNote] = useState(false);
 
