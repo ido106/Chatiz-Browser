@@ -15,28 +15,19 @@ let stopRecording = () => {
 };
 
 let startRecording = () => {
-  console.log("1");
     navigator.mediaDevices.getUserMedia({audio : true})
     .then(stream => {
-      console.log("2");
         mediaRecorder = new MediaRecorder(stream);
-        console.log("!!");
         mediaRecorder.start();
 
         const audioChunks = [];
-        console.log("3");
         mediaRecorder.addEventListener("dataavailable", event => {
-          console.log("4");
             audioChunks.push(event.data);
-            console.log("5");
         });
 
         mediaRecorder.addEventListener("stop", () => {
-          console.log("6");
-            const audioBlob = new Blob(audioChunks);
-            audioMessage  = URL.createObjectURL(audioBlob);
+            audioMessage = new Blob(audioChunks);
             stream.getTracks().forEach(track => track.stop());
-            console.log("stopped recording") 
         });
     });
 };
@@ -55,8 +46,6 @@ onUpdateNote({
   body:"",
   msgChats: value2,
 });
-
-
 };
 
 //record stuff done here
@@ -129,8 +118,11 @@ onUpdateNote({
 
       </div>
       <div className="modal-footer">
-        <button type="button" className="btn btn-secondary mx-3" data-bs-dismiss="modal">Cencel</button>
-        <button type="button" className="btn btn-primary" onClick={() => sendAudio("newMsg", activeNote.body,activeNote.msgChats)}>Send</button>
+        <button type="button" className="btn btn-secondary mx-3" data-bs-dismiss="modal" id="audioCancel">Cencel</button>
+        <button type="button" className="btn btn-primary" onClick={() => {
+          sendAudio("newMsg", activeNote.body,activeNote.msgChats);
+          document.getElementById('audioCancel').click();
+          }}>Send</button>
       </div>
     </div>
   </div>
