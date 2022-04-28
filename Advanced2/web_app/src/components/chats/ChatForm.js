@@ -45,22 +45,14 @@ class ChatForm extends React.Component {
             return;
         }
 
-        let msgs = null
-        this.state.chatInfos.forEach(element => {
-            if (element.name == this.state.activeChat.name) {
-                msgs = element.messages;
-            }
-        });
-        if (msgs == null) {
-            return;
-        }
-        msgs.push({
+        this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
             type: type,
             data: data,
             timeSent: Date.now(),
             isMine: true
-        })
-        // need to add the new message!!
+        });
+        
+        console.log(this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages);
 
     }
 
