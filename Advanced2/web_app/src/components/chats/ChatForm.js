@@ -39,6 +39,7 @@ class ChatForm extends React.Component {
         this.handleImage = this.handleImage.bind(this);
         this.video = this.handleVideo.bind(this);
         this.addChat = this.addChat.bind(this);
+        this.cancelErrors = this.cancelErrors.bind(this);
     }
 
 
@@ -47,22 +48,22 @@ class ChatForm extends React.Component {
         if (this.state.activeChat == null || newData == "") {
             return;
         }
-        
+
         var date = new Date();
         let min = date.getMinutes().toString();
         let hours = date.getHours().toString();
-        if(date.getHours() < 10) {
+        if (date.getHours() < 10) {
             hours = "0" + hours;
         }
 
-        if(date.getMinutes() < 10) {
+        if (date.getMinutes() < 10) {
             min = "0" + min;
         }
 
         this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
             type: messageType,
             data: newData,
-            timeSent: hours+ ":" + min,
+            timeSent: hours + ":" + min,
             isMine: true
         });
 
@@ -70,7 +71,7 @@ class ChatForm extends React.Component {
         this.props.userMessage.find(element => element.user == this.state.activeChat.name).contacts.find(element => element.name == this.state.user).messages.push({
             type: messageType,
             data: newData,
-            timeSent: hours+ ":" + min,
+            timeSent: hours + ":" + min,
             isMine: true
         });
 
@@ -86,7 +87,7 @@ class ChatForm extends React.Component {
 
 
     showMessages() {
-        if(this.state.activeChat.name == null) {
+        if (this.state.activeChat.name == null) {
             return
         }
         var msgs = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages
@@ -184,34 +185,65 @@ class ChatForm extends React.Component {
         input.click();
     }
 
+
+    cancelErrors() {
+        document.getElementById('errorUserIsYou').className="d-none";
+        document.getElementById('errorUserInChat').className="d-none";
+        document.getElementById('errorUserDontExist').className="d-none";
+    }
+
     addChat() {
+       
+
         let newName = document.getElementById('addChatName').value;
 
-        var userExist = false;
+        var cantAdd = false;
 
+        if (newName == this.state.user) {
+            console.log("1")
+
+            document.getElementById('errorUserIsYou').className="";
+            cantAdd = true; 
+            
+        }
+        // console.log("new username = " + )
+        this.state.chatInfos.forEach((element) => {
+            // console.log("element.name = " + element.name);
+            if(element.name == newName) {
+                console.log("2")
+                document.getElementById('errorUserInChat').className="";
+                cantAdd = true;
+            }
+        })
+        var exits = false;
         users.forEach((element) => {
             if (element.UserName == newName) {
-                userExist = true;
+                exits = true;
             }
         });
-        var error = document.getElementById('errorMessageAddChat');
-        if(userExist == false) {
-            error.className = "";
+
+        if(!exits) {
+            document.getElementById('errorUserDontExist').className="";
+            cantAdd = true;
+        }
+
+        if (cantAdd) {
             return;
         }
+
         this.props.userMessage.find(element => element.user == this.state.user).contacts.push({
-            name:newName,
+            name: newName,
             lastSeen: this.props.userMessage.find(element => element.user == newName).lastSeen,
-            img : this.props.userMessage.find(element => element.user == newName).img,
-            messages : []
+            img: this.props.userMessage.find(element => element.user == newName).img,
+            messages: []
         })
 
 
         this.props.userMessage.find(element => element.user == newName).contacts.push({
             name: this.state.user,
-            lastSeen:  this.props.userMessage.find(element => element.user == this.state.user).lastSeen,
-            img : this.props.userMessage.find(element => element.user == this.state.user).img,
-            messages : []
+            lastSeen: this.props.userMessage.find(element => element.user == this.state.user).lastSeen,
+            img: this.props.userMessage.find(element => element.user == this.state.user).img,
+            messages: []
         })
 
         this.setState({
@@ -225,12 +257,11 @@ class ChatForm extends React.Component {
 
 
         document.getElementById("closeAddChat").click();
-        
+
     }
-    
+
 
     render() {
-
         return (
             <div className="container">
                 <div className="row clearfix">
@@ -238,11 +269,11 @@ class ChatForm extends React.Component {
                         <div className="chat-card card chat-app ">
                             <div id="plist" className="people-list">
                                 <div className="input-group">
-                                <button type="button" className="btn btn-primary fa fa-user-plus " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        
+                                    <button type="button" className="btn btn-primary fa fa-user-plus " data-bs-toggle="modal" data-bs-target="#exampleModal">
+
                                     </button>
                                     <div className="input-group-prepend">
-                                 
+
                                         <span className="input-group-text search-buttun-chat"><i className="fa fa-search"></i></span>
                                     </div>
                                     <input type="text" className="form-control" placeholder="Search..."></input>
@@ -297,38 +328,49 @@ class ChatForm extends React.Component {
                     </div>
                 </div>
 
-<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog ">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" id="exampleModalLabel">Add chat</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-        <div className="input-group position-relative fixed-bottom">
-            <div className="input-group-prepend">
-                <button className="input-group-text send-buttun-chat d-flex justify-content-center" onClick={this.addChat}>
-                    <i className="fa fa-plus "></i>
-                </button>
-            </div>                            
-            <input type="text" className="form-control mb-0" placeholder="Enter name here..." id="addChatName" onChange={() => {document.getElementById('errorMessageAddChat').className="d-none"}}/>
-        </div> 
-        <div className="d-none" id="errorMessageAddChat">
-        <div className="errorMessage">
-            User does not exist!
-        </div>
-            
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog ">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Add chat</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="input-group position-relative fixed-bottom">
+                                    <div className="input-group-prepend">
+                                        <button className="input-group-text send-buttun-chat d-flex justify-content-center" onClick={this.addChat}>
+                                            <i className="fa fa-plus "></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" className="form-control mb-0" placeholder="Enter name here..." id="addChatName" onChange={this.cancelErrors} />
+                                </div>
+                                <div className="d-none" id="errorUserDontExist">
+                                    <div className="errorMessage">
+                                        User does not exist!
+                                    </div>
+                                </div>
 
-        </div>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="closeAddChat">Close</button>
+                                <div className="d-none" id="errorUserInChat">
+                                    <div className="errorMessage">
+                                        You already have this contact!
+                                    </div>
+                                </div>
 
-        <button type="button" className="btn btn-primary" onClick={this.addChat}>Add</button>
-      </div>
-    </div>
-  </div>
-</div>
+                                <div className="d-none" id="errorUserIsYou">
+                                    <div className="errorMessage">
+                                        Cant Add yourself!
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="closeAddChat">Close</button>
+
+                                <button type="button" className="btn btn-primary" onClick={this.addChat}>Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
