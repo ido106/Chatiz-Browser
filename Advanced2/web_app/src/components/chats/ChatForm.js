@@ -43,6 +43,7 @@ class ChatForm extends React.Component {
     }
 
 
+
     //********************************************************************************************************** */
     send(messageType, newData) {
         if (this.state.activeChat == null || newData == "") {
@@ -175,7 +176,7 @@ class ChatForm extends React.Component {
     handleVideo() {
         var input = document.createElement('input');
         input.type = 'file';
-        input.accept="video/*";
+        input.accept = "video/*";
         input.click();
         console.log("before onChange")
         input.onchange = e => {
@@ -188,7 +189,7 @@ class ChatForm extends React.Component {
     handleImage() {
         var input = document.createElement('input');
         input.type = 'file';
-        input.accept="image/png, image/gif, image/jpeg";
+        input.accept = "image/png, image/gif, image/jpeg";
         input.click();
         input.onchange = e => {
             this.send('img', URL.createObjectURL((e.target.files[0])));
@@ -197,31 +198,26 @@ class ChatForm extends React.Component {
 
 
     cancelErrors() {
-        document.getElementById('errorUserIsYou').className="d-none";
-        document.getElementById('errorUserInChat').className="d-none";
-        document.getElementById('errorUserDontExist').className="d-none";
+        document.getElementById('errorUserIsYou').className = "d-none";
+        document.getElementById('errorUserInChat').className = "d-none";
+        document.getElementById('errorUserDontExist').className = "d-none";
     }
 
     addChat() {
-       
-
         let newName = document.getElementById('addChatName').value;
-
         var cantAdd = false;
 
         if (newName == this.state.user) {
             console.log("1")
 
-            document.getElementById('errorUserIsYou').className="";
-            cantAdd = true; 
-            
+            document.getElementById('errorUserIsYou').className = "";
+            cantAdd = true;
+
         }
-        // console.log("new username = " + )
         this.state.chatInfos.forEach((element) => {
-            // console.log("element.name = " + element.name);
-            if(element.name == newName) {
+            if (element.name == newName) {
                 console.log("2")
-                document.getElementById('errorUserInChat').className="";
+                document.getElementById('errorUserInChat').className = "";
                 cantAdd = true;
             }
         })
@@ -232,8 +228,8 @@ class ChatForm extends React.Component {
             }
         });
 
-        if(!exits) {
-            document.getElementById('errorUserDontExist').className="";
+        if (!exits) {
+            document.getElementById('errorUserDontExist').className = "";
             cantAdd = true;
         }
 
@@ -260,14 +256,52 @@ class ChatForm extends React.Component {
             ignore: !this.state.ignore
         })
 
-
-
-
-
-
-
         document.getElementById("closeAddChat").click();
+    }
 
+    contantToolbar() {
+        if (this.state.activeChat.name == null) {
+            return
+        }
+
+        return (
+            <div className="chat-header clearfix">
+                <div className="row">
+                    <div className="col-lg-6">
+                        <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" />
+                        </a>
+                        {this.titleChat()}
+                    </div>
+                    <div className="col-lg-6 hidden-sm text-right">
+                        <a className="btn btn-outline-secondary"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
+                        <a className="btn btn-outline-primary"><i className="fa fa-image" onClick={this.handleImage}></i></a>
+                        <a className="btn btn-outline-info"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
+                        <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        )
+    }
+
+    enterTextToolbar() {
+        if (this.state.activeChat.name == null) {
+            return
+        }
+
+        return (
+            <div className="chat-message clearfix" id="toMarginSearch">
+                <div className="input-group position-relative fixed-bottom">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text send-buttun-chat"><i className="fa fa-send" onClick={() => {
+                            this.send("text", document.getElementById('textMessage').value);
+                        }} ></i></span>
+                    </div>
+                    <input type="text" className="form-control mb-0" placeholder="Enter text here..." id="textMessage" />
+                </div>
+            </div>
+        )
     }
 
 
@@ -291,28 +325,15 @@ class ChatForm extends React.Component {
                                 <ul className="list-unstyled chat-list me-2 mb-0">
 
                                     <li>
+
                                         {this.contacts()}
+                                        
                                     </li>
                                 </ul>
                             </div>
                             <div className="chat">
-                                <div className="chat-header clearfix">
-                                    <div className="row">
-                                        <div className="col-lg-6">
-                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" />
-                                            </a>
-                                            {this.titleChat()}
-                                        </div>
-                                        <div className="col-lg-6 hidden-sm text-right">
-                                            <a className="btn btn-outline-secondary"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
-                                            <a className="btn btn-outline-primary"><i className="fa fa-image" onClick={this.handleImage}></i></a>
-                                            <a className="btn btn-outline-info"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
-                                            <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>
-                                        </div>
-                                    </div>
 
-                                </div>
+                                {this.contantToolbar()}
 
                                 <div className="chat-history">
                                     <ul className="m-b-0 logo">
@@ -322,17 +343,8 @@ class ChatForm extends React.Component {
                                     </ul>
                                 </div>
 
+                                {this.enterTextToolbar()}
 
-                                <div className="chat-message clearfix" id="toMarginSearch">
-                                    <div className="input-group position-relative fixed-bottom">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text send-buttun-chat"><i className="fa fa-send" onClick={() => {
-                                                this.send("text", document.getElementById('textMessage').value);
-                                            }} ></i></span>
-                                        </div>
-                                        <input type="text" className="form-control mb-0" placeholder="Enter text here..." id="textMessage" />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -371,7 +383,7 @@ class ChatForm extends React.Component {
                                         Cant Add yourself!
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" id="closeAddChat">Close</button>
@@ -382,10 +394,6 @@ class ChatForm extends React.Component {
                     </div>
                 </div>
             </div>
-
-
-
-
         )
     }
 }
