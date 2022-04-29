@@ -10,7 +10,15 @@ const FormSignup = (props) => {
     validate,
     props.userMessage,
   );
-
+  function handleImage() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = "image/png, image/gif, image/jpeg";
+    input.click();
+    input.onchange = e => {
+        values.img =  URL.createObjectURL((e.target.files[0]));
+    }
+  }
   function togglePassword() {
     var passwordInput = document.getElementById("passwordInput");
     var eye = document.getElementById("passwordEye")
@@ -103,7 +111,7 @@ const FormSignup = (props) => {
           <span className="input-group-text"><i id="ConfirmPasswordEye" className="fa fa-eye" onClick={toggleConfirmPassword}></i></span>
         </div>
         {errors.password2 && <p className="form-inputs text-danger">{errors.password2}</p>}
-
+        <div className="btn btn-outline-primary"><i className="fa fa-image" onClick={handleImage}></i></div>
         <div className="h6">
           <label className="form-label">
             <input type="checkbox" ></input>

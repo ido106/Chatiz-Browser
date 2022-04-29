@@ -7,7 +7,14 @@ export default function validateInfo(values) {
     errors.username = "Username required";
     check = false;
   }
-
+  users.forEach((element) => {
+    if (
+        element.UserName == values.username
+    ) {
+        check = false;
+        errors.username = "user name is already exesit"
+    }
+  });
   if (!values.email) {
     errors.email = "Email required";
     check = false;

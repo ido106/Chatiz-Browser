@@ -94,7 +94,12 @@ class ChatForm extends React.Component {
         var msgs = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages
         if (msgs != null) {
             return msgs.map((element, k) => {
-                return <Message {...element} key={k}></Message>
+                return (
+                    <div>
+                        <Message {...element} key={k}></Message>
+                    </div>
+                );
+                
             })
         }
     }

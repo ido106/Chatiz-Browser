@@ -43,7 +43,7 @@ const useForm = (callback, validate, userMessage ) => {
       userMessage.push({
         user: values.username,
         contacts : [],
-        img : "",
+        img : values.img,
         lastSeen : time,
       })
 
