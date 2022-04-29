@@ -1,7 +1,11 @@
+
+
 export default function ContactView(props) {
     if(props.lastSeen == "online") {
         return (
-        <li className="clearfix">
+        <li className="clearfix"
+        onClick={()=> props.setActiveChat(props.name, props.lastSeen)}
+        >
         <img src={props.img}/>
         <div className="about">
             <div className="name">{props.name} </div>
@@ -10,8 +14,12 @@ export default function ContactView(props) {
     </li>
         )
     }
+
     return (
-        <li className="clearfix">
+
+        <li className="clearfix"
+        onClick={()=> props.setActiveChat(props.name, props.lastSeen)}
+        >
             <img src={props.img}/>
             <div className="about">
                 <div className="name">{props.name} </div>

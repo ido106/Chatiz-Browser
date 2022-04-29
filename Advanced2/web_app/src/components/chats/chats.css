@@ -142,7 +142,7 @@ body{
     font-size: 16px;
     border-radius: 7px;
     display: inline-block;
-    position: relative
+    position: relative;
 }
 
 .chat .chat-history .message:after {
@@ -160,7 +160,7 @@ body{
 }
 
 .chat .chat-history .my-message {
-    background: #efefef
+    background: rgb(175,225,175)
 }
 
 .chat .chat-history .my-message:after {
@@ -178,7 +178,7 @@ body{
 }
 
 .chat .chat-history .other-message {
-    background: #e8f1f3;
+    background: rgb(125, 249, 255);
     text-align: right
 }
 
@@ -244,7 +244,6 @@ body{
     }
     .chat-app .chat-history {
         height: 300px;
-        overflow-x: auto
     }
 }
 
@@ -270,7 +269,7 @@ body{
     }
 }
 
-
-.logo {
-    /* add background img here */
+.message-flow {
+    max-width: 69%;
+    position: relative;
 }
