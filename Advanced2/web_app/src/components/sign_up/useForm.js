@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate) => {
+const useForm = (callback, validate, userMessage ) => {
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -10,7 +10,7 @@ const useForm = (callback, validate) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setValues({
       ...values,
@@ -18,16 +18,36 @@ const useForm = (callback, validate) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    setErrors(validate(values));
     setIsSubmitting(true);
+    setErrors(validate(values));
   };
 
   useEffect(() => {
-    console.log(Object.keys(errors).length);
     if (Object.keys(errors).length == 0 && isSubmitting) {
+
+
+      var date = new Date();
+      let min = date.getMinutes().toString();
+      let hours = date.getHours().toString();
+      if(date.getHours() < 10) {
+          hours = "0" + hours;
+      }
+
+      if(date.getMinutes() < 10) {
+          min = "0" + min;
+      }
+      let time = hours + ":" + min;
+
+      userMessage.push({
+        user: values.username,
+        contacts : [],
+        img : "",
+        lastSeen : time,
+      })
+
+
       callback();
     }
   }, [errors]);

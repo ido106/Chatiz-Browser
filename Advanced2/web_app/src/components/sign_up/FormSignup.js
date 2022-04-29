@@ -4,10 +4,11 @@ import useForm from "./useForm";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Form.css";
 
-const FormSignup = ({ submitForm }) => {
+const FormSignup = (props) => {
   const { handleChange, handleSubmit, values, errors } = useForm(
-    submitForm,
-    validate
+    props.submitForm,
+    validate,
+    props.userMessage,
   );
 
   function togglePassword() {
