@@ -78,9 +78,10 @@ class ChatForm extends React.Component {
 
         this.setState({
             ignore: !this.state.ignore
-        }
-        )
+        })
 
+        var audio = new Audio('/audio/MessageSent.mp3');
+        audio.play();
 
         document.getElementById('textMessage').value = "";
     }
@@ -282,7 +283,7 @@ class ChatForm extends React.Component {
                         <a className="btn btn-outline-secondary"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
                         <a className="btn btn-outline-primary"><i className="fa fa-image" onClick={this.handleImage}></i></a>
                         <a className="btn btn-outline-info"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
-                        <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>
+                        {/* <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>*/}
                     </div>
                 </div>
 
@@ -332,7 +333,7 @@ class ChatForm extends React.Component {
                                     <li>
 
                                         {this.contacts()}
-                                        
+
                                     </li>
                                 </ul>
                             </div>
