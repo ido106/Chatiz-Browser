@@ -4,7 +4,7 @@ import FormSignup from './FormSignup';
 import FormSuccess from './FormSuccess';
 
 
-const Form = () => {
+const Form = (props) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function submitForm() {
@@ -19,7 +19,7 @@ const Form = () => {
       </div>
       {!isSubmitted ? (
 
-        <FormSignup submitForm={submitForm} />
+        <FormSignup submitForm={submitForm} userMessage={props.userMessage} />
       ) : (
         <FormSuccess />
       )}

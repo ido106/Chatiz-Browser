@@ -23,6 +23,7 @@ function App() {
     [
       {
         user: "otma",
+        lastSeen:"2 minutes ago",
         contacts: [
           {
             name: "ido",
@@ -38,32 +39,32 @@ function App() {
             img: "https://bootdey.com/img/Content/avatar/avatar1.png",
             lastSeen: "4 hours",
           },
-          {
-            name: "Shahar",
-            messages: [
-              {
-                type: "text",
-                data: "aaaaaaa",
-                timeSent: "12:45",
-                isMine: false
-              },
+          // {
+          //   name: "Shahar",
+          //   messages: [
+          //     {
+          //       type: "text",
+          //       data: "aaaaaaa",
+          //       timeSent: "12:45",
+          //       isMine: false
+          //     },
 
-              {
-                type: "text",
-                data: "bbbbbbbbbbb",
-                timeSent: "11:11",
-                isMine: true
-              },
+          //     {
+          //       type: "text",
+          //       data: "bbbbbbbbbbb",
+          //       timeSent: "11:11",
+          //       isMine: true
+          //     },
 
-              {
-                type: "text",
-                data: "ccccccccc",
-                timeSent: "12:24",
-                isMine: true
-              }],
-            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
-            lastSeen: "2 hours",
-          }
+          //     {
+          //       type: "text",
+          //       data: "ccccccccc",
+          //       timeSent: "12:24",
+          //       isMine: true
+          //     }],
+          //   img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+          //   lastSeen: "2 hours",
+          // }
         ]
       },
 
@@ -71,6 +72,8 @@ function App() {
 
       {
         user: "ido",
+        lastSeen:"2 days ago",
+
         contacts: [
           {
             name: "otma",
@@ -94,6 +97,7 @@ function App() {
 
       {
         user: "Shahar",
+        lastSeen:"online",
         contacts: [
           {
             name: "otma",
@@ -122,7 +126,8 @@ function App() {
             img: "https://bootdey.com/img/Content/avatar/avatar1.png",
             lastSeen: "4 hours",
           },
-        ]
+        ],
+        img: "https://bootdey.com/img/Content/avatar/avatar1.png",
       },
     ])
 
@@ -130,7 +135,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<SignIn updateUserData={setUserData} />}></Route>
-        <Route path="/SignUp" element={<Form />}></Route>
+        <Route path="/SignUp" element={<Form userMessage={userMessage} />}></Route>
         <Route path="/ChatsTemp" element={<Body UserData={UserData} />}></Route>
         <Route path="/Chats" element={<ChatForm UserData={UserData} userMessage={userMessage} setUserMessage={setUserMessage} />} ></Route>
       </Routes>
