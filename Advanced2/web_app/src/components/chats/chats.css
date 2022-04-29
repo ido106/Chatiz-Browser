@@ -278,3 +278,12 @@ body{
     color: red;
     size: 40%;
   }
+
+.ido-dumb {
+    height: 140px;
+    position: relative;
+}
+
+.seperate-msgs {
+    margin: 5px;
+}

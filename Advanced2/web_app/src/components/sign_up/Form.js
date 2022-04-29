@@ -12,7 +12,7 @@ const Form = (props) => {
   }
 
   return (
-    <div className='form-container'>
+    <div className='form-container center'>
       
       <div className='form-content-left'>
         <img className='form-img' src='img/img-2.svg' alt='spaceship' />

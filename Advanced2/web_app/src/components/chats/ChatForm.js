@@ -37,7 +37,7 @@ class ChatForm extends React.Component {
         this.startRecording = this.startRecording.bind(this);
         this.handleAudioButton = this.handleAudioButton.bind(this);
         this.handleImage = this.handleImage.bind(this);
-        this.video = this.handleVideo.bind(this);
+        this.handleVideo = this.handleVideo.bind(this);
         this.addChat = this.addChat.bind(this);
         this.cancelErrors = this.cancelErrors.bind(this);
     }
@@ -163,26 +163,36 @@ class ChatForm extends React.Component {
         var mic = document.getElementById("mic");
         this.setState({ isRecording: !this.state.isRecording });
         if (this.state.isRecording) {
-            mic.className = "fa fa-microphone-slash";
+            mic.className = "fa fa-microphone";
             this.stopRecording();
         }
         else {
-            mic.className = "fa fa-microphone";
+            mic.className = "fa fa-microphone-slash";
             this.startRecording();
         }
     }
 
-
     handleVideo() {
         var input = document.createElement('input');
         input.type = 'file';
+        input.accept="video/*";
         input.click();
+        console.log("before onChange")
+        input.onchange = e => {
+            console.log("before send")
+            this.send('video', URL.createObjectURL((e.target.files[0])));
+            console.log("after send")
+        }
     }
 
     handleImage() {
         var input = document.createElement('input');
         input.type = 'file';
+        input.accept="image/png, image/gif, image/jpeg";
         input.click();
+        input.onchange = e => {
+            this.send('img', URL.createObjectURL((e.target.files[0])));
+        }
     }
 
 
@@ -295,9 +305,9 @@ class ChatForm extends React.Component {
                                             {this.titleChat()}
                                         </div>
                                         <div className="col-lg-6 hidden-sm text-right">
-                                            <a className="btn btn-outline-secondary"><i className="fa fa-camera" onClick={this.handleVideo}></i></a>
+                                            <a className="btn btn-outline-secondary"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
                                             <a className="btn btn-outline-primary"><i className="fa fa-image" onClick={this.handleImage}></i></a>
-                                            <a className="btn btn-outline-info"><i className="fa fa-microphone-slash" id="mic" onClick={this.handleAudioButton}></i></a>
+                                            <a className="btn btn-outline-info"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
                                             <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>
                                         </div>
                                     </div>
