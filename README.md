@@ -7,9 +7,9 @@
 **How to run the code:**
 Open cmd and execute
 git clone https://github.com/ido106/Advanced2.git.
-Focus the cmd on web_app
-And run according to the command
-npm start
+Focus the cmd on web_app <br  />
+And run according to the command <br  />
+npm start <br  />
 
 **Downloads required**
 2.node js <br />
@@ -21,8 +21,8 @@ At the command prompt. <br/>
 5.<a href="https://reactrouter.com/">react router</a> <br />
 
 **Users:**
-We recommend logging in under the main user:
-user name: Messi
-password: THE_GOAT
-The list of all users appears in Advanced2 / Advanced2 / web_app / src / components / sign_in / users
+We recommend logging in under the main user: <br  />
+user name: Messi <br  />
+password: THE_GOAT <br  />
+The list of all users appears in Advanced2 / Advanced2 / web_app / src / components / sign_in / users,<br  />
 Under an array called **users.
