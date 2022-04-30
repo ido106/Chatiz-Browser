@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useForm = (callback, validate, userMessage ) => {
+const useForm = (callback, validate, userMessage) => {
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -13,10 +13,11 @@ const useForm = (callback, validate, userMessage ) => {
   var pasted = false
 
   const handleChange = e => {
-    if(pasted) {
+    if (pasted) {
       pasted = false
       return
     }
+
     const { name, value } = e.target;
     setValues({
       ...values,
@@ -41,20 +42,20 @@ const useForm = (callback, validate, userMessage ) => {
       var date = new Date();
       let min = date.getMinutes().toString();
       let hours = date.getHours().toString();
-      if(date.getHours() < 10) {
-          hours = "0" + hours;
+      if (date.getHours() < 10) {
+        hours = "0" + hours;
       }
 
-      if(date.getMinutes() < 10) {
-          min = "0" + min;
+      if (date.getMinutes() < 10) {
+        min = "0" + min;
       }
       let time = hours + ":" + min;
 
       userMessage.push({
         user: values.username,
-        contacts : [],
-        img : values.img,
-        lastSeen : time,
+        contacts: [],
+        img: values.img,
+        lastSeen: time,
       })
 
 
@@ -62,7 +63,7 @@ const useForm = (callback, validate, userMessage ) => {
     }
   }, [errors]);
 
-  return { deletePaste, handleChange, handleSubmit, values, errors };
+  return {deletePaste, handleChange, handleSubmit, values, errors };
 };
 
 export default useForm;

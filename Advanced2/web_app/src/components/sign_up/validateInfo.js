@@ -9,10 +9,10 @@ export default function validateInfo(values) {
   }
   users.forEach((element) => {
     if (
-        element.UserName == values.username
+      element.UserName == values.username
     ) {
-        check = false;
-        errors.username = "user name is already exesit"
+      check = false;
+      errors.username = "user name is already exesit"
     }
   });
   if (!values.email) {
@@ -27,10 +27,13 @@ export default function validateInfo(values) {
     errors.password = "Password is required";
     check = false;
   }
-   else if (values.password.length < 6) {
+  else if (values.password.length < 6) {
     errors.password = "Password needs to be 6 characters or more";
     check = false;
-    }
+  } else if(!/\d/.test(values.password)) {
+    errors.password = "Password must contain at least one digit";
+    check = false;
+  }
 
   if (!values.password2) {
     errors.password2 = "Password is required";
@@ -40,7 +43,7 @@ export default function validateInfo(values) {
     check = false;
   }
   if (check) {
-    
+
     users.push({ UserName: values.username, Password: values.password });
   }
   return errors;
