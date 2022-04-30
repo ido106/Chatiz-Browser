@@ -151,10 +151,13 @@
 }
 
 .center {
+  position: absolute;
   margin: auto;
-  width: 50%;
+  height: 95%;
+  width: 60%;
   border: 3px;
   padding: 10px;
+  margin: 10px;
 }
 
 .photo-height {

@@ -113,7 +113,9 @@ const FormSignup = (props) => {
         </div>
         {errors.password2 && <p className="form-inputs text-danger">{errors.password2}</p>}
 
-        <div className="btn btn-outline-primary"><i className="fa fa-image" onClick={handleImage}></i></div>
+        <p className="form-inputs text-white">Profile Picture (optional)</p>
+        <div className="btn btn-outline-primary "><i className="fa fa-image" onClick={handleImage}></i></div>
+        <br/>
         
         <div className="h6">
           <label className="form-label">
