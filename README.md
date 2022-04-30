@@ -17,12 +17,12 @@ npm start
 3. npm
 Under the command npm install -g npm
 At the command prompt.
-<a href="https://react-bootstrap.github.io/">4.react bootstrap</a>
-<a href="https://reactrouter.com/">5.react router</a>
+4.<a href="https://react-bootstrap.github.io/">react bootstrap</a>
+5.<a href="https://reactrouter.com/">react router</a>
 
 **Users:**
 We recommend logging in under the main user:
 user name: Messi
 password: THE_GOAT
 The list of all users appears in Advanced2 / Advanced2 / web_app / src / components / sign_in / users
-Under an array called ##users##.
+Under an array called **users.
