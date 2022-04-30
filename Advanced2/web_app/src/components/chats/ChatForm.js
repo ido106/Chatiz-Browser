@@ -49,6 +49,9 @@ class ChatForm extends React.Component {
 
     //********************************************************************************************************** */
     send(messageType, newData) {
+        if(messageType == "text" && newData == "") {
+            return;
+        }
 
         var date = new Date();
         let min = date.getMinutes().toString();
@@ -278,7 +281,7 @@ class ChatForm extends React.Component {
         }
 
         return (
-            <div className="chat-header clearfix">
+            <div className="chat-header clearfix ">
                 <div className="row">
                     <div className="col-lg-6">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
@@ -286,10 +289,11 @@ class ChatForm extends React.Component {
                         </a>
                         {this.titleChat()}
                     </div>
-                    <div className="col-lg-6 hidden-sm text-right">
-                        <a className="btn btn-outline-secondary"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
-                        <a className="btn btn-outline-primary"><i className="fa fa-image" onClick={this.handleImage}></i></a>
-                        <a className="btn btn-outline-info"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
+                    <div className="col-lg-6 hidden-sm">
+                    <a className="btn btn-outline-info my-btn float-right"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
+                        <a className="btn btn-outline-primary my-btn float-right"><i className="fa fa-image" onClick={this.handleImage}></i></a>
+                        <a className="btn btn-outline-secondary float-right"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
+
                         {/* <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>*/}
                     </div>
                 </div>
@@ -345,12 +349,9 @@ class ChatForm extends React.Component {
                             <div className="chat">
 
                                 {this.contantToolbar()}
-
                                 <div className="chat-history" id="clearfix">
-                                    <ul className="m-b-0 logo">
-                                        <li className="clearfix" >
+                                    <ul className="m-b-0">
                                             {this.showMessages()}
-                                        </li>
                                     </ul>
                                 </div>
 

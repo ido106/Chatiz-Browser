@@ -67,12 +67,6 @@ function App() {
               },
               {
                 type: "text",
-                data: "we have to start this project in Advanced programing 2 dude",
-                timeSent: "15:34",
-                isMine: false
-              },
-              {
-                type: "text",
                 data: "Im laughing so bad holy cow",
                 timeSent: "16:04",
                 isMine: true
@@ -80,7 +74,7 @@ function App() {
 
               {
                 type: "text",
-                data: "shahar just sent me a video of himself getting bumped from an horse, i think this dumbass his hurt.",
+                data: "shahar just sent me a video of himself getting bumped from an horse, i think this dumbass is hurt.",
                 timeSent: "16:04",
                 isMine: true
               }
