@@ -367,7 +367,7 @@ class ChatForm extends React.Component {
                             <div className="chat">
 
                                 {this.contantToolbar()}
-                                <div className="chat-history" id="clearfix">
+                                <div className="chat-history " id="clearfix">
                                     <ul className="m-b-0">
                                         {this.showMessages()}
                                     </ul>
