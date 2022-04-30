@@ -5,8 +5,8 @@
 
 
 **How to run the code:**
-Open cmd and execute
-git clone https://github.com/ido106/Advanced2.git.
+Open cmd and execute: <br  />
+git clone https://github.com/ido106/Advanced2.git. <br  />
 Focus the cmd on web_app <br  />
 And run according to the command <br  />
 npm start <br  />
@@ -25,4 +25,4 @@ We recommend logging in under the main user: <br  />
 user name: Messi <br  />
 password: THE_GOAT <br  />
 The list of all users appears in Advanced2 / Advanced2 / web_app / src / components / sign_in / users,<br  />
-Under an array called **users.
+Under an array called **users**.
