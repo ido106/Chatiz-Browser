@@ -48,9 +48,6 @@ class ChatForm extends React.Component {
 
     //********************************************************************************************************** */
     send(messageType, newData) {
-        if (this.state.activeChat == null || newData == "") {
-            return;
-        }
 
         var date = new Date();
         let min = date.getMinutes().toString();
@@ -84,8 +81,14 @@ class ChatForm extends React.Component {
 
         var audio = new Audio('/audio/MessageSent.mp3');
         audio.play();
-
-        document.getElementById('textMessage').value = "";
+        setTimeout(function() {
+            document.getElementById('textMessage').value = "";
+            let objDiv = document.getElementById("clearfix");
+            objDiv.scrollTop = objDiv.scrollHeight;
+            if (this.state.activeChat == null || newData == "") {
+                return;
+            }
+        }, 100);
     }
 
 
@@ -341,9 +344,9 @@ class ChatForm extends React.Component {
 
                                 {this.contantToolbar()}
 
-                                <div className="chat-history">
+                                <div className="chat-history" id="clearfix">
                                     <ul className="m-b-0 logo">
-                                        <li className="clearfix">
+                                        <li className="clearfix" >
                                             {this.showMessages()}
                                         </li>
                                     </ul>

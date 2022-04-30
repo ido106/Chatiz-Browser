@@ -104,6 +104,11 @@ body{
 }
 
 .chat .chat-history {
+    display: flex;
+    height: calc(125vh - calc(100vh / 2));
+    max-height: calc(125vh - calc(100vh / 2));
+    scroll-behavior: smooth;
+    overflow: auto;
     padding: 20px;
     border-bottom: 2px solid #fff
 }
