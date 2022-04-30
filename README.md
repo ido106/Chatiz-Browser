@@ -12,13 +12,13 @@ And run according to the command
 npm start
 
 **Downloads required**
-2.node js
-<a href="https://nodejs.org/en/">3.node js</a>
-3. npm
+2.node js <br />
+3.<a href="https://nodejs.org/en/">node js</a> <br  />
+3. npm <br/>
 Under the command npm install -g npm
-At the command prompt.
-4.<a href="https://react-bootstrap.github.io/">react bootstrap</a>
-5.<a href="https://reactrouter.com/">react router</a>
+At the command prompt. <br/>
+4.<a href="https://react-bootstrap.github.io/">react bootstrap</a> <br  />
+5.<a href="https://reactrouter.com/">react router</a> <br />
 
 **Users:**
 We recommend logging in under the main user:
