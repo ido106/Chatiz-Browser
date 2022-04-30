@@ -230,7 +230,11 @@ function App() {
         <Route path="/" element={<SignIn updateUserData={setUserData} />}></Route>
         <Route path="/SignUp" element={<Form userMessage={userMessage} />}></Route>
         <Route path="/ChatsTemp" element={<Body UserData={UserData} />}></Route>
-        <Route path="/Chats" element={<ChatForm UserData={UserData} userMessage={userMessage} setUserMessage={setUserMessage} />} ></Route>
+        <Route path="/Chats" element={<ChatForm 
+          UserData={UserData} 
+          setUserData={setUserData}
+          userMessage={userMessage} 
+          setUserMessage={setUserMessage} />} ></Route>
       </Routes>
     </Router>
   );

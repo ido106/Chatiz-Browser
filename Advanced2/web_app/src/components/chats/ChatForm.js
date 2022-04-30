@@ -5,6 +5,9 @@ import './chats.css'
 import ChatInfo from "./ChatInfo"
 import Message from './DataBase/message'
 import users from "../sign_in/users";
+import { Navigate } from "react-router-dom"
+import time from "./DataBase/Time.js"
+
 
 
 class ChatForm extends React.Component {
@@ -45,31 +48,21 @@ class ChatForm extends React.Component {
         this.addChat = this.addChat.bind(this);
         this.cancelErrors = this.cancelErrors.bind(this);
         this.updateContactsList = this.updateContactsList.bind(this);
+        this.signOut = this.signOut.bind(this);
     }
 
 
 
     //********************************************************************************************************** */
     send(messageType, newData) {
-        if(messageType == "text" && newData == "") {
+        if (messageType == "text" && newData == "") {
             return;
-        }
-
-        var date = new Date();
-        let min = date.getMinutes().toString();
-        let hours = date.getHours().toString();
-        if (date.getHours() < 10) {
-            hours = "0" + hours;
-        }
-
-        if (date.getMinutes() < 10) {
-            min = "0" + min;
         }
 
         this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
             type: messageType,
             data: newData,
-            timeSent: hours + ":" + min,
+            timeSent: time(),
             isMine: true
         });
 
@@ -77,7 +70,7 @@ class ChatForm extends React.Component {
         this.props.userMessage.find(element => element.user == this.state.activeChat.name).contacts.find(element => element.name == this.state.user).messages.push({
             type: messageType,
             data: newData,
-            timeSent: hours + ":" + min,
+            timeSent: time(),
             isMine: true
         });
 
@@ -87,7 +80,7 @@ class ChatForm extends React.Component {
 
         var audio = new Audio('/audio/MessageSent.mp3');
         audio.play();
-        setTimeout(function() {
+        setTimeout(function () {
             document.getElementById('textMessage').value = "";
             let objDiv = document.getElementById("clearfix");
             objDiv.scrollTop = objDiv.scrollHeight;
@@ -111,7 +104,7 @@ class ChatForm extends React.Component {
                         <Message {...element} key={k}></Message>
                     </div>
                 );
-                
+
             })
         }
     }
@@ -292,7 +285,7 @@ class ChatForm extends React.Component {
                         {this.titleChat()}
                     </div>
                     <div className="col-lg-6 hidden-sm">
-                    <a className="btn btn-outline-info my-btn float-right"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
+                        <a className="btn btn-outline-info my-btn float-right"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
                         <a className="btn btn-outline-primary my-btn float-right"><i className="fa fa-image" onClick={this.handleImage}></i></a>
                         <a className="btn btn-outline-secondary float-right"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
 
@@ -331,23 +324,33 @@ class ChatForm extends React.Component {
         this.setState({
             ignore: !this.state.ignore
         })
+    }
+
+    signOut() {
+        this.props.userMessage.forEach(e => {
+            if (e.user == this.props.UserData.myUser) {
+                e.lastSeen = time();
+            }
+        })
         
-
-
+        this.props.setUserData((prevState) => ({ ...prevState, myUser: null }))
     }
 
 
     render() {
-        return (
+        if(this.props.UserData.myUser == null) {
+                return <Navigate to="/" />
+        }
+        return (   
             <div className="container">
                 <div className="row clearfix">
                     <div className="col-lg-12">
                         <div className="chat-card card chat-app ">
                             <div id="plist" className="people-list">
                                 <div className="input-group">
-                                    <button type="button" className="btn btn-primary fa fa-user-plus " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" className="btn btn-danger fa fa-sign-out" onClick={this.signOut} />
+                                    <button type="button" className="btn btn-primary fa fa-user-plus " data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
 
-                                    </button>
                                     <div className="input-group-prepend">
 
                                         <span className="input-group-text search-buttun-chat"><i className="fa fa-search"></i></span>
@@ -366,7 +369,7 @@ class ChatForm extends React.Component {
                                 {this.contantToolbar()}
                                 <div className="chat-history" id="clearfix">
                                     <ul className="m-b-0">
-                                            {this.showMessages()}
+                                        {this.showMessages()}
                                     </ul>
                                 </div>
 
