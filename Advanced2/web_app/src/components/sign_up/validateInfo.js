@@ -3,6 +3,11 @@ export default function validateInfo(values) {
   var check = true;
   let errors = {};
 
+  if(!values.terms) {
+    errors.terms = "Checkbox is required"
+    check = false;
+  }
+
   if (!values.username.trim()) {
     errors.username = "Username required";
     check = false;

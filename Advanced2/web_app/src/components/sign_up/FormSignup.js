@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Form.css";
 
 const FormSignup = (props) => {
-  const { deletePaste, handleChange, handleSubmit, values, errors } = useForm(
+  const { handleCheckBox, deletePaste, handleChange, handleSubmit, values, errors } = useForm(
     props.submitForm,
     validate,
     props.userMessage,
@@ -112,20 +112,22 @@ const FormSignup = (props) => {
           <span className="input-group-text"><i id="ConfirmPasswordEye" className="fa fa-eye" onClick={toggleConfirmPassword}></i></span>
         </div>
         {errors.password2 && <p className="form-inputs text-danger">{errors.password2}</p>}
+
         <div className="btn btn-outline-primary"><i className="fa fa-image" onClick={handleImage}></i></div>
+        
         <div className="h6">
           <label className="form-label">
-            <input type="checkbox" ></input>
+            <input type="checkbox" name="terms" onChange={handleCheckBox}></input>
 
             &nbsp;I agree to the&nbsp;
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
               Terms of Service
             </a>
-
           </label>
+          {errors.terms && <p className="form-inputs text-danger">{errors.terms}</p>}
         </div>
 
-        <button className="form-input-btn" type="submit">
+        <button className="form-input-btn" type="submit" >
           Sign up
         </button>
         <span className="h6 form-input-login">

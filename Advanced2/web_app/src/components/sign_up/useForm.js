@@ -6,6 +6,7 @@ const useForm = (callback, validate, userMessage) => {
     email: "",
     password: "",
     password2: "",
+    terms: false
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,6 +25,14 @@ const useForm = (callback, validate, userMessage) => {
       [name]: value,
     });
   };
+
+  const handleCheckBox = e => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: !values.terms,
+    });
+  }
 
   const deletePaste = e => {
     pasted = true
@@ -63,7 +72,7 @@ const useForm = (callback, validate, userMessage) => {
     }
   }, [errors]);
 
-  return {deletePaste, handleChange, handleSubmit, values, errors };
+  return {handleCheckBox, deletePaste, handleChange, handleSubmit, values, errors };
 };
 
 export default useForm;
