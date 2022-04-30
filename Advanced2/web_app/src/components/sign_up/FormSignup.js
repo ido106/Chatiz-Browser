@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./Form.css";
 
 const FormSignup = (props) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { deletePaste, handleChange, handleSubmit, values, errors } = useForm(
     props.submitForm,
     validate,
     props.userMessage,
@@ -106,6 +106,7 @@ const FormSignup = (props) => {
             name="password2"
             placeholder="Confirm your password"
             value={values.password2}
+            onPaste={deletePaste}
             onChange={handleChange}
           />
           <span className="input-group-text"><i id="ConfirmPasswordEye" className="fa fa-eye" onClick={toggleConfirmPassword}></i></span>

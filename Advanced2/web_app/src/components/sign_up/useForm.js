@@ -10,12 +10,22 @@ const useForm = (callback, validate, userMessage ) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  var pasted = false
+
   const handleChange = e => {
+    if(pasted) {
+      pasted = false
+      return
+    }
     const { name, value } = e.target;
     setValues({
       ...values,
       [name]: value,
     });
+  };
+
+  const deletePaste = e => {
+    pasted = true
   };
 
   const handleSubmit = e => {
@@ -52,7 +62,7 @@ const useForm = (callback, validate, userMessage ) => {
     }
   }, [errors]);
 
-  return { handleChange, handleSubmit, values, errors };
+  return { deletePaste, handleChange, handleSubmit, values, errors };
 };
 
 export default useForm;

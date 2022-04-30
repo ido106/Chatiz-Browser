@@ -9,7 +9,8 @@ const FormSuccess = () => {
       <Link to='/' className="form-success">Sign In</Link>
       </h1>
       
-      <img className="form-img-2" src="img/advanced_logo.png" alt="success-image" />
+      <img className="form-img-2" src="logos/Square_Letter/fulllogo_transparent_nobuffer.png" alt="success-image" />
+      
     </div>
   );
 };
