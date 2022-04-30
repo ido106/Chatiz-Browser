@@ -19,14 +19,31 @@ function App() {
     myUser: null
   })
 
-
-
   const [userMessage, setUserMessage] = React.useState(
     [
       {
         user: "otma",
-        lastSeen:"2 minutes ago",
+        lastSeen: "2 minutes ago",
         contacts: [
+          {
+            name: "Gal Kaminka",
+            messages: [
+              {
+                type: "text",
+                data: "i love you",
+                timeSent: "01:00",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "you are gay",
+                timeSent: "09:17",
+                isMine: false
+              },
+            ],
+            img: "/avatars/avatar4.png",
+            lastSeen: "4 hours",
+          },
           {
             name: "ido",
             messages: [
@@ -69,7 +86,7 @@ function App() {
               }
 
             ],
-            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            img: "/avatars/avatar6.png",
             lastSeen: "4 hours",
           },
           {
@@ -92,7 +109,7 @@ function App() {
               {
                 type: "text",
                 data: "cool dude. i just spoke with ido, we should really get started with the design of the project," +
-                " when can you meet up?",
+                  " when can you meet up?",
                 timeSent: "15:49",
                 isMine: true
               },
@@ -116,25 +133,23 @@ function App() {
               },
               {
                 type: "video",
-                data:  horseFallChat,
+                data: horseFallChat,
                 timeSent: "15:59",
                 isMine: false
               },
-              
-            
-            
+
+
+
             ],
-            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            img: "/avatars/avatar5.png",
             lastSeen: "2 hours",
           }
         ]
       },
 
-
-
       {
         user: "ido",
-        lastSeen:"2 days ago",
+        lastSeen: "2 days ago",
 
         contacts: [
           {
@@ -148,18 +163,41 @@ function App() {
               },
 
             ],
-            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            img: "/avatars/avatar2.png",
             lastSeen: "4 hours",
           },
         ]
       },
 
-
-
+      {
+        user: "Gal Kaminka",
+        lastSeen: "2 hours",
+        contacts: [
+          {
+            name: "otma",
+            messages: [
+              {
+                type: "text",
+                data: "i love you",
+                timeSent: "01:00",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "you are gay",
+                timeSent: "09:17",
+                isMine: true
+              },
+            ],
+            img: "/avatars/avatar2.png",
+            lastSeen: "4 hours",
+          },
+        ]
+      },
 
       {
         user: "Shahar",
-        lastSeen:"online",
+        lastSeen: "online",
         contacts: [
           {
             name: "otma",
@@ -185,11 +223,10 @@ function App() {
                 isMine: false
               }
             ],
-            img: "https://bootdey.com/img/Content/avatar/avatar1.png",
+            img: "/avatars/avatar2.png",
             lastSeen: "4 hours",
           },
         ],
-        img: "https://bootdey.com/img/Content/avatar/avatar1.png",
       },
     ])
 

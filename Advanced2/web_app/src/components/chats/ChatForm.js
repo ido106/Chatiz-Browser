@@ -26,6 +26,7 @@ class ChatForm extends React.Component {
             activeChat: {
                 name: null,
                 lastSeen: Date.now(),
+                img: null
             },
             ignore: false
         }
@@ -110,11 +111,12 @@ class ChatForm extends React.Component {
         }
     }
 
-    setActiveChat(userName, userNamelastSeen) {
+    setActiveChat(userName, userNamelastSeen, userImg) {
         this.setState({
             activeChat: {
                 name: userName,
-                lastSeen: userNamelastSeen
+                lastSeen: userNamelastSeen,
+                img: userImg
             }
         });
     }
@@ -280,7 +282,7 @@ class ChatForm extends React.Component {
                 <div className="row">
                     <div className="col-lg-6">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar" />
+                            <img src={this.state.activeChat.img} alt="avatar" />
                         </a>
                         {this.titleChat()}
                     </div>
