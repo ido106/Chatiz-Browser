@@ -1,10 +1,10 @@
 const users = [
-  { UserName: "otma", Password: "tembel" },
   { UserName: "Messi", Password: "THE_GOAT" },
-  { UserName: "ido", Password: "king" },
-  { UserName: "Shahar", Password: "final winner" },
-  { UserName: "Gal Kaminka", Password: "galk" }
-  // { UserName: "xavi", Password: "goat2" },
+  { UserName: "Ranos", Password: "A_DOG!" },
+  { UserName: "Cristiano Ronaldo", Password: "Second_Best" },
+  { UserName: "Mbappe", Password: "BEST_YOUNG" },
+  { UserName: "Xavi", Password: "BEST_MANAGER" },
+  { UserName: "Iniesta", Password: "GENIUS" }
 ];
 
 export default users;

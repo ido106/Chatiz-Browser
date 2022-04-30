@@ -71,7 +71,7 @@ class ChatForm extends React.Component {
             type: messageType,
             data: newData,
             timeSent: time(),
-            isMine: true
+            isMine: false
         });
 
         this.setState({
@@ -368,6 +368,7 @@ class ChatForm extends React.Component {
 
                                 {this.contantToolbar()}
                                 <div className="chat-history " id="clearfix">
+                                    
                                     <ul className="m-b-0">
                                         {this.showMessages()}
                                     </ul>

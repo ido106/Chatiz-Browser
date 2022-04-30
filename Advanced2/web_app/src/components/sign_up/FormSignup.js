@@ -50,7 +50,7 @@ const FormSignup = (props) => {
   return (
     <div className="form-content-right">
     
-      <form onSubmit={handleSubmit} className="form" noValidate>
+      <form onSubmit={handleSubmit} className="form form-scroll" noValidate>
       <p className="form-inputs text-primary text-center display-6">
           Get started with us !
         </p>

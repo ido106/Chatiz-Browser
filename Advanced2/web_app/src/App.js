@@ -2,15 +2,12 @@
 import React from "react"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-
-
 import ChatForm from "./components/chats/ChatForm";
 import SignIn from "./components/sign_in/SignIn";
 import Form from "./components/sign_up/Form";
 import Body from "./components/Body";
 import horseFallChat from "./constData/videos/horseFallChat.mp4"
 import ronaldoSiu from "./constData/audio/SUIII.mp3"
-
 
 import './App.css';
 
@@ -22,64 +19,6 @@ function App() {
 
   const [userMessage, setUserMessage] = React.useState(
     [
-      {
-        user: "Gal Kaminka",
-        lastSeen: "2 hours",
-        contacts: [
-          {
-            name: "otma",
-            messages: [
-              {
-                type: "text",
-                data: "i love you",
-                timeSent: "01:00",
-                isMine: false
-              },
-              {
-                type: "text",
-                data: "you are gay",
-                timeSent: "09:17",
-                isMine: true
-              },
-            ],
-            img: "/avatars/avatar2.png",
-            lastSeen: "4 hours",
-          },
-        ]
-      },
-      {
-        user: "Shahar",
-        lastSeen: "online",
-        contacts: [
-          {
-            name: "otma",
-            messages: [
-              {
-                type: "text",
-                data: "aaaaaaa",
-                timeSent: "12:45",
-                isMine: true
-              },
-
-              {
-                type: "text",
-                data: "bbbbbbbbbbb",
-                timeSent: "11:11",
-                isMine: false
-              },
-
-              {
-                type: "text",
-                data: "ccccccccc",
-                timeSent: "12:24",
-                isMine: false
-              }
-            ],
-            img: "/avatars/avatar2.png",
-            lastSeen: "4 hours",
-          },
-        ],
-      },
       {
         user: "Messi",
         lastSeen: "2 minutes ago",
@@ -131,93 +70,387 @@ function App() {
                 isMine: false
               },
               {
+                type: "text",
+                data: "hey dude, just wanted to text you! say hey to my new dog",
+                timeSent: "12:43",
+                isMine: true
+              },
+              {
                 type: "img",
-                data: "",
-                timeSent: "13:43",
+                data: "/chats_images/dog.jpg",
+                timeSent: "12:43",
                 isMine: true
               },
               {
                 type: "text",
-                data: "cool bro, keep me updtated, you are the best",
-                timeSent: "15:40",
+                data: "his name is real madrid!",
+                timeSent: "12:43",
+                isMine: true
+              },
+
+              {
+                type: "text",
+                data: "haha you are such an idiot!",
+                timeSent: "12:57",
                 isMine: false
-              },
-              {
-                type: "text",
-                data: "Im laughing so bad holy cow",
-                timeSent: "16:04",
-                isMine: true
-              },
-
-              {
-                type: "text",
-                data: "shahar just sent me a video of himself getting bumped from an horse, i think this dumbass is hurt.",
-                timeSent: "16:04",
-                isMine: true
               }
-
             ],
             img: "/avatars/avatar6.png",
             lastSeen: "4 hours",
           },
           {
-            name: "Shahar",
+            name: "Xavi",
             messages: [
               {
                 type: "text",
-                data: "sup mate",
-                timeSent: "15:39",
+                data: "I want to come back home bro",
+                timeSent: "16:21",
                 isMine: true
               },
 
               {
                 type: "text",
-                data: "chilling dude, hbu?",
-                timeSent: "15:45",
-                isMine: false
+                data: "this forking kid Mbappe is so toxic!",
+                timeSent: "16:23",
+                isMine: true
               },
 
               {
                 type: "text",
-                data: "cool dude. i just spoke with ido, we should really get started with the design of the project," +
-                  " when can you meet up?",
-                timeSent: "15:49",
+                data: "yoooo dude, whats up? what did this little ninja turtle did?",
+                timeSent: "16:32",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "look what he sent me!",
+                timeSent: "16:42",
+                isMine: true
+              },
+              {
+                type: "img",
+                data: "/chats_images/mbappe_worldcup.jpg",
+                timeSent: "16:42",
                 isMine: true
               },
               {
                 type: "text",
-                data: "you w'ont belive what happened to me",
-                timeSent: "15:51",
+                data: "dam bro he is so rude, those young players these days...",
+                timeSent: "16:51",
+                isMine: false
+              },
+            ],
+            img: "/avatars/avatar5.png",
+            lastSeen: "2 hours",
+          },
+          {
+            name: "Mbappe",
+            messages: [
+              {
+                type: "text",
+                data: "sup dude, welcome to the club!",
+                timeSent: "15:40",
+                isMine: false
+              },
+
+              {
+                type: "text",
+                data: "Thanks dude! looking forward to play with you!",
+                timeSent: "15:43",
+                isMine: true
+              },
+
+              {
+                type: "text",
+                data: "Just to remind you what i did when i was 19",
+                timeSent: "15:47",
                 isMine: false
               },
               {
-                type: "text",
-                data: "what happened dude?",
-                timeSent: "15:54",
+                type: "img",
+                data: "/chats_images/mbappe_worldcup.jpg",
+                timeSent: "15:47",
                 isMine: true
               },
               {
                 type: "text",
-                data: "i'll send you a video, it will explain itself.",
-                timeSent: "15:59",
+                data: "wth dude you are a jerk.",
+                timeSent: "16:21",
+                isMine: true
+              },
+            ],
+            img: "/avatars/avatar5.png",
+            lastSeen: "2 hours",
+          },
+          {
+            name: "Iniesta",
+            messages: [
+              {
+                type: "text",
+                data: "Hey dude! went through my photos and saw this, A sweet memory!",
+                timeSent: "15:40",
+                isMine: true
+              },
+
+              {
+                type: "img",
+                data: "/chats_images/iniesta_messi2.jpg", 
+                timeSent: "15:43",
+                isMine: true
+              },
+
+              {
+                type: "text",
+                data: "Wow bro thats an old one! where was it??",
+                timeSent: "15:47",
                 isMine: false
               },
               {
-                type: "video",
-                data: horseFallChat,
-                timeSent: "15:59",
+                type: "text",
+                data: "yea man! its from Champions League final 2009",
+                timeSent: "15:50",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "WOW! thats was an amazing night!",
+                timeSent: "15:53",
+                isMine: false
+              },
+            ],
+            img: "/avatars/avatar5.png",
+            lastSeen: "2 hours",
+          }
+        ],
+      },
+      {
+        user: "Iniesta",
+        lastSeen : "2 hours",
+        contacts: [
+          {
+            name: "Messi",
+            messages: [
+              {
+                type: "text",
+                data: "Hey dude! went through my photos and saw this, A sweet memory!",
+                timeSent: "15:40",
                 isMine: false
               },
 
+              {
+                type: "img",
+                data: "/chats_images/iniesta_messi2.jpg", 
+                timeSent: "15:43",
+                isMine: false
+              },
 
-
+              {
+                type: "text",
+                data: "Wow bro thats an old one! where was it??",
+                timeSent: "15:47",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "yea man! its from Champions League final 2009",
+                timeSent: "15:50",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "WOW! thats was an amazing night!",
+                timeSent: "15:53",
+                isMine: true
+              },
             ],
             img: "/avatars/avatar5.png",
             lastSeen: "2 hours",
           }
         ]
       },
+      {
+        user: "Xavi",
+        lastSeen : "2 hours",
+        contacts: [
+          {
+            name: "Messi",
+            messages: [
+              {
+                type: "text",
+                data: "I want to come back home bro",
+                timeSent: "16:21",
+                isMine: false
+              },
+
+              {
+                type: "text",
+                data: "this forking kid Mbappe is so toxic!",
+                timeSent: "16:23",
+                isMine: false
+              },
+
+              {
+                type: "text",
+                data: "yoooo dude, whats up? what did this little ninja turtle did?",
+                timeSent: "16:32",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "look what he sent me!",
+                timeSent: "16:42",
+                isMine: false
+              },
+              {
+                type: "img",
+                data: "/chats_images/mbappe_worldcup.jpg",
+                timeSent: "16:42",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "dam bro he is so rude, those young players these days...",
+                timeSent: "16:51",
+                isMine: true
+              },
+            ],
+            img: "/avatars/avatar5.png",
+            lastSeen: "2 hours",
+          }
+        ]
+      },
+      {
+        user: "Mbappe",
+        lastSeen : "2 hours",
+        contacts: [
+          {
+            name: "Messi",
+            messages: [
+              {
+                type: "text",
+                data: "sup dude, welcome to the club!",
+                timeSent: "15:40",
+                isMine: true
+              },
+
+              {
+                type: "text",
+                data: "Thanks dude! looking forward to play with you!",
+                timeSent: "15:43",
+                isMine: true
+              },
+
+              {
+                type: "text",
+                data: "Just to remind you what i did when i was 19",
+                timeSent: "15:47",
+                isMine: true
+              },
+              {
+                type: "img",
+                data: "/chats_images/mbappe_worldcup.jpg",
+                timeSent: "15:47",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "wth dude you are a jerk.",
+                timeSent: "16:21",
+                isMine: false
+              },
+            ],
+            img: "/avatars/avatar5.png",
+            lastSeen: "2 hours",
+          },
+        ]
+      },
+      {
+        user: "Cristiano Ronaldo",
+        contacts : [
+          {
+            name: "Messi",
+            messages: [
+              {
+                type: "text",
+                data: "Congrats for the 6th Golden Ball mate, you are defentitly the GOAT!",
+                timeSent: "22:35",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "Thanks man!\ni dont think im the goat, Yoav Otmazgin is way better than me!",
+                timeSent: "22:39",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "oh i thought we exclude him, its quite obvious that he is the best!",
+                timeSent: "22:40",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "When someone ask me \"is Yoav Otmazgin the best player in the world?\", thats my answer:",
+                timeSent: "22:40",
+                isMine: true
+              },
+              {
+                type: "audio",
+                data: ronaldoSiu ,
+                timeSent: "22:40",
+                isMine: true
+              },
+            ],
+            img: "/avatars/avatar4.png",
+            lastSeen: "4 hours",
+          },
+        ]
+      },
+      {
+        user: "Ramos",
+        contacts : [
+          {
+            name: "Ramos",
+            messages: [
+              {
+                type: "text",
+                data: "Welcome to PSG bro, I hope we can forget our history and became friends!",
+                timeSent: "12:21",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "hey dude, just wanted to text you! say hey to my new dog",
+                timeSent: "12:43",
+                isMine: false
+              },
+              {
+                type: "img",
+                data: "/chats_images/dog.jpg",
+                timeSent: "12:43",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "his name is real madrid!",
+                timeSent: "12:43",
+                isMine: false
+              },
+
+              {
+                type: "text",
+                data: "haha you are such an idiot!",
+                timeSent: "12:57",
+                isMine: true
+              }
+            ],
+            img: "/avatars/avatar6.png",
+            lastSeen: "4 hours",
+          },
+        ]
+      }
     ])
+
 
   return (
     <Router>
