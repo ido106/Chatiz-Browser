@@ -23,6 +23,7 @@ class ChatForm extends React.Component {
             isRecording: false,
             user: this.props.UserData.myUser,
             chatInfos: chatInfo,
+            usersToShow: chatInfo,
             activeChat: {
                 name: null,
                 lastSeen: Date.now(),
@@ -43,6 +44,7 @@ class ChatForm extends React.Component {
         this.handleVideo = this.handleVideo.bind(this);
         this.addChat = this.addChat.bind(this);
         this.cancelErrors = this.cancelErrors.bind(this);
+        this.updateContactsList = this.updateContactsList.bind(this);
     }
 
 
@@ -126,7 +128,7 @@ class ChatForm extends React.Component {
 
 
     contacts() {
-        return this.state.chatInfos.map((element, k) => {
+        return this.state.usersToShow.map((element, k) => {
             return <ContactView
                 name={element.name}
                 img={element.img}
@@ -321,6 +323,19 @@ class ChatForm extends React.Component {
         )
     }
 
+    updateContactsList() {
+        let search = document.getElementById('userSearch').value;
+        console.log(search);
+        this.state.usersToShow = this.state.chatInfos.filter((chat) => chat.name.startsWith(search))
+
+        this.setState({
+            ignore: !this.state.ignore
+        })
+        
+
+
+    }
+
 
     render() {
         return (
@@ -337,7 +352,7 @@ class ChatForm extends React.Component {
 
                                         <span className="input-group-text search-buttun-chat"><i className="fa fa-search"></i></span>
                                     </div>
-                                    <input type="text" className="form-control" placeholder="Search..."></input>
+                                    <input type="text" className="form-control" placeholder="Search..." id="userSearch" onChange={this.updateContactsList}></input>
                                 </div>
                                 <ul className="list-unstyled chat-list me-2 mb-0">
 

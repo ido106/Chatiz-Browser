@@ -60,6 +60,11 @@ const useForm = (callback, validate, userMessage) => {
       }
       let time = hours + ":" + min;
 
+      if(values.img == null) {
+        let num = Math.floor(Math.random() * 8) + 1;
+        values.img = "/avatars/avatar" + num + ".png"
+      }
+
       userMessage.push({
         user: values.username,
         contacts: [],
