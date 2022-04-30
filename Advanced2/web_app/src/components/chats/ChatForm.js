@@ -15,6 +15,7 @@ class ChatForm extends React.Component {
         this.props.userMessage.forEach(e => {
             if (e.user == this.props.UserData.myUser) {
                 chatInfo = e.contacts;
+                e.lastSeen = "online";
             }
         })
         this.mediaRecorder = null;
@@ -28,6 +29,7 @@ class ChatForm extends React.Component {
             },
             ignore: false
         }
+
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
         this.setActiveChat = this.setActiveChat.bind(this);
@@ -331,9 +333,7 @@ class ChatForm extends React.Component {
                                 <ul className="list-unstyled chat-list me-2 mb-0">
 
                                     <li>
-
                                         {this.contacts()}
-
                                     </li>
                                 </ul>
                             </div>
