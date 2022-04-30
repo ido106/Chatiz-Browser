@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  
+
 }
 
 .close-btn {
@@ -154,12 +154,20 @@
   position: absolute;
   margin: auto;
   height: 95%;
-  width: 60%;
+  width: 85%;
   border: 3px;
-  padding: 10px;
   margin: 10px;
 }
 
 .photo-height {
   height: 40%;
 }
+
+.form-scroll {
+  /* scroll-behavior: smooth; */
+  overflow-y: scroll;
+}
+
+/* .place-center {
+  left: 20%;
+} */
