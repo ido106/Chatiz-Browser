@@ -252,6 +252,8 @@ function App() {
       {
         user: "Iniesta",
         lastSeen : "2 hours",
+        img : "/avatars/avatar6.png",
+
         contacts: [
           {
             name: "Messi",
@@ -302,6 +304,7 @@ function App() {
       {
         user: "Xavi",
         lastSeen : "2 hours",
+        img : "/avatars/avatar7.png",
         contacts: [
           {
             name: "Messi",
@@ -358,6 +361,8 @@ function App() {
       {
         user: "Mbappe",
         lastSeen : "2 hours",
+        img : "/avatars/avatar3.png",
+
         contacts: [
           {
             name: "Messi",
@@ -407,10 +412,13 @@ function App() {
       },
       {
         user: "Cristiano Ronaldo",
+        img : "/avatars/avatar1.png",
+        lastSeen : "2 days ago",
+
         contacts : [
           {
             name: "Messi",
-            lastModifiedMonth: 4,
+            lastModifiedMonth: 3,
             lastModifiedDate: 28,
             lastModifiedHour: 22,
             lastModifiedMinute: 28,
@@ -454,6 +462,8 @@ function App() {
       },
       {
         user: "Ramos",
+        img : "/avatars/avatar7.png",
+        lastSeen :"1 hour ago",
         contacts : [
           {
             name: "Messi",
