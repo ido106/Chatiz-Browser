@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import time from "../chats/DataBase/Time";
 
 const useForm = (callback, validate, userMessage) => {
   const [values, setValues] = useState({
@@ -47,19 +48,6 @@ const useForm = (callback, validate, userMessage) => {
   useEffect(() => {
     if (Object.keys(errors).length == 0 && isSubmitting) {
 
-
-      var date = new Date();
-      let min = date.getMinutes().toString();
-      let hours = date.getHours().toString();
-      if (date.getHours() < 10) {
-        hours = "0" + hours;
-      }
-
-      if (date.getMinutes() < 10) {
-        min = "0" + min;
-      }
-      let time = hours + ":" + min;
-
       if(values.img == null) {
         let num = Math.floor(Math.random() * 8) + 1;
         values.img = "/avatars/avatar" + num + ".png"
@@ -69,7 +57,7 @@ const useForm = (callback, validate, userMessage) => {
         user: values.username,
         contacts: [],
         img: values.img,
-        lastSeen: time,
+        lastSeen: time(),
       })
 
 
