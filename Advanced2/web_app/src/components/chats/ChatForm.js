@@ -30,7 +30,7 @@ class ChatForm extends React.Component {
             activeChat: {
                 name: null,
                 lastSeen: Date.now(),
-                img: null
+                img: "/avatars/no-profile-picture.png"
             },
             ignore: false
         }
@@ -55,24 +55,36 @@ class ChatForm extends React.Component {
 
     //********************************************************************************************************** */
     send(messageType, newData) {
-        if (messageType == "text" && newData == "") {
+        if ((messageType == "text" && newData == "") || this.state.activeChat == null) {
             return;
         }
-
+        var date = new Date();
+        let currentTime = time();
         this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
             type: messageType,
             data: newData,
-            timeSent: time(),
-            isMine: true
+            timeSent: currentTime,
+            isMine: true,
         });
-
 
         this.props.userMessage.find(element => element.user == this.state.activeChat.name).contacts.find(element => element.name == this.state.user).messages.push({
             type: messageType,
             data: newData,
-            timeSent: time(),
-            isMine: false
+            timeSent:currentTime,
+            isMine: false,
+
         });
+
+        let changeModified = contact => {
+            contact.lastModifiedMonth = date.getMonth();
+            contact.lastModifiedDay = date.getDate();
+            contact.lastModifiedHour = date.getHours();
+            contact.lastModifiedMinute = date.getMinutes();
+            contact.lastModifiedSecond = date.getSeconds();
+        }
+
+        changeModified(this.props.userMessage.find(element => element.user == this.state.activeChat.name).contacts.find(element => element.name == this.state.user));
+        changeModified(this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name));
 
         this.setState({
             ignore: !this.state.ignore
@@ -88,6 +100,7 @@ class ChatForm extends React.Component {
                 return;
             }
         }, 100);
+        this.updateContactsList();
     }
 
 
@@ -189,11 +202,8 @@ class ChatForm extends React.Component {
         input.type = 'file';
         input.accept = "video/*";
         input.click();
-        console.log("before onChange")
         input.onchange = e => {
-            console.log("before send")
             this.send('video', URL.createObjectURL((e.target.files[0])));
-            console.log("after send")
         }
     }
 
@@ -216,22 +226,22 @@ class ChatForm extends React.Component {
 
     addChat() {
         let newName = document.getElementById('addChatName').value;
-        var cantAdd = false;
 
         if (newName == this.state.user) {
-            console.log("1")
-
             document.getElementById('errorUserIsYou').className = "";
-            cantAdd = true;
-
+            return;
         }
+        let isInChat = false;
         this.state.chatInfos.forEach((element) => {
             if (element.name == newName) {
-                console.log("2")
-                document.getElementById('errorUserInChat').className = "";
-                cantAdd = true;
+                document.getElementById('errorUserInChat').className = "";  
+                isInChat = true;
+                return
             }
         })
+        if(isInChat) {
+            return;
+        }
         var exits = false;
         users.forEach((element) => {
             if (element.UserName == newName) {
@@ -241,12 +251,10 @@ class ChatForm extends React.Component {
 
         if (!exits) {
             document.getElementById('errorUserDontExist').className = "";
-            cantAdd = true;
-        }
-
-        if (cantAdd) {
             return;
         }
+
+
 
         this.props.userMessage.find(element => element.user == this.state.user).contacts.push({
             name: newName,
@@ -271,7 +279,7 @@ class ChatForm extends React.Component {
     }
 
     contantToolbar() {
-        if (this.state.activeChat.name == null) {
+        if (this.state.activeChat == null) {
             return
         }
 
@@ -318,9 +326,46 @@ class ChatForm extends React.Component {
 
     updateContactsList() {
         let search = document.getElementById('userSearch').value;
-        console.log(search);
-        this.state.usersToShow = this.state.chatInfos.filter((chat) => chat.name.startsWith(search))
+        this.state.usersToShow = this.state.chatInfos.filter((chat) => chat.name.startsWith(search));
+        let sortFunc = (a,b) => {
+            if(a.lastModifiedMonth < b.lastModifiedMonth) {
+                return 1;
+            };
+            if(a.lastModifiedMonth > b.lastModifiedMonth) {
+                return -1;
+            };
 
+            if(a.lastModifiedDay < b.lastModifiedDay) {
+                return 1;
+            };
+            if(a.lastModifiedDay > b.lastModifiedDay) {
+                return -1;
+            };
+
+            if(a.lastModifiedHour < b.lastModifiedHour) {
+                return 1;
+            };
+            if(a.lastModifiedHour > b.lastModifiedHour) {
+                return -1;
+            };
+
+            if(a.lastModifiedMinute < b.lastModifiedMinute) {
+                return 1;
+            };
+            if(a.lastModifiedMinute > b.lastModifiedMinute) {
+                return -1;
+            };
+
+            if(a.lastModifiedSecond < b.lastModifiedSecond) {
+                return 1;
+            };
+            if(a.lastModifiedSecond > b.lastModifiedSecond) {
+                return -1;
+            };
+            
+            return 0;
+        }
+         this.state.usersToShow = this.state.usersToShow.sort(sortFunc);
         this.setState({
             ignore: !this.state.ignore
         })

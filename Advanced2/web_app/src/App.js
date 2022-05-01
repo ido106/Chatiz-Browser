@@ -22,46 +22,15 @@ function App() {
       {
         user: "Messi",
         lastSeen: "2 minutes ago",
+        img: "/avatars/avatar1.png",
         contacts: [
           {
-            name: "Cristiano Ronaldo",
-            messages: [
-              {
-                type: "text",
-                data: "Congrats for the 6th Golden Ball mate, you are defentitly the GOAT!",
-                timeSent: "22:35",
-                isMine: false
-              },
-              {
-                type: "text",
-                data: "Thanks man!\ni dont think im the goat, Yoav Otmazgin is way better than me!",
-                timeSent: "22:39",
-                isMine: true
-              },
-              {
-                type: "text",
-                data: "oh i thought we exclude him, its quite obvious that he is the best!",
-                timeSent: "22:40",
-                isMine: false
-              },
-              {
-                type: "text",
-                data: "When someone ask me \"is Yoav Otmazgin the best player in the world?\", thats my answer:",
-                timeSent: "22:40",
-                isMine: false
-              },
-              {
-                type: "audio",
-                data: ronaldoSiu ,
-                timeSent: "22:40",
-                isMine: false
-              },
-            ],
-            img: "/avatars/avatar4.png",
-            lastSeen: "4 hours",
-          },
-          {
             name: "Ramos",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 12,
+            lastModifiedMinute: 57,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -96,10 +65,15 @@ function App() {
               }
             ],
             img: "/avatars/avatar6.png",
-            lastSeen: "4 hours",
+            lastSeen: "1 hour",
           },
           {
             name: "Xavi",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 16,
+            lastModifiedMinute: 51,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -145,6 +119,11 @@ function App() {
           },
           {
             name: "Mbappe",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 16,
+            lastModifiedMinute: 21,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -170,7 +149,7 @@ function App() {
                 type: "img",
                 data: "/chats_images/mbappe_worldcup.jpg",
                 timeSent: "15:47",
-                isMine: true
+                isMine: false
               },
               {
                 type: "text",
@@ -184,6 +163,11 @@ function App() {
           },
           {
             name: "Iniesta",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 15,
+            lastModifiedMinute: 53,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -193,8 +177,8 @@ function App() {
               },
 
               {
-                type: "img",
-                data: "/chats_images/iniesta_messi2.jpg", 
+                type: "video",
+                data: "/videos/IniestaGoal.mp4", 
                 timeSent: "15:43",
                 isMine: true
               },
@@ -207,7 +191,7 @@ function App() {
               },
               {
                 type: "text",
-                data: "yea man! its from Champions League final 2009",
+                data: "yea man! its from Champions League semi-finals 2009",
                 timeSent: "15:50",
                 isMine: true
               },
@@ -220,7 +204,49 @@ function App() {
             ],
             img: "/avatars/avatar5.png",
             lastSeen: "2 hours",
-          }
+          },
+          {
+            name: "Cristiano Ronaldo",
+            lastModifiedMonth: 3,
+            lastModifiedDate: 28,
+            lastModifiedHour: 22,
+            lastModifiedMinute: 40,
+            lastModifiedSecond: 0,
+            messages: [
+              {
+                type: "text",
+                data: "Congrats for the 6th Golden Ball mate, you are defentitly the GOAT!",
+                timeSent: "22:35",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "Thanks man!\ni dont think im the goat, Yoav Otmazgin is way better than me!",
+                timeSent: "22:39",
+                isMine: true
+              },
+              {
+                type: "text",
+                data: "oh i thought we exclude him, its quite obvious that he is the best!",
+                timeSent: "22:40",
+                isMine: false
+              },
+              {
+                type: "text",
+                data: "When someone ask me \"is Yoav Otmazgin the best player in the world?\", thats my answer:",
+                timeSent: "22:40",
+                isMine: false
+              },
+              {
+                type: "audio",
+                data: ronaldoSiu ,
+                timeSent: "22:40",
+                isMine: false
+              },
+            ],
+            img: "/avatars/avatar4.png",
+            lastSeen: "4 days",
+          },
         ],
       },
       {
@@ -229,6 +255,11 @@ function App() {
         contacts: [
           {
             name: "Messi",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 15,
+            lastModifiedMinute: 53,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -263,7 +294,7 @@ function App() {
                 isMine: true
               },
             ],
-            img: "/avatars/avatar5.png",
+            img: "/avatars/avatar1.png",
             lastSeen: "2 hours",
           }
         ]
@@ -274,6 +305,11 @@ function App() {
         contacts: [
           {
             name: "Messi",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 16,
+            lastModifiedMinute: 51,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -325,6 +361,11 @@ function App() {
         contacts: [
           {
             name: "Messi",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 16,
+            lastModifiedMinute: 21,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -337,7 +378,7 @@ function App() {
                 type: "text",
                 data: "Thanks dude! looking forward to play with you!",
                 timeSent: "15:43",
-                isMine: true
+                isMine: false
               },
 
               {
@@ -350,7 +391,7 @@ function App() {
                 type: "img",
                 data: "/chats_images/mbappe_worldcup.jpg",
                 timeSent: "15:47",
-                isMine: false
+                isMine: true
               },
               {
                 type: "text",
@@ -359,7 +400,7 @@ function App() {
                 isMine: false
               },
             ],
-            img: "/avatars/avatar5.png",
+            img: "/avatars/avatar1.png",
             lastSeen: "2 hours",
           },
         ]
@@ -369,6 +410,11 @@ function App() {
         contacts : [
           {
             name: "Messi",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 22,
+            lastModifiedMinute: 28,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -410,7 +456,12 @@ function App() {
         user: "Ramos",
         contacts : [
           {
-            name: "Ramos",
+            name: "Messi",
+            lastModifiedMonth: 4,
+            lastModifiedDate: 28,
+            lastModifiedHour: 12,
+            lastModifiedMinute: 57,
+            lastModifiedSecond: 0,
             messages: [
               {
                 type: "text",
@@ -444,7 +495,7 @@ function App() {
                 isMine: true
               }
             ],
-            img: "/avatars/avatar6.png",
+            img: "/avatars/avatar1.png",
             lastSeen: "4 hours",
           },
         ]
