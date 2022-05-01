@@ -260,7 +260,12 @@ class ChatForm extends React.Component {
             name: newName,
             lastSeen: this.props.userMessage.find(element => element.user == newName).lastSeen,
             img: this.props.userMessage.find(element => element.user == newName).img,
-            messages: []
+            messages: [],
+            lastModifiedMonth: 1,
+            lastModifiedDate: 1,
+            lastModifiedHour: 1,
+            lastModifiedMinute: 1,
+            lastModifiedSecond: 1,
         })
 
 
@@ -268,7 +273,11 @@ class ChatForm extends React.Component {
             name: this.state.user,
             lastSeen: this.props.userMessage.find(element => element.user == this.state.user).lastSeen,
             img: this.props.userMessage.find(element => element.user == this.state.user).img,
-            messages: []
+            messages: [],            lastModifiedMonth: 1,
+            lastModifiedDate: 1,
+            lastModifiedHour: 1,
+            lastModifiedMinute: 1,
+            lastModifiedSecond: 1,
         })
 
         this.setState({
