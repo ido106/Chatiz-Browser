@@ -1,8 +1,8 @@
-﻿using Advanced_2.Models;
+﻿using Advanced2_ASP.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Advanced_2.Controllers
+namespace Advanced2_ASP.Controllers
 {
     public class HomeController : Controller
     {

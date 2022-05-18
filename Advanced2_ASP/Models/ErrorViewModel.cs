@@ -1,4 +1,4 @@
-namespace Advanced_2.Models
+namespace Advanced2_ASP.Models
 {
     public class ErrorViewModel
     {
