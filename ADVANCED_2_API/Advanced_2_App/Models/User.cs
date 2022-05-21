@@ -5,6 +5,9 @@ namespace Advanced_2_App.Models
     public class User
     {
         [Key]
+        public string Id { get; set; }
+
+        [Required]
         public string UserName { get; set; }
 
         [Required]
@@ -12,7 +15,10 @@ namespace Advanced_2_App.Models
         public string Password { get; set; }
         [Required]
         public string lastSeen { get; set; }
+
         [Required]
-        public List<JsonContent> Contacts { get; set; }
+        public string server { get; set; }
+        [Required]
+        public List<User> Contacts { get; set; }
     }
 }

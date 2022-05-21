@@ -8,31 +8,81 @@ using Microsoft.EntityFrameworkCore;
 using Advanced_2_App.Data;
 using Advanced_2_App.Models;
 using Advanced_2_App.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Advanced_2_App.Controllers
 {
+    [ApiController]
+    [Route("api/(controller)")]
     public class UsersController : Controller
     {
-        private UsersService _Service;
+        private readonly UsersService _service;
         public UsersController()
         {
-            _Service = new UsersService();
+            _service = new UsersService();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("UserName,Password")] User user)
+        [HttpGet("{username}")]
+        public async Task<IActionResult> GetUser(string username)
         {
-            Console.WriteLine("len is " + _Service.Users.Count);
-            if (ModelState.IsValid)
+            // maybe has to check if the user is null and return a default user or flag user.
+            if (!ModelState.IsValid)
             {
-                _Service.AddUser(user);
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            return View(_Service.Users);
+            return Json(_service.GetUser(username));
         }
+
+        [HttpPost("login")]
+        public async Task<bool> Login([Bind("username", "password")] User user)
+        {
+            if(!_service.IsUserExists(user))
+            {
+                return false;
+            }
+            HttpContext.Session.SetString("username", user.UserName);
+            return true;
+        }
+
+
+        [HttpGet("contacts")]
+        [Authorize]
+        public async Task<IActionResult> Contacts()
+        {
+            String? username = HttpContext.Session.GetString("username");
+
+            if(username == null)
+            {
+                return NotFound();
+            }
+            return Json(_service.getContacts(_service.GetUser(username)));
+        }
+
+        [HttpPost("contacts")]
+        public async Task<IActionResult> Contacts([Bind("username")] String user)
+        {
+            String? username = HttpContext.Session.GetString("username");
+
+            if (username == null)
+            {
+                return NotFound();
+            }
+
+            bool added = _service.addContact(user, user);
+
+            if(!added)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        } 
+
+
+
+
+
+
+
+
     }
 }

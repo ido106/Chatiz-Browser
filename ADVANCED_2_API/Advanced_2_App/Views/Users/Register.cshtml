@@ -1,10 +1,10 @@
 ﻿@model Advanced_2_App.Models.User
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Register";
 }
 
-<h1>Create</h1>
+<h1>Register</h1>
 
 <h4>Users</h4>
 <hr />
@@ -30,9 +30,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Signin">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
