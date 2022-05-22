@@ -8,17 +8,19 @@ namespace Advanced_2_App.Models
         public string Id { get; set; }
 
         [Required]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required]
-        public string lastSeen { get; set; }
 
         [Required]
-        public string server { get; set; }
+        public string LastSeen { get; set; }
+
         [Required]
-        public List<User> Contacts { get; set; }
+        public string Server { get; set; }
+
+        [Required]
+        public List<Contact> Contacts { get; set; }
     }
 }

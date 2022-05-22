@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Advanced_2_App.Controllers
 {
     [ApiController]
-    [Route("api/(controller)")]
+    [Route("api")]
     public class UsersController : Controller
     {
         private readonly UsersService _service;
@@ -75,7 +75,70 @@ namespace Advanced_2_App.Controllers
                 return BadRequest();
             }
             return Ok();
-        } 
+        }
+        
+        [HttpGet("contacts/{id}")]
+        public async Task<IActionResult> Contacts(string id)
+        {
+            String? username = HttpContext.Session.GetString("username");
+            if (username == null || _service.GetUser(username) == null)
+            {
+                return BadRequest();
+            }
+
+            User contactId = _service.getContacts(_service.GetUser(username)).FirstOrDefault((x) => x.Id == id);
+
+            if (contactId == null)
+            {
+                return BadRequest();
+            }
+
+            return Json(contactId);
+        }
+
+        [HttpPut("contacts/{id}")]
+        public async Task<IActionResult> Contacts([Bind("name")] string name, [Bind("server")] string server)
+        {
+            String? username = HttpContext.Session.GetString("username");
+            if (username == null || _service.GetUser(username) == null)
+            {
+                return BadRequest();
+            }
+
+            if(_service.GetUser(name) == null)
+            {
+                return BadRequest();;
+            }
+
+            Contact contact =  _service.getContact(_service.GetUser(username), name);
+            contact.Username = name;
+            contact.Server = server;
+            return Ok();
+        }
+
+
+
+
+        [HttpGet("contacts/{id}/{messages}")]
+        public async Task<IActionResult> GetMessages(int id)
+        {
+            String? username = HttpContext.Session.GetString("username");
+            if (username == null || _service.GetUser(username) == null)
+            {
+                return BadRequest();
+            }
+
+            User user = _service.GetUser(username);
+            if (user.Contacts.FirstOrDefault(x => x.Id == id) == null) { return BadRequest(); }
+            foreach(Contact c in user.Contacts)
+            {
+                if (c.id == id)
+                {
+                    return Json(c.Messages);
+                }
+            }
+            return BadRequest();
+        }
 
 
 
