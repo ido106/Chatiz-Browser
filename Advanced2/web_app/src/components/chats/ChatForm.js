@@ -72,7 +72,6 @@ class ChatForm extends React.Component {
             data: newData,
             timeSent:currentTime,
             isMine: false,
-
         });
 
         let changeModified = contact => {
