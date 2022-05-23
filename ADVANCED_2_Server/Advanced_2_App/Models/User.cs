@@ -23,6 +23,4 @@ namespace Advanced_2_App.Models
         [Required]
         public List<Contact> Contacts { get; set; }
     }
-
-    public int forPush { get; set; }
 }
