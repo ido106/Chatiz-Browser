@@ -25,6 +25,7 @@ class ChatForm extends React.Component {
         this.state = {
             isRecording: false,
             user: this.props.UserData.myUser,
+            nickName : this.props.nickName,
             chatInfos: chatInfo,
             usersToShow: chatInfo,
             activeChat: {
@@ -108,6 +109,7 @@ class ChatForm extends React.Component {
         if (this.state.activeChat.name == null) {
             return
         }
+        
         var msgs = this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages
         if (msgs != null) {
             return msgs.map((element, k) => {
@@ -121,10 +123,12 @@ class ChatForm extends React.Component {
         }
     }
 
-    setActiveChat(userName, userNamelastSeen, userImg) {
+    setActiveChat(userName, userNamelastSeen, userImg, nickName) {
+        console.log("username is: "+userName);
         this.setState({
             activeChat: {
                 name: userName,
+                nickName : nickName,
                 lastSeen: userNamelastSeen,
                 img: userImg
             }
@@ -135,11 +139,13 @@ class ChatForm extends React.Component {
     contacts() {
         return this.state.usersToShow.map((element, k) => {
             return <ContactView
+                nickName={element.nickName}
                 name={element.name}
                 img={element.img}
                 lastSeen={element.lastSeen}
                 key={k}
                 setActiveChat={this.setActiveChat}
+                lastMessage={element.messages.length > 0 ? element.messages[element.messages.length - 1] : ("")}
             />
         });
     }
@@ -254,12 +260,14 @@ class ChatForm extends React.Component {
         }
 
 
-
-        this.props.userMessage.find(element => element.user == this.state.user).contacts.push({
+        let other = this.props.userMessage.find(element => element.user == this.state.user);
+        other.contacts.push({
             name: newName,
+            nickName : this.props.UserData.nickName,
             lastSeen: this.props.userMessage.find(element => element.user == newName).lastSeen,
             img: this.props.userMessage.find(element => element.user == newName).img,
             messages: [],
+            lastMessage: "",
             lastModifiedMonth: 1,
             lastModifiedDate: 1,
             lastModifiedHour: 1,
@@ -270,9 +278,12 @@ class ChatForm extends React.Component {
 
         this.props.userMessage.find(element => element.user == newName).contacts.push({
             name: this.state.user,
+            nickName :other.nickName,
             lastSeen: this.props.userMessage.find(element => element.user == this.state.user).lastSeen,
             img: this.props.userMessage.find(element => element.user == this.state.user).img,
-            messages: [],            lastModifiedMonth: 1,
+            messages: [],
+            lastMessage : "",
+            lastModifiedMonth: 1,
             lastModifiedDate: 1,
             lastModifiedHour: 1,
             lastModifiedMinute: 1,
@@ -283,6 +294,8 @@ class ChatForm extends React.Component {
             ignore: !this.state.ignore
         })
 
+        console.log("added!");
+
         document.getElementById("closeAddChat").click();
     }
 
@@ -292,7 +305,7 @@ class ChatForm extends React.Component {
         }
 
         return (
-            <div className="chat-header clearfix ">
+            <div className="chat-header clearfix">
                 <div className="row">
                     <div className="col-lg-6">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
@@ -410,7 +423,7 @@ class ChatForm extends React.Component {
                                     </div>
                                     <input type="text" className="form-control" placeholder="Search..." id="userSearch" onChange={this.updateContactsList}></input>
                                 </div>
-                                <ul className="list-unstyled chat-list me-2 mb-0">
+                                <ul className="list-unstyled chat-list me-2 mb-0 show-contacts">
 
                                     <li>
                                         {this.contacts()}

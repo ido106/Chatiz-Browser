@@ -3,7 +3,8 @@ import time from "../chats/DataBase/Time";
 
 const useForm = (callback, validate, userMessage) => {
   const [values, setValues] = useState({
-    username: "",
+      username: "",
+      usernameN: "",
     email: "",
     password: "",
     password2: "",
@@ -54,7 +55,8 @@ const useForm = (callback, validate, userMessage) => {
       }
 
       userMessage.push({
-        user: values.username,
+          user: values.username,
+        nickName : values.usernameN,
         contacts: [],
         img: values.img,
         lastSeen: time(),

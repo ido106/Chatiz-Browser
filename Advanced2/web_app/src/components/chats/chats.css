@@ -302,5 +302,9 @@ body{
     margin: 5px;
 }
 
+.show-contacts {
+    overflow-y: scroll;
+    max-height: 90%;
+}
 
 

@@ -20,7 +20,11 @@ export default function validateInfo(values) {
       errors.username = "user name is already exesit"
     }
   });
-  if (!values.email) {
+    if (!values.usernameN.trim()) {
+        errors.usernameN = "User nick name required";
+        check = false;
+    }
+      if (!values.email) {
     errors.email = "Email required";
     check = false;
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {

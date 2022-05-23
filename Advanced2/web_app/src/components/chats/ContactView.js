@@ -1,30 +1,20 @@
 
 
 export default function ContactView(props) {
-    if(props.lastSeen == "online") {
         return (
         <li className="clearfix"
-        onClick={()=> props.setActiveChat(props.name, props.lastSeen, props.img)}
+        onClick={()=> props.setActiveChat(props.name, props.lastSeen, props.img, props.nickName)}
         >
         <img src={props.img}/>
         <div className="about">
-            <div className="name">{props.name} </div>
-            <div className="status"> <i className="fa fa-circle online"></i>online</div>
+            <div className="name">{props.nickName} </div>
+            <div className="small">{props.lastMessage.data && props.lastMessage.data.substr(0,25) + "..."}</div>
+            {props.lastSeen ? 
+            (<div className="status"> <i className="fa fa-circle online"></i>online</div>) :
+            (<div className="status"> <i className="fa fa-circle offline"></i> left {props.lastSeen} ago </div>)
+            }
         </div>
     </li>
         )
-    }
 
-    return (
-
-        <li className="clearfix"
-        onClick={()=> props.setActiveChat(props.name, props.lastSeen, props.img)}
-        >
-            <img src={props.img}/>
-            <div className="about">
-                <div className="name">{props.name} </div>
-                <div className="status"> <i className="fa fa-circle offline"></i> left {props.lastSeen} ago </div>
-            </div>
-        </li>
-    )
 }
