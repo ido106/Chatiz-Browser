@@ -12,6 +12,7 @@ import ronaldoSiu from "./constData/audio/SUIII.mp3"
 import './App.css';
 
 function App() {
+let date = new Date();
 
   const [UserData, setUserData] = React.useState({
     myUser: null
@@ -33,6 +34,8 @@ function App() {
             lastModifiedHour: 12,
             lastModifiedMinute: 57,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
@@ -77,6 +80,8 @@ function App() {
             lastModifiedHour: 16,
             lastModifiedMinute: 51,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
@@ -128,6 +133,8 @@ function App() {
             lastModifiedHour: 16,
             lastModifiedMinute: 21,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
@@ -173,6 +180,8 @@ function App() {
             lastModifiedHour: 15,
             lastModifiedMinute: 53,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
@@ -218,6 +227,7 @@ function App() {
             lastModifiedHour: 22,
             lastModifiedMinute: 40,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
             messages: [
               {
                 type: "text",
@@ -263,13 +273,14 @@ function App() {
 
         contacts: [
           {
-            name: "messi",
+            name: "Messi",
             nickName: "goat",
             lastModifiedMonth: 4,
             lastModifiedDate: 28,
             lastModifiedHour: 15,
             lastModifiedMinute: 53,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
             messages: [
               {
                 type: "text",
@@ -316,13 +327,15 @@ function App() {
         img : "/avatars/avatar7.png",
         contacts: [
           {
-            name: "messi",
+            name: "Messi",
             nickName: "goat",
             lastModifiedMonth: 4,
             lastModifiedDate: 28,
             lastModifiedHour: 16,
             lastModifiedMinute: 51,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
@@ -376,13 +389,15 @@ function App() {
 
         contacts: [
           {
-            name: "messi",
+            name: "Messi",
             nickName: "goat",
             lastModifiedMonth: 4,
             lastModifiedDate: 28,
             lastModifiedHour: 16,
             lastModifiedMinute: 21,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
@@ -430,13 +445,16 @@ function App() {
 
         contacts : [
           {
-            name: "messi",
+            name: "Messi",
             nickName: "goat",
             lastModifiedMonth: 3,
             lastModifiedDate: 28,
             lastModifiedHour: 22,
             lastModifiedMinute: 28,
             lastModifiedSecond: 0,
+
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
@@ -481,13 +499,15 @@ function App() {
         lastSeen :"1 hour ago",
         contacts : [
           {
-            name: "messi",
+            name: "Messi",
             nickName: "goat",
             lastModifiedMonth: 4,
             lastModifiedDate: 28,
             lastModifiedHour: 12,
             lastModifiedMinute: 57,
             lastModifiedSecond: 0,
+            lastTimeModified : date.getTime(),
+
             messages: [
               {
                 type: "text",
