@@ -9,7 +9,6 @@ import { Navigate } from "react-router-dom"
 import time from "./DataBase/Time.js"
 
 
-
 class ChatForm extends React.Component {
 
     constructor(props) {
@@ -60,6 +59,7 @@ class ChatForm extends React.Component {
             return;
         }
         var date = new Date();
+        var date2 = new Date();
         let currentTime = time();
         console.log("2");
         this.props.userMessage.find(element => element.user == this.state.user).contacts.find(element => element.name == this.state.activeChat.name).messages.push({
