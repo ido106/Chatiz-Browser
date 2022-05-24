@@ -139,6 +139,33 @@ class ChatForm extends React.Component {
 
 
     contacts() {
+        function compare( a, b ) {
+            if ( a.lastModifiedHour > b.lastModifiedHour ){
+              return -1;
+            }
+            if ( a.lastModifiedHour < b.lastModifiedHour ){
+              return 1;
+            }
+            if ( a.lastModifiedHour == b.lastModifiedHour ){
+                if ( a.lastModifiedMinute < b.lastModifiedMinute ){
+                    return 1;
+                }
+                if ( a.lastModifiedMinute > b.lastModifiedMinute ){
+                    return -1;
+                  }
+                  if (a.lastModifiedMinute == b.lastModifiedMinute){
+                    if ( a.lastModifiedSecond < b.lastModifiedSecond ){
+                        return 1;
+                    }
+                    if ( a.lastModifiedSecond > b.lastModifiedSecond ){
+                        return -1;
+                    }
+                    
+                  }
+              }
+          }
+          
+        this.state.usersToShow.sort( compare );
         return this.state.usersToShow.map((element, k) => {
             return <ContactView
                 nickName={element.nickName}
@@ -156,7 +183,7 @@ class ChatForm extends React.Component {
     titleChat() {
         if (this.state.activeChat != null) {
             return <ChatInfo
-                name={this.state.activeChat.name}
+                name={this.state.activeChat.nickName}
                 lastSeen={this.state.activeChat.lastSeen}
             />
         }
