@@ -1,10 +1,8 @@
 import React from "react"
 import { Navigate } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import ChatBody from "../chatBody/ChatBody";
 import './sign_in.css';
 import users from "./users";
-import Body from "../Body";
 class SignIn extends React.Component {
     constructor(props) {
         super(props);

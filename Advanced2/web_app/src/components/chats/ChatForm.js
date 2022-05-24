@@ -139,33 +139,13 @@ class ChatForm extends React.Component {
 
 
     contacts() {
-        function compare( a, b ) {
-            if ( a.lastModifiedHour > b.lastModifiedHour ){
-              return -1;
-            }
-            if ( a.lastModifiedHour < b.lastModifiedHour ){
-              return 1;
-            }
-            if ( a.lastModifiedHour == b.lastModifiedHour ){
-                if ( a.lastModifiedMinute < b.lastModifiedMinute ){
-                    return 1;
-                }
-                if ( a.lastModifiedMinute > b.lastModifiedMinute ){
-                    return -1;
-                  }
-                  if (a.lastModifiedMinute == b.lastModifiedMinute){
-                    if ( a.lastModifiedSecond < b.lastModifiedSecond ){
-                        return 1;
-                    }
-                    if ( a.lastModifiedSecond > b.lastModifiedSecond ){
-                        return -1;
-                    }
-                    
-                  }
-              }
-          }
-          
-        this.state.usersToShow.sort( compare );
+        let sortFunc = (a,b) => {
+           if(a.lastTimeModified > b.lastTimeModified) {
+               return -1;
+           }
+           return 1;
+        }
+        this.state.usersToShow = this.state.usersToShow.sort(sortFunc);
         return this.state.usersToShow.map((element, k) => {
             return <ContactView
                 nickName={element.nickName}
@@ -378,41 +358,10 @@ class ChatForm extends React.Component {
         let search = document.getElementById('userSearch').value;
         this.state.usersToShow = this.state.chatInfos.filter((chat) => chat.name.startsWith(search));
         let sortFunc = (a,b) => {
-            // if(a.lastModifiedMonth < b.lastModifiedMonth) {
-            //     return 1;
-            // };
-            // if(a.lastModifiedMonth > b.lastModifiedMonth) {
-            //     return -1;
-            // };
-
-            // if(a.lastModifiedDay < b.lastModifiedDay) {
-            //     return 1;
-            // };
-            // if(a.lastModifiedDay > b.lastModifiedDay) {
-            //     return -1;
-            // };
-
-            // if(a.lastModifiedHour < b.lastModifiedHour) {
-            //     return 1;
-            // };
-            // if(a.lastModifiedHour > b.lastModifiedHour) {
-            //     return -1;
-            // };
-
-            // if(a.lastModifiedMinute < b.lastModifiedMinute) {
-            //     return 1;
-            // };
-            // if(a.lastModifiedMinute > b.lastModifiedMinute) {
-            //     return -1;
-            // };
-
-            // if(a.lastModifiedSecond < b.lastModifiedSecond) {
-            //     return 1;
-            // };
-            // if(a.lastModifiedSecond > b.lastModifiedSecond) {
-            //     return -1;
-            // };
-            return a.lastTimeModified < b.lastTimeModified;
+           if(a.lastTimeModified > b.lastTimeModified) {
+               return -1;
+           }
+           return 1;
         }
          this.state.usersToShow = this.state.usersToShow.sort(sortFunc);
         this.setState({

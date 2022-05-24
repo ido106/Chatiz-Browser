@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ChatForm from "./components/chats/ChatForm";
 import SignIn from "./components/sign_in/SignIn";
 import Form from "./components/sign_up/Form";
-import Body from "./components/Body";
-import horseFallChat from "./constData/videos/horseFallChat.mp4"
 import ronaldoSiu from "./constData/audio/SUIII.mp3"
 
 import './App.css';
@@ -452,7 +450,6 @@ let date = new Date();
             lastModifiedHour: 22,
             lastModifiedMinute: 28,
             lastModifiedSecond: 0,
-
             lastTimeModified : date.getTime(),
 
             messages: [
@@ -554,7 +551,6 @@ let date = new Date();
       <Routes>
         <Route path="/" element={<SignIn updateUserData={setUserData} />}></Route>
         <Route path="/SignUp" element={<Form userMessage={userMessage} />}></Route>
-        <Route path="/ChatsTemp" element={<Body UserData={UserData} />}></Route>
         <Route path="/Chats" element={<ChatForm 
           UserData={UserData} 
           setUserData={setUserData}
