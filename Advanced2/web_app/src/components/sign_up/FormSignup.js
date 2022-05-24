@@ -66,8 +66,19 @@ const FormSignup = (props) => {
             onChange={handleChange}
           />
         </div>
-        {errors.username && <p className="form-inputs text-danger">{errors.username}</p>}
-
+              {errors.username && <p className="form-inputs text-danger">{errors.username}</p>}
+              <p className="form-inputs text-white">Nick name</p>
+              <div className="form-inputs input-group form-group">
+                  <input
+                      className="form-control"
+                      type="text"
+                      name="usernameN"
+                      placeholder="Enter your user nick name"
+                      value={values.usernameN}
+                      onChange={handleChange}
+                  />
+              </div>
+              {errors.username && <p className="form-inputs text-danger">{errors.usernameN}</p>}
 
         <p className="form-inputs text-white">Email</p>
         <div className="form-inputs input-group form-group">
