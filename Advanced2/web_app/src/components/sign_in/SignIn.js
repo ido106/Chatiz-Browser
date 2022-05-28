@@ -1,8 +1,8 @@
 import React from "react"
 import { Navigate } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useEffect } from "react"
 import './sign_in.css';
-import users from "./users";
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -49,17 +49,26 @@ class SignIn extends React.Component {
             isSubmitted: true
         })
         var check1 = false;
-
-        users.forEach((element) => {
-            if (
-                element.UserName == this.state.userName &&
-                element.Password == this.state.passWord
-            ) {
-                check1 = true;
-            }
+        const [exist, setExist] = useState(false);
+        useEffect(async () => {
+            const res = await fetch("https://localhost:7038/api/SignIn",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({username: this.state.userName, passeord: this.state.passWord})
+                
+            });
+             const data = res.status();
+             if (data == 400) {
+                 setExist(false);
+             }
         });
+        
 
-        if (check1) {
+        if (exist
+            ) {
             this.setState({
                 valid_user: true
             });

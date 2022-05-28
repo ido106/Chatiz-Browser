@@ -3,9 +3,8 @@
 export default function ContactView(props) {
         return (
         <li className="clearfix"
-        onClick={()=> props.setActiveChat(props.name, props.lastSeen, props.img, props.nickName)}
+        onClick={()=> props.setActiveChat(props.name, props.lastSeen, props.nickName)}
         >
-        <img src={props.img}/>
         <div className="about">
             <div className="name">{props.nickName} </div>
             {props.lastMessage.data.length > 17  ?

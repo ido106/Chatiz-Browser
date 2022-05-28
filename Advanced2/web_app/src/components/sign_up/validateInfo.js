@@ -1,4 +1,4 @@
-import users from "../sign_in/users";
+import { useEffect } from "react"
 export default function validateInfo(values) {
   var check = true;
   let errors = {};
@@ -12,14 +12,7 @@ export default function validateInfo(values) {
     errors.username = "Username required";
     check = false;
   }
-  users.forEach((element) => {
-    if (
-      element.UserName == values.username
-    ) {
-      check = false;
-      errors.username = "user name is already exesit"
-    }
-  });
+ 
     if (!values.usernameN.trim()) {
         errors.usernameN = "User nick name required";
         check = false;
@@ -52,8 +45,31 @@ export default function validateInfo(values) {
     check = false;
   }
   if (check) {
-
-    users.push({ UserName: values.username, Password: values.password });
+    const [exist, setExist] = useState(false);
+        useEffect(async () => {
+          const res = await fetch("https://localhost:7038/api/SignIn",
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({username: values.username, nickName: values.usernameN, password: values.password})
+                
+            });
+            
+             const data = res.status();
+             if (data == 400) {
+                 setExist(true);
+             }
+        });
+        
+    if (
+      exist
+    ) {
+      check = false;
+      errors.username = "user name is already exesit"
+    }
+    
   }
   return errors;
 }
