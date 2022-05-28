@@ -160,7 +160,7 @@ class ChatForm extends React.Component {
 
     contacts() {
         let sortFunc = (a, b) => {
-            if (a.lastTimeModified > b.lastTimeModified) {
+            if (a.lastdate > b.lastdate) {
                 return -1;
             }
             return 1;
@@ -168,12 +168,12 @@ class ChatForm extends React.Component {
         this.state.contactList = this.state.contactList.sort(sortFunc);
         return this.state.contactList.map((element, k) => {
             return <ContactView
-                nickName={element.nickName}
-                name={element.name}
-                lastSeen={element.lastSeen}
+                nickName={element.name}
+                name={element.id}
+                lastSeen={element.lastdate}
                 key={k}
                 setActiveChat={this.setActiveChat}
-                lastMessage={element.lastMessage}
+                lastMessage={element}
             />
         });
     }
@@ -369,7 +369,7 @@ class ChatForm extends React.Component {
 
 
         let sortFunc = (a, b) => {
-            if (a.lastTimeModified > b.lastTimeModified) {
+            if (a.lastdate > b.lastdate) {
                 return -1;
             }
             return 1;
@@ -385,11 +385,6 @@ class ChatForm extends React.Component {
     }
 
     signOut() {
-        this.props.userMessage.forEach(e => {
-            if (e.user == this.props.UserData.myUser) {
-                e.lastSeen = time();
-            }
-        })
 
         this.props.setUserData((prevState) => ({ ...prevState, myUser: null }))
     }
