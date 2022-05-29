@@ -8,7 +8,6 @@ const FormSignup = (props) => {
   const { handleCheckBox, deletePaste, handleChange, handleSubmit, values, errors } = useForm(
     props.submitForm,
     validate,
-    props.userMessage,
   );
   function handleImage() {
     var input = document.createElement('input');

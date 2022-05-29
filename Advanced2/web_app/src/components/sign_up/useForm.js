@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import time from "../chats/DataBase/Time";
 
-const useForm = (callback, validate, userMessage) => {
+const useForm = (callback, validate) => {
   const [values, setValues] = useState({
       username: "",
       usernameN: "",
@@ -54,13 +54,6 @@ const useForm = (callback, validate, userMessage) => {
         values.img = "/avatars/avatar" + num + ".png"
       }
 
-      userMessage.push({
-          user: values.username,
-        nickName : values.usernameN,
-        contacts: [],
-        img: values.img,
-        lastSeen: time(),
-      })
 
 
       callback();

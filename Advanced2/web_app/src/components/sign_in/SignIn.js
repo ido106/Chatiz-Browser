@@ -1,7 +1,6 @@
 import React from "react"
 import { Navigate } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { useEffect } from "react"
 import './sign_in.css';
 class SignIn extends React.Component {
     constructor(props) {
@@ -48,36 +47,44 @@ class SignIn extends React.Component {
         this.setState({
             isSubmitted: true
         })
-        var check1 = false;
-        const [exist, setExist] = useState(false);
-        useEffect(async () => {
+        let token = null;
+        let exist = true;
+        let func = async () => {
             const res = await fetch("https://localhost:7038/api/SignIn",
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({username: this.state.userName, passeord: this.state.passWord})
-                
-            });
-             const data = res.status();
-             if (data == 400) {
-                 setExist(false);
-             }
-        });
-        
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: this.state.userName, password: this.state.passWord })
 
-        if (exist
-            ) {
-            this.setState({
-                valid_user: true
-            });
-            this.props.updateUserData((prevState) => ({ ...prevState, myUser: this.state.userName }))
-        } else {
-            this.setState({
-                valid_user: false
-            });
-        }
+                });
+
+            const data = res.status;
+            if (data == 400) {
+                exist = false;
+            }
+            token = res.body;
+            console.log(token);
+        };
+
+        func().then(() => {
+            if (exist) {
+                this.setState({
+                    valid_user: true
+                });
+                this.props.updateUserData((prevState) => ({
+                     ...prevState, myUser: this.state.userName,
+                     JWTToken: token
+                    }))
+            }
+
+            else {
+                this.setState({
+                    valid_user: false
+                });
+            }
+        });
     }
 
     render() {

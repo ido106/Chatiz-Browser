@@ -17,11 +17,17 @@ class ChatForm extends React.Component {
         this.mediaRecorder = null;
         this.state = {
             messages: [],
-            contactList: [],
-            activeChat: null,
+            contactList: props.contacts(),
+            activeChat: {name: null, nickName: null, lastSeen: null,
+
+                userName : null,
+                nickName : null,
+                lastMessage : null,
+            },
 
         }
-
+        console.log("aaaa");
+        console.log(this.state.contactList);
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
         this.setActiveChat = this.setActiveChat.bind(this);
@@ -36,41 +42,6 @@ class ChatForm extends React.Component {
         this.cancelErrors = this.cancelErrors.bind(this);
         this.updateContactsList = this.updateContactsList.bind(this);
         this.signOut = this.signOut.bind(this);
-        
-        const resContacts = await fetch("http://localhost:7026/api//contacts/", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            },
-            );
-
-            if (res.status() == 200) {
-                setReseived(true);
-            }
-
-            this.setState({ contactList: await res.json() });
-
-
-        useEffect(async () => {
-            if (this.state.activeChat == null) {
-                this.setState({ messages: [] })
-            }
-            const res = await fetch("http://localhost:7026/api//contacts/" + this.state.activeChat.name + "/messages", {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            },
-            );
-
-            if (res.status() == 200) {
-                setReseived(true);
-            }
-
-            this.setState({ messages: await res.json() })
-        },
-            this.state.activeChat);
     }
 
 
@@ -78,37 +49,28 @@ class ChatForm extends React.Component {
     //********************************************************************************************************** */
 
 
-    send(messageType, newData) {
-        if ((messageType == "text" && newData == "") || this.state.activeChat == null) {
+
+
+
+    async send(messageType, newData) {
+        if ((messageType == "text" && newData == "") || this.state.activeChat.userName == null) {
             return;
         }
 
 
-        const [sent, setSent] = useState(false);
-        useEffect(async () => {
-            const res = await fetch("http://localhost:7026/api//contacts/" + this.state.activeChat.name + "/messages", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "content": newData,
-                })
-            });
+        const res = fetch("http://localhost:7026/api//contacts/" + this.state.activeChat.userName + "/messages",  {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                content: newData
+            })
+        })
 
-            if (res.status() == 201) {
-                setAdded(true);
-            }
-        });
-
-        if (!added) {
-            return;
+        if (await res.status() != 201) {
+            
         }
-
-
-
-
-
 
         var audio = new Audio('/audio/MessageSent.mp3');
         audio.play();
@@ -123,7 +85,7 @@ class ChatForm extends React.Component {
 
 
         this.updateContactsList();
-        
+
     }
 
 
@@ -155,8 +117,7 @@ class ChatForm extends React.Component {
                 lastSeen: userNamelastSeen,
             }
         });
-    }
-
+   }
 
     contacts() {
         let sortFunc = (a, b) => {
@@ -266,26 +227,20 @@ class ChatForm extends React.Component {
             document.getElementById('errorUserIsYou').className = "";
             return;
         }
-        const [added, setAdded] = useState(false);
-        useEffect(async () => {
-            const res = await fetch("http://localhost:7026/api//contacts", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "username": newUserName,
-                    "nickname": newNickName,
-                    "server": newServer,
-                })
-            });
 
-            if (res.status() == 201) {
-                setAdded(true);
-            }
-        })
+        const res = await fetch("http://localhost:7026/api//contacts", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "username": newUserName,
+                "nickname": newNickName,
+                "server": newServer,
+            })
+        });
 
-        if (added) {
+        if (res.status() == 200) {
             document.getElementById('userSearch').value = "";
             this.updateContactsList();
             document.getElementById("closeAddChat").click();
@@ -344,25 +299,21 @@ class ChatForm extends React.Component {
         )
     }
 
-    updateContactsList() {
+    async updateContactsList() {
         let search = document.getElementById('userSearch').value;
 
+        const res = await fetch("https://localhost:7038/api/contacts",
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+        const data = res.status();
 
-        useEffect(async () => {
-            const res = await fetch("https://localhost:7038/api/contacts",
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-            const data = res.status();
-
-            if (data == 200) {
-                this.state.contactList = await res.json();
-            }
-
-        })
+        if (data == 200) {
+            this.state.contactList = await res.json();
+        }
 
 
         this.state.contactList = this.state.contactList.filter((chat) => chat.name.startsWith(search));

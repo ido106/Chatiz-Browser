@@ -1,9 +1,10 @@
-import { useEffect } from "react"
+
+
 export default function validateInfo(values) {
   var check = true;
   let errors = {};
 
-  if(!values.terms) {
+  if (!values.terms) {
     errors.terms = "Checkbox is required"
     check = false;
   }
@@ -12,12 +13,12 @@ export default function validateInfo(values) {
     errors.username = "Username required";
     check = false;
   }
- 
-    if (!values.usernameN.trim()) {
-        errors.usernameN = "User nick name required";
-        check = false;
-    }
-      if (!values.email) {
+
+  if (!values.usernameN.trim()) {
+    errors.usernameN = "User nick name required";
+    check = false;
+  }
+  if (!values.email) {
     errors.email = "Email required";
     check = false;
   } else if (!/\S+@\S+\.\S+/.test(values.email)) {
@@ -32,7 +33,7 @@ export default function validateInfo(values) {
   else if (values.password.length < 6) {
     errors.password = "Password needs to be 6 characters or more";
     check = false;
-  } else if(!/\d/.test(values.password)) {
+  } else if (!/\d/.test(values.password)) {
     errors.password = "Password must contain at least one digit";
     check = false;
   }
@@ -45,31 +46,29 @@ export default function validateInfo(values) {
     check = false;
   }
   if (check) {
-    const [exist, setExist] = useState(false);
-        useEffect(async () => {
-          const res = await fetch("https://localhost:7038/api/SignIn",
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({username: values.username, nickName: values.usernameN, password: values.password})
-                
-            });
-            
-             const data = res.status();
-             if (data == 400) {
-                 setExist(true);
-             }
+    var exist = false;
+    let func = async () => {
+      const res = await fetch("https://localhost:7038/api/Register",
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: values.username, nickName: values.usernameN, password: values.password })
         });
-        
-    if (
-      exist
-    ) {
-      check = false;
-      errors.username = "user name is already exesit"
-    }
-    
+
+      const data = res.status;
+      if (data == 400) {
+        exist = true;
+      }
+    };
+
+    func().then(() => {
+      if (exist) {
+        check = false;
+        errors.username = "user name is already exesit"
+      }
+    });
   }
   return errors;
 }
