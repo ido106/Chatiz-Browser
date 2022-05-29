@@ -64,7 +64,7 @@ class SignIn extends React.Component {
             if (data == 400) {
                 exist = false;
             }
-            token = res.body;
+            token = res.json();
             console.log(token);
         };
 

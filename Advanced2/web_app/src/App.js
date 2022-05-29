@@ -12,15 +12,16 @@ import './App.css';
 
 async function getContacts() {
 
-  const res = fetch("http://localhost:7026/api//contacts/", {
+  const res = await fetch("http://localhost:7026/api//contacts/", {
     method: 'GET',
   })
 
-  if (await res.status != 200) {
+  if (res.status != 200) {
     return [];
   }
 
-  return await res.then(async ans => await ans.text());
+  const foo = await res.json.then(result => result.data);
+  return foo;
 }
 
 function App() {
