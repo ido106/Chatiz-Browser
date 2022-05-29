@@ -64,21 +64,40 @@ class SignIn extends React.Component {
             if (data == 400) {
                 exist = false;
             }
-            token = res.json();
-            console.log(token);
+            token = await res.json();
+            console.log(token["token"]);
         };
 
-        func().then(() => {
+        func().then(async () => {
             if (exist) {
+                var foo;
                 this.setState({
                     valid_user: true
                 });
+                const res = await fetch("http://localhost:7038/api/contacts/", {
+                    method: 'GET',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + token["token"],
+                    }
+                  })
+                
+                  if (res.status != 200) {
+                    foo = [];
+                  }
+                  else {
+                    foo = await res.json()
+                  }
+                  
+                
                 this.props.updateUserData((prevState) => ({
-                     ...prevState, myUser: this.state.userName,
-                     JWTToken: token
+                        ...prevState,
+                        myUser: this.state.userName,
+                        JWTToken: token["token"],
+                        contacts: foo
                     }))
             }
-
             else {
                 this.setState({
                     valid_user: false
@@ -89,6 +108,7 @@ class SignIn extends React.Component {
 
     render() {
         if (this.state.valid_user) {
+
             return (
                 <Navigate to="/Chats" />
             );

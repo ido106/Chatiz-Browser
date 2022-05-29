@@ -4,10 +4,8 @@ import ContactView from "./ContactView"
 import './chats.css'
 import ChatInfo from "./ChatInfo"
 import Message from './DataBase/message'
-import users from "../sign_in/users";
 import { Navigate } from "react-router-dom"
-import time from "./DataBase/Time.js"
-import { useEffect } from "react"
+
 
 
 class ChatForm extends React.Component {
@@ -17,7 +15,7 @@ class ChatForm extends React.Component {
         this.mediaRecorder = null;
         this.state = {
             messages: [],
-            contactList: props.contacts(),
+            contactList: props.contacts,
             activeChat: {name: null, nickName: null, lastSeen: null,
 
                 userName : null,
@@ -46,7 +44,7 @@ class ChatForm extends React.Component {
 
 
 
-    //********************************************************************************************************** */
+    //************************************ */
 
 
 

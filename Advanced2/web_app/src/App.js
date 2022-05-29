@@ -6,22 +6,39 @@ import ChatForm from "./components/chats/ChatForm";
 import SignIn from "./components/sign_in/SignIn";
 import Form from "./components/sign_up/Form";
 import { useState } from "react";
+import $ from 'jquery'; 
 
 import './App.css';
 
 
-async function getContacts() {
+async function getContacts(token,flag) {
+  console.log("ajnba;bn;b;woivoa;hvohvaiojf;awijviaj!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-  const res = await fetch("http://localhost:7026/api//contacts/", {
-    method: 'GET',
-  })
-
-  if (res.status != 200) {
+  if(!flag) {
     return [];
   }
 
-  const foo = await res.json.then(result => result.data);
-  return foo;
+  let contacts = null;
+  await fetch("https://localhost:7038/api/contacts", {
+    headers : {
+      'Content-Type' : 'application/json',
+      'Authorization' : 'Bearer' + token,
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    contacts = data;
+  })
+
+  console.log(contacts);
+  if(contacts == null) {
+    console.log("here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    return [];
+  }
+  return contacts;
+
+
 }
 
 function App() {
@@ -39,7 +56,8 @@ function App() {
         <Route path="/Chats" element={<ChatForm
           UserData={UserData}
           setUserData={setUserData}
-          contacts={getContacts}
+          getContacts={getContacts}
+          token={UserData["JWTToken"]}
         />} ></Route>
       </Routes>
     </Router>
