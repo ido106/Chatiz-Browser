@@ -16,7 +16,7 @@ class ChatForm extends React.Component {
     constructor(props) {
         super(props);
  
-        console.log("yyyyyyyyyyyy");
+        console.log("ChatForm Constructor.....");
         
         this.mediaRecorder = null;
         this.state = {
@@ -196,33 +196,55 @@ class ChatForm extends React.Component {
             });
     };
 
-
-
     async getAllContacts() {
-     
-            await fetch("https://localhost:7038/api/contacts", {
-                 method: 'GET',
-                 headers: {
-                     'Accept': 'application/json',
-                     'Content-Type': 'application/json',
-                     'Authorization': 'Bearer ' + Globaltoken.token,
+        await fetch("https://localhost:7038/api/contacts", {
+             method: 'GET',
+             headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json',
+                 'Authorization': 'Bearer ' + Globaltoken.token,
+             }
+         }).then(response2=>{
+             //console.log("response2: ",response2);
+             response2.text().then(
+                 response3 => {
+                     this.setState(prevState => ({
+                         ...prevState,
+                         contactList: response3,
+                     }))
+
+
+                     GlobalConts.contacts = response3;
+                     console.log("GlobalConts in ChatForm = " , this.state.contactList);
                  }
-             }).then(response2=>{
-                 console.log("response2: ",response2);
-                 return response2
-              })
-             .then(async data=>{
-                 console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                 console.log(await data.json());
-                 let conts = JSON.stringify(await data.json());
-                 console.log("conts:");
-                 console.log(conts);
-                 this.setState(prevState => ({
-                    ...prevState,
-                    contactList : conts, 
-                }))
-             })
+             )
+          })
          }
+
+    // async getAllContacts() {
+     
+    //         await fetch("https://localhost:7038/api/contacts", {
+    //              method: 'GET',
+    //              headers: {
+    //                  'Accept': 'application/json',
+    //                  'Content-Type': 'application/json',
+    //                  'Authorization': 'Bearer ' + Globaltoken.token,
+    //              }
+    //          }).then(response2=>{
+    //              console.log("response2: ",response2);
+    //              return response2
+    //           })
+    //          .then(async data=>{
+    //              console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    //              console.log(await data.json());
+    //              let conts = JSON.stringify(await data.json());
+    //              console.log("conts:", conts);
+    //              this.setState(prevState => ({
+    //                 ...prevState,
+    //                 contactList : conts, 
+    //             }))
+    //          })
+    //      }
      
 
 
@@ -299,7 +321,7 @@ class ChatForm extends React.Component {
 
         document.getElementById("closeAddChat").click();
 
-        this.getAllContacts();
+        await this.getAllContacts();
     }
 
     contantToolbar() {

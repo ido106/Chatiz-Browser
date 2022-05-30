@@ -44,7 +44,6 @@ import './App.css';
 function App() {
   const [UserData, setUserData] = useState({
     myUser: null,
-    contacts : [],
   })
 
 
@@ -57,7 +56,6 @@ function App() {
         <Route path="/Chats" element={<ChatForm
           UserData={UserData}
           setUserData={setUserData}
-          contacts={UserData["contacts"]}
         />} ></Route>
       </Routes>
     </Router>

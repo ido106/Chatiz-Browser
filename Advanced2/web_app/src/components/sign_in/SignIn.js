@@ -25,6 +25,7 @@ class SignIn extends React.Component {
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.fetchAll = this.fetchAll.bind(this);
     }
 
     togglePassword() {
@@ -51,16 +52,7 @@ class SignIn extends React.Component {
         this.setState({ passWord: event.target.value });
     }
 
-    async handleSubmit(event) {
-        this.setState({
-            valid_user: true
-        });
-        event.preventDefault();
-        this.setState({
-            isSubmitted: true
-        })
-        let token = null;
-        let exist = true;
+    async fetchAll() {
         let func = async () => {
             const res = await fetch("https://localhost:7038/api/SignIn",
                 {
@@ -73,16 +65,23 @@ class SignIn extends React.Component {
                     })
 
                 }).then(
-                    async response => {
+                     response => {
                         
                         response.text().then(
                             response2 => {
-                                console.log("res2= ", response2);
+                                //console.log("res2= ", response2);
                                 Globaltoken.token = response2;
                                 console.log("Global Token= ", Globaltoken.token);
                                 getAllContacts();
                             
                             
+                            }).then( res => {
+                                this.setState({
+                                    valid_user: true
+                                });
+                                this.setState({
+                                    isSubmitted: true
+                                })
                             })
 
 
@@ -91,7 +90,7 @@ class SignIn extends React.Component {
                     });
         };
 
-        let conts = [];
+        //let conts = [];
 
          async function getAllContacts() {
            await fetch("https://localhost:7038/api/contacts", {
@@ -102,23 +101,41 @@ class SignIn extends React.Component {
                     'Authorization': 'Bearer ' + Globaltoken.token,
                 }
             }).then(response2=>{
-                console.log("response2: ",response2);
-                return response2
+                //console.log("response2: ",response2);
+                response2.text().then(
+                    response3 => {
+                        GlobalConts.contacts = response3;
+                        console.log("global conts = " , GlobalConts.contacts);
+                    }
+                )
              })
-            .then(async data=>{
-                //console.log("jvbdsovbsdoubaodivbaiovnasoivnasivbasiovba");
-                GlobalConts.contacts = (await data.json())[0];
-                console.log("global conts = GlobalConts.contacts");
-                this.props.updateUserData(prevState => ({
-                    ...prevState,
-                    contacts : GlobalConts.contacts,
-                }))
-            })
-        }
+            // .then(async data=>{
+            //     GlobalConts.contacts = (await data.json())[0];
+            //     console.log("global conts = " , GlobalConts.contacts);
+            //     // this.props.updateUserData(prevState => ({
+            //     //     ...prevState,
+            //     //     contacts : GlobalConts.contacts,
+            //     // }))
+                
+            // })
+            }
+            await func();
 
-
-        await func();
     }
+
+    async handleSubmit(event) {
+        event.preventDefault();
+        
+        // let token = null;
+        // let exist = true;
+        
+
+
+        await this.fetchAll()
+        
+        
+    }
+    
     
 
     render() {
