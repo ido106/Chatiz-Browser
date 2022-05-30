@@ -127,19 +127,56 @@ class ChatForm extends React.Component {
         });
    }
 
+   async getAllContacts() {
+       var result;
+    await fetch("https://localhost:7038/api/contacts", {
+         method: 'GET',
+         headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json',
+             'Authorization': 'Bearer ' + Globaltoken.token,
+         }
+     }).then(response2=>{
+         //console.log("response2: ",response2);
+         response2.json().then(
+             response3 => {
+                 result = response3;
+                //  this.setState(prevState => ({
+                //      ...prevState,
+                //      contactList: response3,
+                //  }))
+
+
+                 GlobalConts.contacts = response3;
+                 console.log("GlobalConts in ChatForm = " , this.state.contactList);
+             }
+         )
+      })
+
+      return result;
+     }
+
     contacts() {
         console.log("token for getAllContact is: ", Globaltoken.token)
-        this.getAllContacts();
+        
+        var contact_array = this.getAllContacts();
         //console.log("ido")
-        console.log(this.state.contactList)
+        console.log("Actual Contact List: ", this.state.contactList)
        // console.log("shahar")
-        console.log(GlobalConts.contacts);
+        //console.log(GlobalConts.contacts);
         if(this.state.contactList == null) {
             //console.log("2222222222222222222222222222222222");
             return;
         }
+        console.log("BEFORE typeof is : ", typeof(this.state.contactList))
+        let response3_parsed = JSON.parse(this.state.contactList);
+        this.setState(prevState => ({
+            ...prevState,
+            contactList: response3_parsed,
+        }))
+        console.log("AFTER typeof is : ", typeof(this.state.contactList))
         return this.state.contactList.map((element, k) => {
-            console.log("username = " + element.lastSeen);
+            console.log("username = " + element.userName);
             return <ContactView
                 // nickName={element.name}
                 // name={element.id}
@@ -156,6 +193,24 @@ class ChatForm extends React.Component {
                 lastMessage={element.lastMessage == null ? ("") : element.lastMessage}
             />
         });
+        // return this.state.contactList.map((element, k) => {
+        //     console.log("username = " + element.lastSeen);
+        //     return <ContactView
+        //         // nickName={element.name}
+        //         // name={element.id}
+        //         // lastSeen={element.lastdate}
+        //         // key={k}
+        //         // setActiveChat={this.setActiveChat}
+        //         // lastMessage={element}
+
+        //         nickName={element.nickname}
+        //         name={element.contactUsername}
+        //         lastSeen={element.lastSeen}
+        //         key={k}
+        //         setActiveChat={this.setActiveChat}
+        //         lastMessage={element.lastMessage == null ? ("") : element.lastMessage}
+        //     />
+        // });
     }
 
 
@@ -196,30 +251,7 @@ class ChatForm extends React.Component {
             });
     };
 
-    async getAllContacts() {
-        await fetch("https://localhost:7038/api/contacts", {
-             method: 'GET',
-             headers: {
-                 'Accept': 'application/json',
-                 'Content-Type': 'application/json',
-                 'Authorization': 'Bearer ' + Globaltoken.token,
-             }
-         }).then(response2=>{
-             //console.log("response2: ",response2);
-             response2.text().then(
-                 response3 => {
-                     this.setState(prevState => ({
-                         ...prevState,
-                         contactList: response3,
-                     }))
-
-
-                     GlobalConts.contacts = response3;
-                     console.log("GlobalConts in ChatForm = " , this.state.contactList);
-                 }
-             )
-          })
-         }
+    
 
     // async getAllContacts() {
      
