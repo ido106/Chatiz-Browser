@@ -5,6 +5,7 @@ import './chats.css'
 import ChatInfo from "./ChatInfo"
 import Message from './DataBase/message'
 import { Navigate } from "react-router-dom"
+import { Globaltoken } from "../sign_in/SignIn"
 
 
 
@@ -15,7 +16,7 @@ class ChatForm extends React.Component {
         this.mediaRecorder = null;
         this.state = {
             messages: [],
-            contactList: props.contacts,
+            contactList: this.props.contacts,
             activeChat: {name: null, nickName: null, lastSeen: null,
 
                 userName : null,
@@ -38,6 +39,7 @@ class ChatForm extends React.Component {
         this.cancelErrors = this.cancelErrors.bind(this);
         this.updateContactsList = this.updateContactsList.bind(this);
         this.signOut = this.signOut.bind(this);
+        this.getAllContacts = this.getAllContacts.bind(this);
     }
 
 
@@ -176,6 +178,31 @@ class ChatForm extends React.Component {
     };
 
 
+
+    async getAllContacts() {
+     
+            await fetch("https://localhost:7038/api/contacts", {
+                 method: 'GET',
+                 headers: {
+                     'Accept': 'application/json',
+                     'Content-Type': 'application/json',
+                     'Authorization': 'Bearer ' + Globaltoken.token,
+                 }
+             }).then(response2=>{
+                 console.log("response2: ",response2);
+                 return response2
+              })
+             .then(async data=>{
+                 console.log("jvbdsovbsdoubaodivbaiovnasoivnasivbasiovba");
+                 this.setState(prevState => ({
+                    ...prevState,
+                    contacts : await data.json(), 
+                }))
+             })
+         }
+     
+
+
     handleAudioButton() {
         var mic = document.getElementById("mic");
         this.setState({ isRecording: !this.state.isRecording });
@@ -226,31 +253,30 @@ class ChatForm extends React.Component {
             return;
         }
 
-        const res = await fetch("http://localhost:7026/api/contacts", {
+        await fetch("https://localhost:7038/api/contacts", {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.props.token,
-
+                'Authorization': 'Bearer ' + Globaltoken.token,
             },
-            body: JSON.stringify({
-                "username": newUserName,
-                "nickname": newNickName,
-                "server": newServer,
-            })
-        });
+            body : JSON.stringify({
+                "id" : newUserName,
+                "name" : newNickName,
+                "server" : newServer, 
+            }),
 
-        if (res.status() == 200) {
-            document.getElementById('userSearch').value = "";
-            this.updateContactsList();
-            document.getElementById("closeAddChat").click();
-            return;
-        }
+        }).then(response2=>console.log("response2: ",response2))
+        .then(data => {
+            console.log(data);
+        })
 
         document.getElementById('addChatFailed').className = "";
 
 
         document.getElementById("closeAddChat").click();
+
+        this.getAllContacts();
     }
 
     contantToolbar() {

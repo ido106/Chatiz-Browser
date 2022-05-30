@@ -64,7 +64,9 @@ class SignIn extends React.Component {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ username: this.state.userName, password: this.state.passWord })
+                    body: JSON.stringify({ username: this.state.userName
+                        , password: this.state.passWord
+                    })
 
                 }).then(
                     async response => {
@@ -85,7 +87,7 @@ class SignIn extends React.Component {
                     });
         };
 
-        async function getAllContacts() {
+         async function getAllContacts() {
            await fetch("https://localhost:7038/api/contacts", {
                 method: 'GET',
                 headers: {
@@ -93,83 +95,17 @@ class SignIn extends React.Component {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + Globaltoken.token,
                 }
-            }).then(response2=>console.log("response2: ",response2))
-            .then(data=>console.log(data))
+            }).then(response2=>{
+                console.log("response2: ",response2);
+                return response2
+             })
+            .then(async data=>{
+                console.log("jvbdsovbsdoubaodivbaiovnasoivnasivbasiovba");
+                console.log(await data.json());
+
+            })
         }
 
-        // let func = async () => {
-        //     const res = await fetch("https://localhost:7038/api/SignIn",
-        //         {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //             },
-        //             body: JSON.stringify({ username: this.state.userName, password: this.state.passWord })
-
-        //         }).then(
-        //             response => {
-                        
-        //                 response.text().then(
-        //                     response2 => {
-        //                         console.log("res2= ", response2);
-        //                         Globaltoken.token = response2;
-        //                         console.log("Global Token= ", Globaltoken.token);
-        //                         const data = response.status;
-        //                         if (data == 400) {
-        //                             exist = false;
-        //                         }
-
-        //                         if (!exist) {
-        //                             console.log("!!");
-                        
-        //                             this.setState({
-        //                                 valid_user: false
-        //                             });
-        //                             return;
-        //                         }
-
-        //                         let funcCon = async () => {
-        //                             var foo = [];
-        //                             if (this.state.valid_user == true) {
-        //                                 console.log(token["token"]);
-        //                                 const res = await fetch("http://localhost:7038/api/contacts", {
-        //                                     method: 'GET',
-        //                                     headers: {
-        //                                         'Accept': 'application/json',
-        //                                         'Content-Type': 'application/json',
-        //                                         'Authorization': 'Bearer ' + Globaltoken.token,
-        //                                     }
-        //                                 })
-        //                                 console.log("status is " + res.status);
-        //                                 if (res.status != 200) {
-        //                                     foo = [];
-        //                                 }
-        //                                 else {
-        //                                     foo = await res.json()
-        //                                 }
-                        
-        //                             }
-        //                             this.props.updateUserData((prevState) => ({
-        //                                 ...prevState,
-        //                                 myUser: this.state.userName,
-        //                                 JWTToken: token["token"],
-        //                                 contacts: foo,
-        //                             }));
-                        
-        //                         };
-                                
-        //                         console.log("start...");
-        //                         //await funcCon();
-        //                         console.log("end...");
-
-        //                     });
-
-
-
-
-        //                 //token = await res.json();
-        //             });
-        // };
 
         await func();
 
