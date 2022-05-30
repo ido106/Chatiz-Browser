@@ -17,5 +17,4 @@ export default function ContactView(props) {
         </div>
     </li>
         )
-
 }

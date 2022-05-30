@@ -6,6 +6,8 @@ import ChatInfo from "./ChatInfo"
 import Message from './DataBase/message'
 import { Navigate } from "react-router-dom"
 import { Globaltoken } from "../sign_in/SignIn"
+import { GlobalConts } from "../sign_in/SignIn"
+
 
 
 
@@ -13,18 +15,24 @@ class ChatForm extends React.Component {
 
     constructor(props) {
         super(props);
+ 
+        console.log("yyyyyyyyyyyy");
+        
         this.mediaRecorder = null;
         this.state = {
             messages: [],
-            contactList: this.props.contacts,
+            contactList: null,
             activeChat: {name: null, nickName: null, lastSeen: null,
 
                 userName : null,
                 nickName : null,
                 lastMessage : null,
             },
-
         }
+        //console.log("constructor");
+        console.log(GlobalConts.contacts);
+        console.log(this.state.contactList);
+        //console.log("end of const");
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
         this.setActiveChat = this.setActiveChat.bind(this);
@@ -120,21 +128,32 @@ class ChatForm extends React.Component {
    }
 
     contacts() {
-        let sortFunc = (a, b) => {
-            if (a.lastdate > b.lastdate) {
-                return -1;
-            }
-            return 1;
+        console.log("token for getAllContact is: ", Globaltoken.token)
+        this.getAllContacts();
+        //console.log("ido")
+        console.log(this.state.contactList)
+       // console.log("shahar")
+        console.log(GlobalConts.contacts);
+        if(this.state.contactList == null) {
+            //console.log("2222222222222222222222222222222222");
+            return;
         }
-        this.state.contactList = this.state.contactList.sort(sortFunc);
         return this.state.contactList.map((element, k) => {
+            console.log("username = " + element.lastSeen);
             return <ContactView
-                nickName={element.name}
-                name={element.id}
-                lastSeen={element.lastdate}
+                // nickName={element.name}
+                // name={element.id}
+                // lastSeen={element.lastdate}
+                // key={k}
+                // setActiveChat={this.setActiveChat}
+                // lastMessage={element}
+
+                nickName={element.nickname}
+                name={element.contactUsername}
+                lastSeen={element.lastSeen}
                 key={k}
                 setActiveChat={this.setActiveChat}
-                lastMessage={element}
+                lastMessage={element.lastMessage == null ? ("") : element.lastMessage}
             />
         });
     }
@@ -193,10 +212,14 @@ class ChatForm extends React.Component {
                  return response2
               })
              .then(async data=>{
-                 console.log("jvbdsovbsdoubaodivbaiovnasoivnasivbasiovba");
+                 console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                 console.log(await data.json());
+                 let conts = JSON.stringify(await data.json());
+                 console.log("conts:");
+                 console.log(conts);
                  this.setState(prevState => ({
                     ...prevState,
-                    contacts : await data.json(), 
+                    contactList : conts, 
                 }))
              })
          }

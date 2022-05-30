@@ -43,7 +43,8 @@ import './App.css';
 
 function App() {
   const [UserData, setUserData] = useState({
-    myUser: null
+    myUser: null,
+    contacts : [],
   })
 
 
@@ -56,9 +57,7 @@ function App() {
         <Route path="/Chats" element={<ChatForm
           UserData={UserData}
           setUserData={setUserData}
-          // getContacts={getContacts}
-          token={UserData["JWTToken"]}
-          contacts={[]}
+          contacts={UserData["contacts"]}
         />} ></Route>
       </Routes>
     </Router>

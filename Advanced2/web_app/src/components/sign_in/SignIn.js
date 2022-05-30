@@ -7,6 +7,10 @@ export const Globaltoken = {
     token:''
 };
 
+export const GlobalConts = {
+    contacts : null
+};
+
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -87,6 +91,8 @@ class SignIn extends React.Component {
                     });
         };
 
+        let conts = [];
+
          async function getAllContacts() {
            await fetch("https://localhost:7038/api/contacts", {
                 method: 'GET',
@@ -100,16 +106,18 @@ class SignIn extends React.Component {
                 return response2
              })
             .then(async data=>{
-                console.log("jvbdsovbsdoubaodivbaiovnasoivnasivbasiovba");
-                console.log(await data.json());
-
+                //console.log("jvbdsovbsdoubaodivbaiovnasoivnasivbasiovba");
+                GlobalConts.contacts = (await data.json())[0];
+                console.log("global conts = GlobalConts.contacts");
+                this.props.updateUserData(prevState => ({
+                    ...prevState,
+                    contacts : GlobalConts.contacts,
+                }))
             })
         }
 
 
         await func();
-
-        
     }
     
 
