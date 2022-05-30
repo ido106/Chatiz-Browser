@@ -24,8 +24,6 @@ class ChatForm extends React.Component {
             },
 
         }
-        console.log("aaaa");
-        console.log(this.state.contactList);
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
         this.setActiveChat = this.setActiveChat.bind(this);
@@ -56,10 +54,12 @@ class ChatForm extends React.Component {
         }
 
 
-        const res = fetch("http://localhost:7026/api//contacts/" + this.state.activeChat.userName + "/messages",  {
+        const res = fetch("http://localhost:7026/api/contacts/" + this.state.activeChat.userName + "/messages",  {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer' + this.props.token,
+
             },
             body: JSON.stringify({
                 content: newData
@@ -226,10 +226,12 @@ class ChatForm extends React.Component {
             return;
         }
 
-        const res = await fetch("http://localhost:7026/api//contacts", {
+        const res = await fetch("http://localhost:7026/api/contacts", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer' + this.props.token,
+
             },
             body: JSON.stringify({
                 "username": newUserName,
@@ -300,18 +302,18 @@ class ChatForm extends React.Component {
     async updateContactsList() {
         let search = document.getElementById('userSearch').value;
 
-        const res = await fetch("https://localhost:7038/api/contacts",
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-        const data = res.status();
+        // const res = await fetch("https://localhost:7038/api/contacts",
+        //     {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //     })
+        // const data = res.status();
 
-        if (data == 200) {
-            this.state.contactList = await res.json();
-        }
+        // if (data == 200) {
+        //     this.state.contactList = await res.json();
+        // }
 
 
         this.state.contactList = this.state.contactList.filter((chat) => chat.name.startsWith(search));

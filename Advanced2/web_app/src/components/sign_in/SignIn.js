@@ -42,12 +42,15 @@ class SignIn extends React.Component {
         this.setState({ passWord: event.target.value });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
+        this.setState({
+            valid_user: true
+        });
         event.preventDefault();
         this.setState({
             isSubmitted: true
         })
-        let token = null;
+        // let token = null;
         let exist = true;
         let func = async () => {
             const res = await fetch("https://localhost:7038/api/SignIn",
@@ -64,46 +67,50 @@ class SignIn extends React.Component {
             if (data == 400) {
                 exist = false;
             }
-            token = await res.json();
-            console.log(token["token"]);
+            // token = await res.json();
+            // console.log(token["token"]);
         };
 
-        func().then(async () => {
-            if (exist) {
-                var foo;
+        await func();
+
+        if (!exist) {
+            console.log("!!");
+                
                 this.setState({
-                    valid_user: true
+                    valid_user: false
                 });
-                const res = await fetch("http://localhost:7038/api/contacts/", {
+                return;
+        }
+        let funcCon = async () => {
+            var foo = [];
+            if (this.state.valid_user == true) {
+                const res = await fetch("http://localhost:7038/api/contacts", {
                     method: 'GET',
                     headers: {
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + token["token"],
                     }
                   })
-                
+                console.log("status is " + res.status);
                   if (res.status != 200) {
                     foo = [];
                   }
                   else {
                     foo = await res.json()
                   }
-                  
-                
-                this.props.updateUserData((prevState) => ({
-                        ...prevState,
-                        myUser: this.state.userName,
-                        JWTToken: token["token"],
-                        contacts: foo
-                    }))
+
             }
-            else {
-                this.setState({
-                    valid_user: false
-                });
-            }
-        });
+            this.props.updateUserData((prevState) => ({
+                ...prevState,
+                myUser: this.state.userName,
+                // JWTToken: token["token"],
+                contacts: foo,
+            }));
+
+        };
+        console.log("start...");
+        await funcCon();
+        console.log("end...");
     }
 
     render() {
