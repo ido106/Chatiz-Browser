@@ -58,7 +58,7 @@ class ChatForm extends React.Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer' + this.props.token,
+                'Authorization': 'Bearer ' + this.props.token,
 
             },
             body: JSON.stringify({
@@ -230,7 +230,7 @@ class ChatForm extends React.Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': 'Bearer' + this.props.token,
+                'Authorization': 'Bearer ' + this.props.token,
 
             },
             body: JSON.stringify({

@@ -50,7 +50,7 @@ class SignIn extends React.Component {
         this.setState({
             isSubmitted: true
         })
-        // let token = null;
+        let token = null;
         let exist = true;
         let func = async () => {
             const res = await fetch("https://localhost:7038/api/SignIn",
@@ -67,8 +67,8 @@ class SignIn extends React.Component {
             if (data == 400) {
                 exist = false;
             }
-            // token = await res.json();
-            // console.log(token["token"]);
+            token = await res.json();
+            console.log(token["token"]);
         };
 
         await func();
@@ -89,6 +89,7 @@ class SignIn extends React.Component {
                     headers: {
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + token["token"],
                     }
                   })
                 console.log("status is " + res.status);
@@ -103,7 +104,7 @@ class SignIn extends React.Component {
             this.props.updateUserData((prevState) => ({
                 ...prevState,
                 myUser: this.state.userName,
-                // JWTToken: token["token"],
+                JWTToken: token["token"],
                 contacts: foo,
             }));
 

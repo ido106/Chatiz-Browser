@@ -57,7 +57,7 @@ function App() {
           UserData={UserData}
           setUserData={setUserData}
           // getContacts={getContacts}
-          // token={UserData["JWTToken"]}
+          token={UserData["JWTToken"]}
           contacts={[]}
         />} ></Route>
       </Routes>
