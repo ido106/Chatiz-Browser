@@ -7,7 +7,7 @@ import Message from './DataBase/message'
 import { Navigate } from "react-router-dom"
 import { Globaltoken } from "../sign_in/SignIn"
 import { GlobalConts } from "../sign_in/SignIn"
-import {GlobalIsSigninDone } from "../sign_in/SignIn"
+import { GlobalIsSigninDone } from "../sign_in/SignIn"
 import { data } from "jquery"
 
 
@@ -17,43 +17,43 @@ class ChatForm extends React.Component {
 
     constructor(props) {
         super(props);
- 
-        console.log("ChatForm Constructor.....");
-        
+
+        //console.log("ChatForm Constructor.....");
+
         this.mediaRecorder = null;
         this.state = {
             messages: [],
             contactList: [],
-            activeChat: {name: null, nickName: null, lastSeen: null,
-
-                userName : null,
-                nickName : null,
-                lastMessage : null,
+            activeChat: {
+                name: null,
+                nickName: null,
+                lastSeen: null,
+                userName: null,
+                nickName: null,
+                lastMessage: null,
             },
             ignore: false,
-            ignore2 : false
+            ignore2: false
         }
-        //console.log("constructor");
-        console.log(GlobalConts.contacts);
-        console.log(this.state.contactList);
-        //console.log("end of const");
+        ////console.log("constructor");
+        //console.log(GlobalConts.contacts);
+        //console.log(this.state.contactList);
+        ////console.log("end of const");
         this.contacts = this.contacts.bind(this);
         this.titleChat = this.titleChat.bind(this);
         this.setActiveChat = this.setActiveChat.bind(this);
         this.showMessages = this.showMessages.bind(this);
         this.send = this.send.bind(this);
-        this.stopRecording = this.stopRecording.bind(this);
-        this.startRecording = this.startRecording.bind(this);
-        this.handleAudioButton = this.handleAudioButton.bind(this);
-        this.handleImage = this.handleImage.bind(this);
-        this.handleVideo = this.handleVideo.bind(this);
         this.addChat = this.addChat.bind(this);
         this.cancelErrors = this.cancelErrors.bind(this);
         this.updateContactsList = this.updateContactsList.bind(this);
         this.signOut = this.signOut.bind(this);
         this.getAllContacts = this.getAllContacts.bind(this);
         this.render2 = this.render2.bind(this);
+        this.render3 = this.render3.bind(this);
+
         this.showCon = this.showCon.bind(this);
+        this.getAllMessages = this.getAllMessages.bind(this);
     }
 
 
@@ -61,72 +61,116 @@ class ChatForm extends React.Component {
     //************************************ */
 
 
-    render2 () {
+    render2() {
         if (GlobalIsSigninDone.isDone == false || this.state.ignore2) {
             return;
         }
-        console.log("rendering!");
-        console.log("contacts when rendering:");
-        console.log(this.state.contactList);
+        //console.log("rendering!");
+        //console.log("contacts when rendering:");
+        //console.log(this.state.contactList);
         this.setState({
             ignore2: true
-        })}
+        })
+    }
+
+
+    render3() {
+        this.setState(prevState => ({
+            ...prevState,
+            ignore: !this.state.ignore,
+        }))
+    }
+
+
+
+    async getAllMessages() {
+        if (this.state.activeChat.name == null) {
+            //console.log("suck my dick")
+            return;
+        }
+
+        await fetch("https://localhost:7038/api/contacts/" + this.state.activeChat.name + "/messages", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Globaltoken.token,
+            }
+        }).then(response2 => {
+            response2.json().then(
+                response3 => {
+                    //console.log("response in getAllMessages is");
+                    //console.log(response3);
+                    this.state.messages = response3;
+                }
+            )
+        })
+
+    }
 
 
     async send(messageType, newData) {
-        console.log("gggg");
+        //console.log("gggg");
         if ((messageType == "text" && newData == "") || this.state.activeChat.name == null) {
-            console.log(messageType);
-            console.log(newData);
-            console.log("lololo");
+            //console.log(messageType);
+            //console.log(newData);
+            //console.log("lololo");
             return;
         }
 
 
-        await fetch("https://localhost:7038/api/contacts/" + this.state.activeChat.name +"/messages", {
+        await fetch("https://localhost:7038/api/contacts/" + this.state.activeChat.name + "/messages", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + Globaltoken.token,
             },
-            body : JSON.stringify({
-                content : newData
+            body: JSON.stringify({
+                content: newData
             }),
 
-        }).then(response2=>console.log("response2: ",response2))
-        .then(data => {
-            console.log(data);
-            this.state.messages = data;
-        })
-        
+        }).then(response2 => response2)
+            .then(data => {
+  
+            })
+
         var audio = new Audio('/audio/MessageSent.mp3');
         audio.play();
         setTimeout(function () {
             document.getElementById('textMessage').value = "";
             let objDiv = document.getElementById("clearfix");
             objDiv.scrollTop = objDiv.scrollHeight;
-            if (this.state.activeChat == null || newData == "") {
-                return;
-            }
         }, 100);
 
+        this.getAllMessages();
+        this.render3();
 
     }
 
 
 
     showMessages() {
+
+        //?
+   
+        this.getAllMessages();
+        //console.log("work");
+
         if (this.state.activeChat.name == null) {
-            return
+            //console.log("no messages for you bitch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            return;
         }
 
         var msgs = this.state.messages;
         if (msgs != null) {
+            //console.log("here are some messages for you bitch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             return msgs.map((element, k) => {
                 return (
                     <div>
-                        <Message {...element} key={k}></Message>
+                        <Message
+                         {...element}
+                          key={k}></Message>
                     </div>
                 );
 
@@ -135,7 +179,7 @@ class ChatForm extends React.Component {
     }
 
     setActiveChat(userName, userNamelastSeen, nickName) {
-        console.log("username is: " + userName);
+        //console.log("username is: " + userName);
         this.setState({
             activeChat: {
                 name: userName,
@@ -143,57 +187,58 @@ class ChatForm extends React.Component {
                 lastSeen: userNamelastSeen,
             }
         });
-   }
 
-  async getAllContacts() {
-    await fetch("https://localhost:7038/api/contacts", {
-         method: 'GET',
-         headers: {
-             'Accept': 'application/json',
-             'Content-Type': 'application/json',
-             'Authorization': 'Bearer ' + Globaltoken.token,
-         }
-     }).then(response2=>{
-         //console.log("response2: ",response2);
-         response2.json().then(
-             response3 => {
-                 GlobalConts.contacts = response3;
-                 console.log("GlobalConts in ChatForm = " , GlobalConts.contacts);
-                 /**this.setState(prevState =>({
-                    ...prevState,
-                     contactList : [GlobalConts.contacts[0]],
-                 }))**/
-                 console.log("GlobalConts in ChatForm = " , GlobalConts.contacts);
-                 if(GlobalConts.contacts == null) {
-                     this.state.contactList = [];
-                     return;
-                 }
-                 this.state.contactList = GlobalConts.contacts;
-                 console.log(this.state.contactList);
-             }
-         )
-    })
+        this.render3();
+    }
 
-      return GlobalConts.contacts[0];
-     }
-     
+    async getAllContacts() {
+        await fetch("https://localhost:7038/api/contacts", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Globaltoken.token,
+            }
+        }).then(response2 => {
+            response2.json().then(
+                response3 => {
+                    GlobalConts.contacts = response3;
+                    //console.log("GlobalConts in ChatForm = ", GlobalConts.contacts);
+                    /**this.setState(prevState =>({
+                       ...prevState,
+                        contactList : [GlobalConts.contacts[0]],
+                    }))**/
+                    //console.log("GlobalConts in ChatForm = ", GlobalConts.contacts);
+                    if (GlobalConts.contacts == null) {
+                        this.state.contactList = [];
+                        return;
+                    }
+                    this.state.contactList = GlobalConts.contacts;
+                    //console.log(this.state.contactList);
+                }
+            )
+        })
+
+        return GlobalConts.contacts[0];
+    }
+
 
     contacts() {
-        console.log("token for getAllContact is: ", Globaltoken.token)
-        
+        //console.log("token for getAllContact is: ", Globaltoken.token)
+
         var contact_array = this.getAllContacts();
-        //console.log("ido")
-        console.log("Actual Contact List: ", contact_array)
-       // console.log("shahar")
-        //console.log(GlobalConts.contacts);
-        if(this.state.contactList == []) {
-            console.log("gggg")
+        ////console.log("ido")
+        //console.log("Actual Contact List: ", contact_array)
+        // //console.log("shahar")
+        ////console.log(GlobalConts.contacts);
+        if (this.state.contactList == []) {
+            //console.log("gggg")
         }
-        console.log("BEFORE typeof is : ", typeof(this.state.contactList))
-        console.log("AFTER typeof is : ", typeof(this.state.contactList))
+        //console.log("BEFORE typeof is : ", typeof (this.state.contactList))
+        //console.log("AFTER typeof is : ", typeof (this.state.contactList))
         this.render2();
         return this.state.contactList.map((element, k) => {
-            console.log("username = " + element.userName);
+            //console.log("username = " + element.userName);
             return <ContactView
                 nickName={element.name}
                 name={element.id}
@@ -205,25 +250,6 @@ class ChatForm extends React.Component {
                 lastMessage={element.lastMessage == null ? ("") : element.lastMessage}
             />
         });
-        // return this.state.contactList.map((element, k) => {
-        //     console.log("username = " + element.lastSeen);
-        //     return <ContactView
-        //         // nickName={element.name}
-        //         // name={element.id}
-        //         // lastSeen={element.lastdate}
-        //         // key={k}
-        //         // setActiveChat={this.setActiveChat}
-        //         // lastMessage={element}
-
-        //         nickName={element.nickname}
-        //         name={element.contactUsername}
-        //         lastSeen={element.lastSeen}
-        //         key={k}
-        //         setActiveChat={this.setActiveChat}
-        //         lastMessage={element.lastMessage == null ? ("") : element.lastMessage}
-        //     />
-        // });
-
     }
 
 
@@ -235,97 +261,6 @@ class ChatForm extends React.Component {
             />
         }
     }
-
-
-    stopRecording() {
-        if (this.mediaRecorder == null) {
-            return;
-        }
-        this.mediaRecorder.stop();
-    };
-
-    startRecording() {
-        navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-                this.mediaRecorder = new MediaRecorder(stream);
-                this.mediaRecorder.start();
-
-                const audioChunks = [];
-                this.mediaRecorder.addEventListener("dataavailable", event => {
-                    audioChunks.push(event.data);
-                });
-
-                this.mediaRecorder.addEventListener("stop", () => {
-                    let audioMessage = new Blob(audioChunks);
-                    stream.getTracks().forEach(track => track.stop());
-                    this.send('audio', URL.createObjectURL(audioMessage));
-
-                });
-            });
-    };
-
-    
-
-    // async getAllContacts() {
-     
-    //         await fetch("https://localhost:7038/api/contacts", {
-    //              method: 'GET',
-    //              headers: {
-    //                  'Accept': 'application/json',
-    //                  'Content-Type': 'application/json',
-    //                  'Authorization': 'Bearer ' + Globaltoken.token,
-    //              }
-    //          }).then(response2=>{
-    //              console.log("response2: ",response2);
-    //              return response2
-    //           })
-    //          .then(async data=>{
-    //              console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    //              console.log(await data.json());
-    //              let conts = JSON.stringify(await data.json());
-    //              console.log("conts:", conts);
-    //              this.setState(prevState => ({
-    //                 ...prevState,
-    //                 contactList : conts, 
-    //             }))
-    //          })
-    //      }
-     
-
-
-    handleAudioButton() {
-        var mic = document.getElementById("mic");
-        this.setState({ isRecording: !this.state.isRecording });
-        if (this.state.isRecording) {
-            mic.className = "fa fa-microphone";
-            this.stopRecording();
-        }
-        else {
-            mic.className = "fa fa-microphone-slash";
-            this.startRecording();
-        }
-    }
-
-    handleVideo() {
-        var input = document.createElement('input');
-        input.type = 'file';
-        input.accept = "video/*";
-        input.click();
-        input.onchange = e => {
-            this.send('video', URL.createObjectURL((e.target.files[0])));
-        }
-    }
-
-    handleImage() {
-        var input = document.createElement('input');
-        input.type = 'file';
-        input.accept = "image/png, image/gif, image/jpeg";
-        input.click();
-        input.onchange = e => {
-            this.send('img', URL.createObjectURL((e.target.files[0])));
-        }
-    }
-
 
     cancelErrors() {
         document.getElementById('errorUserIsYou').className = "d-none";
@@ -350,16 +285,16 @@ class ChatForm extends React.Component {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + Globaltoken.token,
             },
-            body : JSON.stringify({
-                "id" : newUserName,
-                "name" : newNickName,
-                "server" : newServer, 
+            body: JSON.stringify({
+                "id": newUserName,
+                "name": newNickName,
+                "server": newServer,
             }),
 
-        }).then(response2=>console.log("response2: ",response2))
-        .then(data => {
-            console.log(data);
-        })
+        }).then(response2 => response2)
+            .then(data => {
+                //console.log(data);
+            })
 
         document.getElementById('addChatFailed').className = "";
 
@@ -379,19 +314,10 @@ class ChatForm extends React.Component {
                 <div className="row">
                     <div className="col-lg-6">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                            <img src={this.state.activeChat.img} alt="avatar" />
                         </a>
                         {this.titleChat()}
                     </div>
-                    <div className="col-lg-6 hidden-sm">
-                        <a className="btn btn-outline-info my-btn float-right"><i className="fa fa-microphone" id="mic" onClick={this.handleAudioButton}></i></a>
-                        <a className="btn btn-outline-primary my-btn float-right"><i className="fa fa-image" onClick={this.handleImage}></i></a>
-                        <a className="btn btn-outline-secondary float-right"><i className="fa fa-file-video-o " onClick={this.handleVideo}></i></a>
-
-                        {/* <a className="btn btn-outline-warning"><i className="fa fa-question"></i></a>*/}
-                    </div>
                 </div>
-
             </div>
         )
     }
@@ -418,20 +344,6 @@ class ChatForm extends React.Component {
     async updateContactsList() {
         let search = document.getElementById('userSearch').value;
 
-        // const res = await fetch("https://localhost:7038/api/contacts",
-        //     {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //     })
-        // const data = res.status();
-
-        // if (data == 200) {
-        //     this.state.contactList = await res.json();
-        // }
-
-
         this.state.contactList = this.state.contactList.filter((chat) => chat.name.startsWith(search));
 
 
@@ -457,7 +369,7 @@ class ChatForm extends React.Component {
     }
 
     showCon() {
-        console.log("ddddffff")
+        //console.log("ddddffff")
         this.setState({
             ignore: !this.state.ignore
         })
