@@ -7,7 +7,7 @@ export default function ContactView(props) {
         >
         <div className="about">
             <div className="name">{props.nickName} </div>
-            {props.lastMessage.data.length > 17  ?
+            {props.lastMessage.length > 17  ?
             (<div className="small">{props.lastMessage.data && props.lastMessage.data.substr(0,17) + "..."}</div>) :
             (<div className="small">{props.lastMessage.data}</div>)}
             {props.lastSeen ? 

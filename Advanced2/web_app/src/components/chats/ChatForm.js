@@ -7,6 +7,8 @@ import Message from './DataBase/message'
 import { Navigate } from "react-router-dom"
 import { Globaltoken } from "../sign_in/SignIn"
 import { GlobalConts } from "../sign_in/SignIn"
+import {GlobalIsSigninDone } from "../sign_in/SignIn"
+import { data } from "jquery"
 
 
 
@@ -21,13 +23,15 @@ class ChatForm extends React.Component {
         this.mediaRecorder = null;
         this.state = {
             messages: [],
-            contactList: null,
+            contactList: [],
             activeChat: {name: null, nickName: null, lastSeen: null,
 
                 userName : null,
                 nickName : null,
                 lastMessage : null,
             },
+            ignore: false,
+            ignore2 : false
         }
         //console.log("constructor");
         console.log(GlobalConts.contacts);
@@ -48,6 +52,8 @@ class ChatForm extends React.Component {
         this.updateContactsList = this.updateContactsList.bind(this);
         this.signOut = this.signOut.bind(this);
         this.getAllContacts = this.getAllContacts.bind(this);
+        this.render2 = this.render2.bind(this);
+        this.showCon = this.showCon.bind(this);
     }
 
 
@@ -55,31 +61,45 @@ class ChatForm extends React.Component {
     //************************************ */
 
 
-
+    render2 () {
+        if (GlobalIsSigninDone.isDone == false || this.state.ignore2) {
+            return;
+        }
+        console.log("rendering!");
+        console.log("contacts when rendering:");
+        console.log(this.state.contactList);
+        this.setState({
+            ignore2: true
+        })}
 
 
     async send(messageType, newData) {
-        if ((messageType == "text" && newData == "") || this.state.activeChat.userName == null) {
+        console.log("gggg");
+        if ((messageType == "text" && newData == "") || this.state.activeChat.name == null) {
+            console.log(messageType);
+            console.log(newData);
+            console.log("lololo");
             return;
         }
 
 
-        const res = fetch("http://localhost:7026/api/contacts/" + this.state.activeChat.userName + "/messages",  {
+        await fetch("https://localhost:7038/api/contacts/" + this.state.activeChat.name +"/messages", {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this.props.token,
-
+                'Authorization': 'Bearer ' + Globaltoken.token,
             },
-            body: JSON.stringify({
-                content: newData
-            })
+            body : JSON.stringify({
+                content : newData
+            }),
+
+        }).then(response2=>console.log("response2: ",response2))
+        .then(data => {
+            console.log(data);
+            this.state.messages = data;
         })
-
-        if (await res.status() != 201) {
-            
-        }
-
+        
         var audio = new Audio('/audio/MessageSent.mp3');
         audio.play();
         setTimeout(function () {
@@ -91,8 +111,6 @@ class ChatForm extends React.Component {
             }
         }, 100);
 
-
-        this.updateContactsList();
 
     }
 
@@ -127,8 +145,7 @@ class ChatForm extends React.Component {
         });
    }
 
-   async getAllContacts() {
-       var result;
+  async getAllContacts() {
     await fetch("https://localhost:7038/api/contacts", {
          method: 'GET',
          headers: {
@@ -140,56 +157,51 @@ class ChatForm extends React.Component {
          //console.log("response2: ",response2);
          response2.json().then(
              response3 => {
-                 result = response3;
-                //  this.setState(prevState => ({
-                //      ...prevState,
-                //      contactList: response3,
-                //  }))
-
-
                  GlobalConts.contacts = response3;
-                 console.log("GlobalConts in ChatForm = " , this.state.contactList);
+                 console.log("GlobalConts in ChatForm = " , GlobalConts.contacts);
+                 /**this.setState(prevState =>({
+                    ...prevState,
+                     contactList : [GlobalConts.contacts[0]],
+                 }))**/
+                 console.log("GlobalConts in ChatForm = " , GlobalConts.contacts);
+                 if(GlobalConts.contacts == null) {
+                     this.state.contactList = [];
+                     return;
+                 }
+                 this.state.contactList = GlobalConts.contacts;
+                 console.log(this.state.contactList);
              }
          )
-      })
+    })
 
-      return result;
+      return GlobalConts.contacts[0];
      }
+     
 
     contacts() {
         console.log("token for getAllContact is: ", Globaltoken.token)
         
         var contact_array = this.getAllContacts();
         //console.log("ido")
-        console.log("Actual Contact List: ", this.state.contactList)
+        console.log("Actual Contact List: ", contact_array)
        // console.log("shahar")
         //console.log(GlobalConts.contacts);
-        if(this.state.contactList == null) {
-            //console.log("2222222222222222222222222222222222");
-            return;
+        if(this.state.contactList == []) {
+            console.log("gggg")
         }
         console.log("BEFORE typeof is : ", typeof(this.state.contactList))
-        let response3_parsed = JSON.parse(this.state.contactList);
-        this.setState(prevState => ({
-            ...prevState,
-            contactList: response3_parsed,
-        }))
         console.log("AFTER typeof is : ", typeof(this.state.contactList))
+        this.render2();
         return this.state.contactList.map((element, k) => {
             console.log("username = " + element.userName);
             return <ContactView
-                // nickName={element.name}
-                // name={element.id}
-                // lastSeen={element.lastdate}
-                // key={k}
-                // setActiveChat={this.setActiveChat}
-                // lastMessage={element}
-
-                nickName={element.nickname}
-                name={element.contactUsername}
-                lastSeen={element.lastSeen}
+                nickName={element.name}
+                name={element.id}
+                lastSeen={element.lastdate}
                 key={k}
                 setActiveChat={this.setActiveChat}
+
+
                 lastMessage={element.lastMessage == null ? ("") : element.lastMessage}
             />
         });
@@ -211,6 +223,7 @@ class ChatForm extends React.Component {
         //         lastMessage={element.lastMessage == null ? ("") : element.lastMessage}
         //     />
         // });
+
     }
 
 
@@ -443,7 +456,13 @@ class ChatForm extends React.Component {
         this.props.setUserData((prevState) => ({ ...prevState, myUser: null }))
     }
 
-
+    showCon() {
+        console.log("ddddffff")
+        this.setState({
+            ignore: !this.state.ignore
+        })
+        return;
+    }
     render() {
         if (this.props.UserData.myUser == null) {
             return <Navigate to="/" />
@@ -456,13 +475,14 @@ class ChatForm extends React.Component {
                             <div id="plist" className="people-list">
                                 <div className="input-group">
                                     <button type="button" className="btn btn-danger fa fa-sign-out" onClick={this.signOut} />
-                                    <button type="button" className="btn btn-primary fa fa-user-plus " data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                                    <button type="button" className="btn btn-primary fa fa-user-plus " data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={this.cancelErrors}></button>
 
                                     <div className="input-group-prepend">
 
                                         <span className="input-group-text search-buttun-chat"><i className="fa fa-search"></i></span>
                                     </div>
                                     <input type="text" className="form-control" placeholder="Search..." id="userSearch" onChange={this.updateContactsList}></input>
+                                    <button type="button" className="btn btn-primary" onClick={this.showCon}>contacts</button>
                                 </div>
                                 <ul className="list-unstyled chat-list me-2 mb-0 show-contacts">
 

@@ -11,6 +11,10 @@ export const GlobalConts = {
     contacts : null
 };
 
+export const GlobalIsSigninDone = {
+    isDone: false
+}
+
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
@@ -132,6 +136,8 @@ class SignIn extends React.Component {
 
 
         await this.fetchAll()
+
+        GlobalIsSigninDone.isDone = true;
         
         
     }
