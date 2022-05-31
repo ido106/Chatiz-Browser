@@ -70,16 +70,19 @@ class SignIn extends React.Component {
 
                 }).then(
                      response => {
-                        
                         response.text().then(
                             response2 => {
                                 //console.log("res2= ", response2);
                                 Globaltoken.token = response2;
+                                if(response.status != 200) {
+                                    return;
+                                }
                                 console.log("Global Token= ", Globaltoken.token);
                                 getAllContacts();
                             
                             
                             }).then( res => {
+                                
                                 this.setState({
                                     valid_user: true
                                 });
