@@ -135,8 +135,6 @@ class ChatForm extends React.Component {
   
             })
 
-        var audio = new Audio('/audio/MessageSent.mp3');
-        audio.play();
         setTimeout(function () {
             document.getElementById('textMessage').value = "";
             let objDiv = document.getElementById("clearfix");
@@ -305,6 +303,7 @@ class ChatForm extends React.Component {
     }
 
     contantToolbar() {
+        
         if (this.state.activeChat == null) {
             return
         }

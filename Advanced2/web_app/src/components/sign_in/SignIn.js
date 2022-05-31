@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './sign_in.css';
 
 export const Globaltoken = {
-    token:''
+    token: ''
 };
 
 export const GlobalConts = {
-    contacts : null
+    contacts: null
 };
 
 export const GlobalIsSigninDone = {
@@ -57,32 +57,59 @@ class SignIn extends React.Component {
     }
 
     async fetchAll() {
+
         let func = async () => {
+            var flag = true;
             const res = await fetch("https://localhost:7038/api/SignIn",
                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ username: this.state.userName
+                    body: JSON.stringify({
+                        username: this.state.userName
                         , password: this.state.passWord
                     })
 
                 }).then(
-                     response => {
+                    response => {
                         response.text().then(
                             response2 => {
                                 //console.log("res2= ", response2);
                                 Globaltoken.token = response2;
-                                if(response.status != 200) {
+                                console.log("Global Token= ", Globaltoken.token);
+                                console.log(typeof (Globaltoken.token));
+                                let jsonRes = null;
+                                try {
+                                    jsonRes = JSON.parse(response2);
+                                } catch (error) {
+                                    this.setState({
+                                        valid_user: true
+                                    });
+                                    this.setState({
+                                        isSubmitted: true
+                                    })
                                     return;
                                 }
-                                console.log("Global Token= ", Globaltoken.token);
+                                if (JSON.parse(response2).status == 400) {
+                                    console.log("hh")
+                                    this.setState({
+                                        isSubmitted: true
+                                    })
+                                    flag = false;
+                                    return;
+                                }
+                                if (!flag) {
+                                    return;
+                                }
+                                console.log(typeof (Globaltoken.token));
                                 getAllContacts();
-                            
-                            
-                            }).then( res => {
-                                
+
+
+                            }).then(res => {
+                                if (!flag) {
+                                    return;
+                                }  
                                 this.setState({
                                     valid_user: true
                                 });
@@ -99,23 +126,23 @@ class SignIn extends React.Component {
 
         //let conts = [];
 
-         async function getAllContacts() {
-           await fetch("https://localhost:7038/api/contacts", {
+        async function getAllContacts() {
+            await fetch("https://localhost:7038/api/contacts", {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + Globaltoken.token,
                 }
-            }).then(response2=>{
+            }).then(response2 => {
                 //console.log("response2: ",response2);
                 response2.text().then(
                     response3 => {
                         GlobalConts.contacts = response3;
-                        console.log("global conts = " , GlobalConts.contacts);
+                        console.log("global conts = ", GlobalConts.contacts);
                     }
                 )
-             })
+            })
             // .then(async data=>{
             //     GlobalConts.contacts = (await data.json())[0];
             //     console.log("global conts = " , GlobalConts.contacts);
@@ -123,29 +150,29 @@ class SignIn extends React.Component {
             //     //     ...prevState,
             //     //     contacts : GlobalConts.contacts,
             //     // }))
-                
+
             // })
-            }
-            await func();
+        }
+        await func();
 
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        
+
         // let token = null;
         // let exist = true;
-        
+
 
 
         await this.fetchAll()
 
         GlobalIsSigninDone.isDone = true;
-        
-        
+
+
     }
-    
-    
+
+
 
     render() {
         if (this.state.valid_user) {
@@ -209,6 +236,10 @@ class SignIn extends React.Component {
                             <div className="d-flex justify-content-center links">
                                 Don't have an account?<Link to="/SignUp" onClick={() => { this.setState({ valid_user: false }) }}>Sign Up</Link>
                             </div>
+                            <div className="fa fa star d-flex justify-content-center links big">
+                                <a href = "http://localhost:5155">Rating Page</a>
+                            </div>
+                            
                             <div className="d-flex justify-content-center">
                                 <a href="https://www.youtube.com/watch?v=y83x7MgzWOA" target="_blank">
                                     Forgot your password?
