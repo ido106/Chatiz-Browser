@@ -28,8 +28,6 @@ class ChatForm extends React.Component {
                 name: null,
                 nickName: null,
                 lastSeen: null,
-                userName: null,
-                nickName: null,
                 lastMessage: null,
             },
             ignore: false,
@@ -109,6 +107,8 @@ class ChatForm extends React.Component {
     }
 
 
+
+
     async send(messageType, newData) {
         //console.log("gggg");
         if ((messageType == "text" && newData == "") || this.state.activeChat.name == null) {
@@ -141,7 +141,7 @@ class ChatForm extends React.Component {
             objDiv.scrollTop = objDiv.scrollHeight;
         }, 100);
 
-        this.getAllMessages();
+        //this.getAllMessages();
         this.render3();
 
     }
@@ -152,7 +152,7 @@ class ChatForm extends React.Component {
 
         //?
    
-        this.getAllMessages();
+       // this.getAllMessages();
         //console.log("work");
 
         if (this.state.activeChat.name == null) {
@@ -161,6 +161,8 @@ class ChatForm extends React.Component {
         }
 
         var msgs = this.state.messages;
+        console.log(typeof(msgs));
+        console.log(msgs);
         if (msgs != null) {
             //console.log("here are some messages for you bitch!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             return msgs.map((element, k) => {
@@ -185,7 +187,7 @@ class ChatForm extends React.Component {
                 lastSeen: userNamelastSeen,
             }
         });
-
+        //this.getAllMessages2(userName)
         this.render3();
     }
 
@@ -252,6 +254,7 @@ class ChatForm extends React.Component {
 
 
     titleChat() {
+        this.getAllMessages()
         if (this.state.activeChat != null) {
             return <ChatInfo
                 name={this.state.activeChat.nickName}
