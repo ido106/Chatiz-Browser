@@ -18,7 +18,7 @@ This application was created as part of the course "Advanced Programming 2" and 
 ## Project Description
 The project is divided into 3 parts:
 
- 1. **Browser Side** in React.JS.
+ 1. **Browser Side** in React.JS. [link](https://github.com/ido106/Chatiz_Browser)
  2. Server Side in ASP.NET core (C#) with a MariaDB connection. [link](https://github.com/ido106/Chatiz_Server)
  3. Android side in Java. [link](https://github.com/ido106/Chatiz_Android)  
 
@@ -48,7 +48,9 @@ The list of all users appears in Advanced2 / Advanced2 / web_app / src / compone
 ## Screenshots
 **Turn on the volume in the video :loud_sound:**  
 
-**Chat review**
+**Chat review**  
+
+https://user-images.githubusercontent.com/92651125/197273374-0f219628-83fd-4cf8-89ac-15b8ddf27f08.mp4
 
 **Full review**  
 
