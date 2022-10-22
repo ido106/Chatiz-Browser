@@ -38,8 +38,9 @@ Pre installations:
  To run the code:
  1. In the same folder that you opened, enter `git clone https://github.com/ido106/Advanced2.git`
  2. Enter the folder "web_app".
- 3. Open the terminal, and enter "npm start".
- 4. Enjoy !
+ 3. Open the terminal, and enter `npm install react-scripts`.
+ 4. Enter `npm start`.
+ 5. Enjoy !
 
 **I recommend logging in under the main user:**  
 Username: Messi  
