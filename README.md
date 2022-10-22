@@ -7,7 +7,7 @@
   >
 </p>
 
-## Part 1: Browser    
+ ## Description
 ### ***For screenshots - skip to the bottom of the page.***  
 
 
@@ -15,7 +15,7 @@ Chatiz is a chat application that allows you to communicate with people from all
 From a more professional point of view, **Chatiz is a chat application for web browsers and Android devices, connected to a back-end RESTful server with a DB connection**: React.JS usage for the web application, Server side in ASP.NET core (C#) with a MariaDB connection (local database), and Android side in Java.  
 This application was created as part of the course "Advanced Programming 2" and inspired by the application "Whatsapp Web". In the code we can find various techniques like ORM, MVC, Entity framework, services and more.  
 
-## Project Description
+## Part 1: Browser   
 The project is divided into 3 parts:
 
  1. **Browser Side** in React.JS. [link](https://github.com/ido106/Chatiz_Browser)
