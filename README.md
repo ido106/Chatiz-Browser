@@ -22,7 +22,8 @@ The project is divided into 3 parts:
  2. Server Side in ASP.NET core (C#) with a MariaDB connection. [link](https://github.com/ido106/Chatiz_Server)
  3. Android side in Java. [link](https://github.com/ido106/Chatiz_Android)  
 
-As marked, in this part I will show the browser side. The browser side is the first task, and it is **not** connected to the database (which is connected in the second and third task). All users and messages are saved inside the code (hard coded) and are not saved, which means that after you exit the app, you will lose all **new** messages you sent.  
+As marked, in this part I will show the **browser** side. 
+The browser side is the first task, and it is **not** connected to the database (which is connected in the second and third task). All users and messages are saved inside the code (hard coded) and are not saved, which means that after you exit the app, you will lose all **new** messages you sent.  
 For simplicity, to test the application **I recommend using this part of the project**, because the operation of this part is simpler.  
 
 ## Instruction Manual
