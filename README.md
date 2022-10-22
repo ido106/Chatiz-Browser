@@ -48,13 +48,39 @@ Password: THE_GOAT
 The list of all users appears in Advanced2 / Advanced2 / web_app / src / components / sign_in / users, under an array called "users".
 
 ## Screenshots
-**Turn on the volume in the video :loud_sound:**  
+**Turn on the volume in the videos :loud_sound:**  
 
-**Chat review**  
+### Login
+<p align="center">
+  <img 
+    width="900"
+    src="https://user-images.githubusercontent.com/92651125/197364065-b0fb09b1-a02b-4f88-aedc-e196d1aedbdb.gif"
+  >
+</p>
+
+
+### Chat
+<p align="center">
+  <img 
+    width="900"
+    src="https://user-images.githubusercontent.com/92651125/197363596-2afea7c6-4a79-4486-a9ca-6bffff220f57.png"
+  >
+</p>
+
+### SignUp
+<p align="center">
+  <img 
+    width="900"
+    src="https://user-images.githubusercontent.com/92651125/197363605-1acbe7bc-d669-4596-b793-6e8221a7a3fe.png"
+  >
+</p>
+
+
+### Chat review  
 
 https://user-images.githubusercontent.com/92651125/197273374-0f219628-83fd-4cf8-89ac-15b8ddf27f08.mp4
 
-**Full review**  
+### Full review  
 
 https://user-images.githubusercontent.com/92651125/197266911-3e094208-990a-4f83-931e-961234c1d1a4.mp4
 
