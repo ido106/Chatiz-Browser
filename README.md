@@ -31,13 +31,13 @@ For simplicity, to test the application **I recommend using this part of the pro
 ## Instruction Manual
 We work only on the main branch that on GitHub.  
 
-Pre installations:
+### Pre installations
  1. Download and install [Node.JS](https://nodejs.org/en/download/) .
  2. Open a new folder.
  3. Right click on the folder, then "Open Terminal".
  4. Download npm: enter `npm install -g npm` in the terminal.
  
- To run the code:
+### Using ***Chatiz*** on the browser
  1. In the same folder that you opened, enter `git clone https://github.com/ido106/Chatiz_Browser.git` in the terminal.
  2. Enter the folder "web_app".
  3. Open the terminal, and enter `npm install react-scripts`.
