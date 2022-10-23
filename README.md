@@ -24,6 +24,8 @@ The project is divided into 3 parts:
 
 As marked, in this part I will show the **browser** side.  
 The browser side is the first task, and it is **not** connected to the database (which is connected in the second and third task). All users and messages are saved inside the code (hard coded) and are not saved, which means that after you exit the app, you will lose all **new** messages you sent.  
+This part was designed, combined with personal design, with [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/). This part includes a **login screen**, **registration screen**, **verifications**, **contacts and chats screen**, use of **Hooks**, **Router** and more.  
+
 For simplicity, to test the application **I recommend using this part of the project**, because the operation of this part is simpler.  
 
 ## Instruction Manual
