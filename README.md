@@ -22,7 +22,7 @@ The project is divided into 3 parts:
  2. Server Side in ASP.NET core (C#) with a MariaDB connection. [link](https://github.com/ido106/Chatiz_Server)
  3. Android side in Java. [link](https://github.com/ido106/Chatiz_Android)  
 
-As marked, in this part I will show the **browser** side.  
+As marked, in this part I will show the **browser** side in **React.JS**.  
 The browser side is the first task, and it is **not** connected to the database (which is connected in the second and third task). All users and messages are saved inside the code (hard coded) and are not saved, which means that after you exit the app, you will lose all **new** messages you sent.  
 This part was designed, combined with personal design, with [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/). This part includes a **login screen**, **registration screen**, **verifications**, **contacts and chats screen**, use of **Hooks**, **Router** and more.  
 
